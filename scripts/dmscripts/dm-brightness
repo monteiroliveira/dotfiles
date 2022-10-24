@@ -1,0 +1,17 @@
+#! /bin/env bash
+
+home=home/guilherme
+
+source /${home}/scripts/dmscripts/config-defaults
+
+choice=$(printf '%s\n' "${!brightness_values[@]}" | sort -n | ${DMENU} 'Brightness:' "$@")
+
+if [[ "$choice" == "quit" ]]; then
+  echo "Program terminaded." && exit 1
+
+elif [ "$choice" ]; then
+  echo "$choice" > /sys/class/backlight/intel_backlight/brightness
+
+else
+  echo "Program terminaded." && exit 1
+fi
