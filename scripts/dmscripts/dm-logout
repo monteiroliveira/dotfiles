@@ -28,7 +28,7 @@ case $choice in
 
   'Logout')
     if [[ "$(echo -e "No\nYes" | ${DMENU} "$choice?")" == "Yes" ]]; then
-      loginctl terminate-user 'whoami'
+      loginctl terminate-user $(whoami)
     else
       exit 1
     fi
