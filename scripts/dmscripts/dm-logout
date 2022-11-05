@@ -4,6 +4,8 @@ source $HOME/scripts/dmscripts/config-defaults
 
 declare -a options=(
 "Lock screen"
+"Logout"
+"Suspend"
 "Reboot"
 "Shutdown"
 "Quit"
@@ -23,6 +25,23 @@ case $choice in
       exit 1
     fi
     ;;
+
+  'Logout')
+    if [[ "$(echo -e "No\nYes" | ${DMENU} "$choice?")" == "Yes" ]]; then
+      loginctl terminate-user 'whoami'
+    else
+      exit 1
+    fi
+    ;;
+
+  'Suspend')
+    if [[ "$(echo -e "No\nYes" | ${DMENU} "$choice?")" == "Yes" ]]; then
+      systemctl suspend
+    else
+      exit 1
+    fi
+    ;;
+
   'Shutdown')
     if [[ "$(echo -e "No\nYes" | ${DMENU} "$choice?")" == "Yes" ]]; then
       systemctl poweroff
