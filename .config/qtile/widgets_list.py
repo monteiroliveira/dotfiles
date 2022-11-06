@@ -1,36 +1,39 @@
 from libqtile import qtile
 from libqtile import widget
 from libqtile.lazy import lazy
-from unicode_symbols import left_arrow, right_arrow
+
 import os
 import subprocess
+
+from unicode_symbols import left_arrow, right_arrow
+from themes.doom_one import color
 
 def init_widget_list():
     widget_list = [
         widget.Sep(
             linewidth=0,
             padding=6,
-            background=["#9600fa"]
+            background=color['magenta']
         ),
         widget.TextBox(
             text="",
             fontsize=26,
             padding=0,
-            background=["#9600fa"]
+            background=color['magenta']
         ),
-        right_arrow(["#282c34"],["#9600fa"]),
+        right_arrow(color['bg'], color['magenta']),
         widget.Sep(
             padding=2,
             linewidth=0
         ),
         widget.GroupBox(
             highlight_method="line",
-            highlight_color=["#282c34", "#282c34"],
-            this_current_screen_border=["#b48bf0"],
+            highlight_color=color['bg'],
+            this_current_screen_border=color['light_magenta'],
             borderwidth=3,
-            inactive=["#ffffff"],
-            active=["#b48bf0"],
-            background=["#282c34"],
+            inactive=color['white'],
+            active=color['light_magenta'],
+            background=color['bg'],
             #fontsize=12,
             disable_drag=True,
         ),
@@ -45,71 +48,71 @@ def init_widget_list():
         #left_arrow(["#9600fa"],["#282c34"]),
         widget.Systray(
             padding=6,
-            background=["#282c34"],
+            background=color['bg'],
         ),
         widget.Sep(
             padding=6,
             linewidth=0,
         ),
         #left_arrow(["#282c34"],["#51afef"]),
-        left_arrow(["#282c34"],["#3f4654"]),
+        left_arrow(color['bg'],color['gray']),
         widget.Chord(
             #chords_colors={
             #    "launch": ("#ff0000", "#ffffff"),
             #},
             #name_transform=lambda name: name.upper(),
             fmt="Mode: {}",
-            background=["#3f4654"],
+            background=color['gray'],
             padding=6,
         ),
-        left_arrow(["#3f4654"],["#282c34"]),
-        left_arrow(["#282c34"],["#0069c0"]),
+        left_arrow(color['gray'], color['bg']),
+        left_arrow(color['bg'], color['blue']),
         widget.TextBox(
             text="",
             fontsize=20,
             padding=2,
-            background=["#0069c0"]
+            background=color['blue']
         ),
         widget.GenPollText(
             func=lambda: subprocess.check_output(os.path.expanduser("~/scripts/get_kernel_version.sh")).decode("utf-8"),
-            background=["#0069c0"],
+            background=color['blue'],
             padding=6
         ),
-        left_arrow(["#0069c0"],["#9600fa"]),
+        left_arrow(color['blue'], color['magenta']),
         widget.TextBox(
             text="",
             fontsize=20,
             padding=4,
-            background=["#9600fa"]
+            background=color['magenta']
         ),
         widget.ThermalSensor(
             fmt="Temp: {}",
             padding=6,
-            background=["#9600fa"]
+            background=color['magenta']
         ),
-        left_arrow(["#9600fa"],["#0069c0"]),
+        left_arrow(color['magenta'], color['blue']),
         widget.TextBox(
             text="",
             fontsize=17,
             padding=4,
-            background=["#0069c0"]
+            background=color['blue']
         ),
         widget.Memory(
             fmt="Mem:{}",
             padding=6,
-            background=["#0069c0"],
+            background=color['blue'],
             mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn('alacritty -e htop')}
         ),
-        left_arrow(["#0069c0"],["#9600fa"]),
+        left_arrow(color['blue'], color['magenta']),
         widget.Sep(
             padding=2,
             linewidth=0,
-            background=["#9600fa"]
+            background=color['magenta']
         ),
         widget.TextBox(
             text="↻",
             fontsize=16,
-            background=["#9600fa"]
+            background=color['magenta']
         ),
         widget.CheckUpdates(
             display_format="Updates: {updates}",
@@ -117,33 +120,33 @@ def init_widget_list():
             distro="Arch_checkupdates",
             update_interval=60,
             padding=6,
-            background=["#9600fa"],
+            background=color['magenta'],
             mouse_callbacks={'Button1': lambda: qtile.cmd_spawn('alacritty -e sudo pacman -Syu')}
         ),
         widget.Sep(
             linewidth=0,
             padding=2,
-            background=["#9600fa"]
+            background=color['magenta']
         ),
-        left_arrow(["#9600fa"],["#0069c0"]),
+        left_arrow(color['magenta'], color['blue']),
         widget.TextBox(
             text="",
             fontsize=20,
             padding=4,
-            background=["#0069c0"],
+            background=color['blue'],
         ),
         widget.Clock(
             format="%A - %m/%d/%Y - (%I:%M) %p ",
             padding=4,
-            background=["#0069c0"],
+            background=color['blue'],
         ),
         widget.Sep(
             linewidth=0,
             padding=0,
-            background=["#0069c0"]
+            background=color['blue']
         ),
-        left_arrow(["#0069c0"],["#3f4654"]),
-        left_arrow(["#3f4654"],["#282c34"]),
+        left_arrow(color['blue'], color['gray']),
+        left_arrow(color['gray'], color['bg']),
         widget.CurrentLayoutIcon(
             #custom_icon_paths = [os.path.expanduser("~/.config/qtile/icons")],
             padding=2,
