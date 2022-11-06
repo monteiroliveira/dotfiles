@@ -6,5 +6,6 @@ picom &
 nitrogen --restore &
 nm-applet &
 cbatticon &
+blueman-applet &
 setxkbmap -layout br
-#/usr/bin/emacs --daemon &
+/usr/bin/emacs --daemon &
