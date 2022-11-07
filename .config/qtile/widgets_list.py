@@ -16,8 +16,8 @@ def init_widget_list():
             background=color['magenta']
         ),
         widget.TextBox(
-            text="",
-            fontsize=26,
+            text="",
+            fontsize=25,
             padding=0,
             background=color['magenta']
         ),
@@ -93,7 +93,7 @@ def init_widget_list():
         left_arrow(color['magenta'], color['blue']),
         widget.TextBox(
             text="",
-            fontsize=17,
+            fontsize=20,
             padding=4,
             background=color['blue']
         ),
@@ -111,7 +111,7 @@ def init_widget_list():
         ),
         widget.TextBox(
             text="↻",
-            fontsize=16,
+            fontsize=15,
             background=color['magenta']
         ),
         widget.CheckUpdates(
