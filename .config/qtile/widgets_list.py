@@ -34,7 +34,6 @@ def init_widget_list():
             inactive=color['white'],
             active=color['light_magenta'],
             background=color['bg'],
-            #fontsize=12,
             disable_drag=True,
         ),
         widget.Sep(
@@ -43,9 +42,6 @@ def init_widget_list():
         ),
         widget.Prompt(),
         widget.WindowName(font="mononoki nerd font bold",),
-        #widget.TaskList(border=["#282c34"], padding_y=1, spacing=1, icon_size=15),
-        #widget.WindowTabs(),
-        #left_arrow(["#9600fa"],["#282c34"]),
         widget.Systray(
             padding=6,
             background=color['bg'],
@@ -54,13 +50,8 @@ def init_widget_list():
             padding=6,
             linewidth=0,
         ),
-        #left_arrow(["#282c34"],["#51afef"]),
         left_arrow(color['bg'],color['gray']),
         widget.Chord(
-            #chords_colors={
-            #    "launch": ("#ff0000", "#ffffff"),
-            #},
-            #name_transform=lambda name: name.upper(),
             fmt="Mode: {}",
             background=color['gray'],
             padding=6,
@@ -148,7 +139,6 @@ def init_widget_list():
         left_arrow(color['blue'], color['gray']),
         left_arrow(color['gray'], color['bg']),
         widget.CurrentLayoutIcon(
-            #custom_icon_paths = [os.path.expanduser("~/.config/qtile/icons")],
             padding=2,
             scale = 0.7
         ),
