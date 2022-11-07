@@ -8,7 +8,7 @@ DMEDITOR="emacsclient -c -a ''"
 
 SCREEN_LOCKER="slock"
 
-BROWSER="firefox"
+BROWSER="brave"
 
 declare -A config_edit_list
 config_edit_list[config defaults]="$HOME/scripts/dmscripts/config-defaults"
