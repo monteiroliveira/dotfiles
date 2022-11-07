@@ -20,7 +20,8 @@ set EDITOR 'vim'
 alias ls='exa --icons'
 alias cat='bat --style=auto'
 alias df='lfs'
-alias dotfile='/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME'
+alias sysup='sudo pacman -Syyuu'
+alias dots='/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME'
 
 function fish_greeting
     if test (random 1 10) -gt 5
