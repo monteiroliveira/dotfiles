@@ -4,7 +4,6 @@ def left_half_circle(fg_color):
     return TextBox(
         text='\uE0B6',
         fontsize=28,
-        font="Source Code Pro",
         foreground=fg_color,
         padding=0)
 
@@ -30,7 +29,7 @@ def left_arrow(bg_color, fg_color):
     return TextBox(
         text='\uE0B2',
         padding=0,
-        font="Source Code Pro",
+        font="SauceCodePro Nerd Font",
         fontsize=22,
         background=bg_color,
         foreground=fg_color)
@@ -40,7 +39,7 @@ def right_arrow(bg_color, fg_color):
     return TextBox(
         text='\uE0B0',
         padding=0,
-        font="Source Code Pro",
+        font="SauceCodePro Nerd Font",
         fontsize=22,
         background=bg_color,
         foreground=fg_color)
