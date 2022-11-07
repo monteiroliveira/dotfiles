@@ -10,6 +10,8 @@ end
 source $HOME/scripts/fish_ssh_agent.fish
 source /opt/asdf-vm/asdf.fish
 
+starship init fish | source
+
 set fish_greeting
 set fish_vi_key_bindings
 set TERM 'xterm-256color'
