@@ -1,6 +1,13 @@
 set -e fish_user_paths
 set -U fish_user_paths $HOME/.local/bin $HOME/.cargo/bin $HOME/.emacs.d/bin $fish_user_paths
 
+if status --is-login
+	if [ $(tty) = /dev/tty1 ] ;
+		exec startx
+	end
+end
+
+source $HOME/scripts/fish_ssh_agent.fish
 source /opt/asdf-vm/asdf.fish
 
 set fish_greeting
