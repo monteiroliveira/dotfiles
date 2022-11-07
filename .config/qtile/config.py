@@ -20,7 +20,7 @@ import subprocess
 # Variables.
 mod = "mod4" # Sets mod key to SUPER/WINDOWS
 terminal = "alacritty" # My terminal of choice
-browser = "firefox" # My browser of choice
+browser = "brave" # My browser of choice
 
 # Keybinds.
 keys = [
@@ -204,7 +204,7 @@ layouts = [
 
 # Widget defaults parameters.
 widget_defaults = dict(
-    font="ubuntu bold",
+    font="SauceCodePro Nerd Font Mono bold",
     fontsize=11,
     padding=2,
     background=["#282c34"],
