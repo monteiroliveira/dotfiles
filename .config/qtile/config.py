@@ -186,14 +186,14 @@ for i in groups:
 
 # Layouts.    
 layouts = [
-    layout.Columns(border_focus=["#b48bf0"], border_width=2),
+    layout.Columns(border_focus=["#51afef"], border_width=2),
     layout.Max(),
     # Try more layouts by unleashing below layouts.
     # layout.Stack(num_stacks=2),
     # layout.Bsp(),
     # layout.Matrix(),
-    layout.MonadTall(border_focus=["#b48bf0"], border_width=2, margin=8),
-    layout.Floating(border_focus=["#b48bf0"], border_width=2, margin=8),
+    layout.MonadTall(border_focus=["#51afef"], border_width=2, margin=15),
+    layout.Floating(border_focus=["#51afef"], border_width=2, margin=15),
     # layout.MonadWide(),
     # layout.RatioTile(),
     # layout.Tile(),
