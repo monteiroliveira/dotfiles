@@ -35,7 +35,7 @@ keys = [
     Key([mod], "p", lazy.spawn("rofi -show drun -show-icons"),
         desc="Launch rofi"),#
 
-    Key([mod], "o", lazy.spawn("dmenu_run -i -p 'Run:' -sb '#9600fa' -h 22"),
+    Key([mod], "d", lazy.spawn("dmenu_run -i -p 'Run:' -sb '#9600fa' -h 22"),
         desc="Launch dmenu"),#
 
     Key([mod, "shift"], "z", lazy.spawn("slock"),
