@@ -243,6 +243,7 @@ floating_layout = layout.Floating(
         Match(wm_class="maketag"),  # gitk
         Match(wm_class="ssh-askpass"),  # ssh-askpass
         Match(wm_class="qalculate-gtk"),
+        Match(wm_class="blueman-manager"),
         Match(wm_class="yad"),
         Match(title="branchdialog"),  # gitk
         Match(title="pinentry"),  # GPG key password entry
