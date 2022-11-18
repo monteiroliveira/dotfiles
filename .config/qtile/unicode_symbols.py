@@ -29,7 +29,7 @@ def left_arrow(bg_color, fg_color):
     return TextBox(
         text='\uE0B2',
         padding=0,
-        font="SauceCodePro Nerd Font",
+        font="Source Code Pro",
         fontsize=22,
         background=bg_color,
         foreground=fg_color)
@@ -39,7 +39,7 @@ def right_arrow(bg_color, fg_color):
     return TextBox(
         text='\uE0B0',
         padding=0,
-        font="SauceCodePro Nerd Font",
+        font="Source Code Pro",
         fontsize=22,
         background=bg_color,
         foreground=fg_color)
