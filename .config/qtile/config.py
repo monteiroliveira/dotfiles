@@ -24,8 +24,7 @@ browser = "brave" # My browser of choice
 
 # Keybinds.
 keys = [
-    #START_KEYS
-    # KB_GROUP The essentials keybinds
+    # The essentials keybinds
     Key([mod], "Return", lazy.spawn(terminal),
         desc="Launch terminal"),#
 
@@ -41,7 +40,10 @@ keys = [
     Key([mod, "shift"], "z", lazy.spawn("slock"),
         desc="lock screen"),#
 
-    # KB_GROUP Emacs
+    Key([],"XF86MonBrightnessUp", lazy.spawn("light -A 1")),
+    Key([],"XF86MonBrightnessDown", lazy.spawn("light -U 1")),
+
+    # Doom Emacs
     KeyChord([mod], "e", [
                  Key([], "e", lazy.spawn("emacsclient -c -a 'emacs'"), lazy.ungrab_chord(),
                      desc="Launch emacs"),#
@@ -49,11 +51,11 @@ keys = [
                      desc="Launch ibuffer in emacs"),#
              ],name="Emacs"),
 
-    # KB_GROUP Dmenu Scripts
+    # Dmenu Scripts
     KeyChord([mod], "i", [
                  Key([], "1", lazy.spawn("./scripts/dmscripts/dm-configedit"), lazy.ungrab_chord(),
                      desc="Choose a config file to edit"),#
-                 Key([], "2", lazy.spawn("alacritty -e sudo ./scripts/dmscripts/dm-brightness"), lazy.ungrab_chord(),
+                 Key([], "2", lazy.spawn("./scripts/dmscripts/dm-brightness"), lazy.ungrab_chord(),
                      desc="Change brightness with dmenu"),#
                  Key([], "3", lazy.spawn("./scripts/dmscripts/dm-archwikisearch"), lazy.ungrab_chord(),
                      desc="Open a local arch wiki documentation"),#
@@ -63,9 +65,7 @@ keys = [
                      desc="Logout menu"),#
              ],name="DM Scripts"),
 
-    # KB_GROUP Focus control
-    # A list of available commands that can be bound to keys can be found
-    # at https://docs.qtile.org/en/latest/manual/config/lazy.html
+    # Focus control
     # Switch between windows
     Key([mod], "h", lazy.layout.left(),
         desc="Move focus to left"),#
@@ -82,7 +82,7 @@ keys = [
     Key([mod], "space", lazy.layout.next(),
         desc="Move window focus to other window"),#
 
-    # KB_GROUP window control
+    # Window control
     # Move windows between left/right columns or move up/down in current stack.
     # Moving out of range in Columns layout will create new column.
     Key([mod, "shift"], "h", lazy.layout.shuffle_left(),
@@ -136,7 +136,7 @@ keys = [
     Key([mod, "shift"], "c", lazy.window.kill(),
         desc="Kill focused window"),#
 
-    # KB_GROUP Qtile control
+    # Qtile control
     Key([mod, "control"], "r", lazy.reload_config(),
         desc="Reload the config"),#
 
@@ -148,8 +148,6 @@ keys = [
 
     Key([mod], "r", lazy.spawncmd(),
         desc="Spawn a command using a prompt widget"),#
-    #END_KEYS
-
 ]
 
 #Groups define.
@@ -188,7 +186,6 @@ for i in groups:
 layouts = [
     layout.Columns(border_focus=["#51afef"], border_width=2),
     layout.Max(),
-    # Try more layouts by unleashing below layouts.
     # layout.Stack(num_stacks=2),
     # layout.Bsp(),
     # layout.Matrix(),
