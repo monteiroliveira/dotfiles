@@ -4,20 +4,46 @@
 # Inserts a blank line between shell prompts
 add_newline = false
 
+[username]
+style_user = "green bold"
+style_root = "red bold"
+format = "[$user]($style) "
+disabled = false
+show_always = true
+
+[hostname]
+ssh_only = false
+format = "on [$hostname](bold purple) "
+trim_at = "."
+disabled = false
+
 [line_break]
 disabled = true
 
 [character]
-success_symbol = "[❯❯](bold cyan)"
-error_symbol = "[❯❯](red)"
-vicmd_symbol = "[❯❯](bold green)"
+success_symbol = "[{I} ➜](bold cyan)"
+error_symbol = "[✗](red)"
+vicmd_symbol = "[{N} ➜](bold cyan)"
 
 [directory]
 read_only = " "
-truncation_length = 1
+truncation_length = 10
+truncate_to_repo = true
+style = "bold italic cyan"
 
 [git_branch]
 symbol = "שׂ "
+
+[git_state]
+style = "bold red"
+format = "[$state( $progress_current/$progress_total) ]($style)"
+rebase = "rebase"
+merge = "merge"
+revert = "revert"
+cherry_pick = "cherry"
+bisect = "bisect"
+am = "am"
+am_or_rebase = "am/rebase"
 
 # Disable the package module, hiding it from the prompt completely
 [package]
