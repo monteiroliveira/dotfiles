@@ -65,7 +65,7 @@ def init_widget_list():
             background=color['blue']
         ),
         widget.GenPollText(
-            func=lambda: subprocess.check_output(os.path.expanduser("~/scripts/get_kernel_version.sh")).decode("utf-8"),
+            func=lambda: subprocess.check_output(os.path.expanduser("~/.local/bin/get_kernel_version")).decode("utf-8"),
             background=color['blue'],
             padding=6
         ),

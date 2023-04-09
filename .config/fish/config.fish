@@ -7,7 +7,7 @@ if status --is-login
 	end
 end
 
-source $HOME/scripts/fish_ssh_agent.fish
+source $HOME/.local/bin/fish_ssh_agent.fish
 source /opt/asdf-vm/asdf.fish
 
 starship init fish | source

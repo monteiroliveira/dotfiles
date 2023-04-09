@@ -53,15 +53,15 @@ keys = [
 
     # Dmenu Scripts
     KeyChord([mod], "i", [
-                 Key([], "1", lazy.spawn("./scripts/dmscripts/dm-configedit"), lazy.ungrab_chord(),
+                 Key([], "1", lazy.spawn("./.local/bin/dmscripts/dm-configedit"), lazy.ungrab_chord(),
                      desc="Choose a config file to edit"),#
-                 Key([], "2", lazy.spawn("./scripts/dmscripts/dm-brightness"), lazy.ungrab_chord(),
+                 Key([], "2", lazy.spawn("./.local/bin/dmscripts/dm-brightness"), lazy.ungrab_chord(),
                      desc="Change brightness with dmenu"),#
-                 Key([], "3", lazy.spawn("./scripts/dmscripts/dm-archwikisearch"), lazy.ungrab_chord(),
+                 Key([], "3", lazy.spawn("./.local/bin/dmscripts/dm-archwikisearch"), lazy.ungrab_chord(),
                      desc="Open a local arch wiki documentation"),#
-                 Key([], "8", lazy.spawn("./scripts/dmscripts/dm-screenshot"), lazy.ungrab_chord(),
+                 Key([], "8", lazy.spawn("./.local/bin/dmscripts/dm-screenshot"), lazy.ungrab_chord(),
                      desc="Take screenshot with dmenu"),#
-                 Key([], "9", lazy.spawn("./scripts/dmscripts/dm-logout"), lazy.ungrab_chord(),
+                 Key([], "9", lazy.spawn("./.local/bin/dmscripts/dm-logout"), lazy.ungrab_chord(),
                      desc="Logout menu"),#
              ],name="DM Scripts"),
 
