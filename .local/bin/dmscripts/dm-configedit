@@ -1,6 +1,6 @@
 #! /bin/env bash
 
-source $HOME/scripts/dmscripts/config-defaults
+source $HOME/.local/bin/dmscripts/config-defaults
 
 choice=$(printf '%s\n' "${!config_edit_list[@]}" | sort | ${DMENU} 'Edit config' "$@")
 

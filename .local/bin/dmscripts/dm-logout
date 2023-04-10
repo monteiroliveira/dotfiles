@@ -1,6 +1,6 @@
 #! /bin/env bash
 
-source $HOME/scripts/dmscripts/config-defaults
+source $HOME/.local/bin/dmscripts/config-defaults
 
 declare -a options=(
 "Lock screen"

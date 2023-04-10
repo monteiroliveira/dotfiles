@@ -1,6 +1,6 @@
 #! /bin/env bash
 
-source $HOME/scripts/dmscripts/config-defaults
+source $HOME/.local/bin/dmscripts/config-defaults
 
 wikidir="/usr/share/doc/arch-wiki/html/en/"
 wikidocs="$(find ${wikidir} -iname "*.html")"
