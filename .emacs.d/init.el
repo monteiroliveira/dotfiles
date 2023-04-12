@@ -204,6 +204,22 @@
     "e"  '(:ignore t :which-key "Emacs")
     "er" '((lambda () (interactive) (load-file "~/.emacs.d/init.el")) :which-key "Reload emacs config")))
 
+;; PRODUCTIVITY
+;; Flycheck, for spell check
+(use-package flycheck
+  :defer t
+  :hook ((lsp-mode org-mode) . flycheck-mode))
+
+;; Company for auto-completition
+(use-package company
+  :diminish company-mode
+  :init
+  (global-company-mode))
+
+(use-package company-box
+  :diminish company-box-mode
+  :hook (company-mode . company-box-mode))
+
 ;; ORG MODE
 (defun alpamacs/org-mode-setup ()
   (org-indent-mode)
@@ -244,21 +260,9 @@
 (use-package toc-org
   :hook (org-mode . toc-org-enable))
 
-;; PRODUCTIVITY
-;; Flycheck, for spell check
-(use-package flycheck
-  :defer t
-  :hook (lsp-mode . flycheck-mode))
-
-;; Company for auto-completition
-(use-package company
-  :diminish company-mode
-  :init
-  (company-mode))
-
-(use-package company-box
-  :diminish company-box-mode
-  :hook (company-mode . company-box-mode))
+(use-package evil-org
+  :after org
+  :hook (org-mode . evil-org-mode))
 
 ;; DEVELOPMENT
 ;; Languages
@@ -303,7 +307,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(lsp-haskell dashboard diminish company-box flycheck evil-magit magit counsel-projectile lsp-mode which-key use-package toc-org rainbow-delimiters org-bullets ivy-rich helpful general evil-collection doom-themes counsel all-the-icons-dired)))
+   '(evil-org lsp-haskell dashboard diminish company-box flycheck evil-magit magit counsel-projectile lsp-mode which-key use-package toc-org rainbow-delimiters org-bullets ivy-rich helpful general evil-collection doom-themes counsel all-the-icons-dired)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
