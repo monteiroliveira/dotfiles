@@ -250,11 +250,11 @@
   (setq org-hide-emphasis-markers t)
   (alpamacs/org-font-setup))
 
-(use-package org-bullets
+(use-package org-superstar
   :after org
-  :hook (org-mode . org-bullets-mode)
+  :hook (org-mode . org-superstar-mode)
   :custom
-  (org-bullets-bullet-list '("◉" "●" "○" "◆" "●" "○" "◆")))
+  (org-superstars-headline-bullets-list '("◉" "●" "○" "◆" "●" "○" "◆")))
 
 ;; Auto-generate toc
 (use-package toc-org
@@ -307,7 +307,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(evil-org lsp-haskell dashboard diminish company-box flycheck evil-magit magit counsel-projectile lsp-mode which-key use-package toc-org rainbow-delimiters org-bullets ivy-rich helpful general evil-collection doom-themes counsel all-the-icons-dired)))
+   '(org-superstar lsp-haskell dashboard diminish company-box flycheck evil-magit magit counsel-projectile lsp-mode which-key use-package toc-org rainbow-delimiters org-bullets ivy-rich helpful general evil-collection doom-themes counsel all-the-icons-dired)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
