@@ -251,6 +251,8 @@
   :config
   (lsp-enable-which-key-integration t))
 
+(use-package haskell-mode)
+
 ;; Projectile
 (use-package projectile
   :diminish projectile-mode
