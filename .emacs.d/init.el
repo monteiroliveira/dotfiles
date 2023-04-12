@@ -232,6 +232,12 @@
 		(org-level-8 1.0 normal     "#ff6c6b")))
   (set-face-attribute (nth 0 face) nil :font "Ubuntu Nerd Font" :weight (nth 2 face) :height (nth 1 face) :foreground (nth 3 face)))
 
+;; Set fixed-pitch to some org-faces
+(set-face-attribute 'org-block    nil :inherit 'fixed-pitch)
+(set-face-attribute 'org-code     nil :inherit '(shadow fixed-pitch))
+(set-face-attribute 'org-table    nil :inherit '(shadow fixed-pitch))
+(set-face-attribute 'org-checkbox nil :inherit '(shadow fixed-pitch))
+
 ;; Auto-generate toc
 (use-package toc-org
   :hook (org-mode . toc-org-enable))
