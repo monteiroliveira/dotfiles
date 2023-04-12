@@ -244,14 +244,17 @@
 
 ;; DEVELOPMENT
 ;; Languages
+(use-package haskell-mode)
+(use-package lsp-haskell)
+
 (use-package lsp-mode
   :commands (lsp lsp-deferred)
   :init
   (setq lsp-keymap-prefix "C-c l")
+  :hook ((haskell-mode-hook . lsp)
+	 (haskell-literate-mode-hook . lsp))
   :config
   (lsp-enable-which-key-integration t))
-
-(use-package haskell-mode)
 
 ;; Projectile
 (use-package projectile
@@ -282,7 +285,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(dashboard diminish company-box flycheck evil-magit magit counsel-projectile lsp-mode which-key use-package toc-org rainbow-delimiters org-bullets ivy-rich helpful general evil-collection doom-themes counsel all-the-icons-dired)))
+   '(lsp-haskell dashboard diminish company-box flycheck evil-magit magit counsel-projectile lsp-mode which-key use-package toc-org rainbow-delimiters org-bullets ivy-rich helpful general evil-collection doom-themes counsel all-the-icons-dired)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
