@@ -210,33 +210,35 @@
   (visual-line-mode 1)
   (diminish org-indent-mode))
 
+(defun alpamacs/org-font-setup ()
+    (dolist (face '((org-level-1 1.7 ultra-bold "#51afef")
+		    (org-level-2 1.6 extra-bold "#c678dd")
+		    (org-level-3 1.5 bold       "#98be65")
+		    (org-level-4 1.4 semi-bold  "#da8548")
+		    (org-level-5 1.3 normal     "#5699af")
+		    (org-level-6 1.2 normal     "#a9a1e1")
+		    (org-level-7 1.1 normal     "#46d9ff")
+		    (org-level-8 1.0 normal     "#ff6c6b")))
+      (set-face-attribute (car face) nil :font "Ubuntu Nerd Font" :weight (nth 2 face) :height (nth 1 face) :foreground (nth 3 face)))
+
+  ;; Set fixed-pitch to some org-faces
+  (set-face-attribute 'org-block    nil :inherit 'fixed-pitch)
+  (set-face-attribute 'org-code     nil :inherit '(shadow fixed-pitch))
+  (set-face-attribute 'org-table    nil :inherit '(shadow fixed-pitch))
+  (set-face-attribute 'org-checkbox nil :inherit '(shadow fixed-pitch)))
+
 (use-package org
   :hook (org-mode . alpamacs/org-mode-setup)
   :config
   (setq org-ellipsis " ▼ ")
-  (setq org-hide-emphasis-markers t))
+  (setq org-hide-emphasis-markers t)
+  (alpamacs/org-font-setup))
 
 (use-package org-bullets
   :after org
   :hook (org-mode . org-bullets-mode)
   :custom
   (org-bullets-bullet-list '("◉" "●" "○" "◆" "●" "○" "◆")))
-
-(dolist (face '((org-level-1 1.7 ultra-bold "#51afef")
-		(org-level-2 1.6 extra-bold "#c678dd")
-		(org-level-3 1.5 bold       "#98be65")
-		(org-level-4 1.4 semi-bold  "#da8548")
-		(org-level-5 1.3 normal     "#5699af")
-		(org-level-6 1.2 normal     "#a9a1e1")
-		(org-level-7 1.1 normal     "#46d9ff")
-		(org-level-8 1.0 normal     "#ff6c6b")))
-  (set-face-attribute (nth 0 face) nil :font "Ubuntu Nerd Font" :weight (nth 2 face) :height (nth 1 face) :foreground (nth 3 face)))
-
-;; Set fixed-pitch to some org-faces
-(set-face-attribute 'org-block    nil :inherit 'fixed-pitch)
-(set-face-attribute 'org-code     nil :inherit '(shadow fixed-pitch))
-(set-face-attribute 'org-table    nil :inherit '(shadow fixed-pitch))
-(set-face-attribute 'org-checkbox nil :inherit '(shadow fixed-pitch))
 
 ;; Auto-generate toc
 (use-package toc-org
