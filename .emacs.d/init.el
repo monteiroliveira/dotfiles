@@ -113,6 +113,10 @@
   :config
   (setq which-key-idle-delay 0.3))
 
+(use-package smex
+  :init
+  (smex-initialize))
+
 ;; Helpful, for a better documentation
 (use-package helpful
   :custom
