@@ -282,6 +282,9 @@
   :config
   (lsp-enable-which-key-integration t))
 
+(use-package lsp-ui
+  :hook (lsp-mode . lsp-ui-mode))
+
 ;; Projectile
 (use-package projectile
   :diminish projectile-mode
@@ -311,7 +314,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(org-superstar lsp-haskell dashboard diminish company-box flycheck evil-magit magit counsel-projectile lsp-mode which-key use-package toc-org rainbow-delimiters org-bullets ivy-rich helpful general evil-collection doom-themes counsel all-the-icons-dired)))
+   '(lsp-ui smex org-contrib org-superstar lsp-haskell dashboard diminish company-box flycheck evil-magit magit counsel-projectile lsp-mode which-key use-package toc-org rainbow-delimiters org-bullets ivy-rich helpful general evil-collection doom-themes counsel all-the-icons-dired)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
