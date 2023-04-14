@@ -216,12 +216,15 @@
 
 ;; Company for auto-completition
 (use-package company
-  :diminish company-mode
-  :init
-  (global-company-mode))
+  :diminish
+  :after lsp-mode
+  :hook ((lsp-mode prog-mode) . company-mode)
+  :custom
+  (company-minimum-prefix-lenght 1)
+  (company-idle-delay 0.0))
 
 (use-package company-box
-  :diminish company-box-mode
+  :diminish
   :hook (company-mode . company-box-mode))
 
 ;; ORG MODE
