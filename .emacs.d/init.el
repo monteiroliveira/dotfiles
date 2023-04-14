@@ -212,7 +212,7 @@
 ;; Flycheck, for spell check
 (use-package flycheck
   :defer t
-  :hook ((lsp-mode org-mode) . flycheck-mode))
+  :hook (lsp-mode . flycheck-mode))
 
 ;; Company for auto-completition
 (use-package company
