@@ -283,7 +283,8 @@
   :hook ((haskell-mode) . lsp)
   :config
   (lsp-enable-which-key-integration t)
-  (setq lsp-headerline-breadcrumb-enable nil))
+  (setq lsp-headerline-breadcrumb-enable nil)
+  (setq lsp-lens-enable nil))
 
 (use-package lsp-ui
   :hook (lsp-mode . lsp-ui-mode))
