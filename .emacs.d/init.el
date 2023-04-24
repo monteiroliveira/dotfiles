@@ -302,7 +302,7 @@
   :commands (lsp lsp-deferred)
   :init
   (setq lsp-keymap-prefix "C-c l")
-  :hook ((haskell-mode) . lsp)
+  :hook ((haskell-mode c-mode cc-mode) . lsp)
   :config
   (lsp-enable-which-key-integration t)
   (setq lsp-headerline-breadcrumb-enable nil)
