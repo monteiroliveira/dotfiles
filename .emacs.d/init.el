@@ -286,6 +286,14 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
+(use-package yasnippet
+  :config
+  (yas-global-mode))
+
+(use-package doom-snippets
+  :after yasnippet
+  :straight (doom-snippets :type git :host github :repo "doomemacs/snippets" :files ("*.el" "*")))
+
 ;; Languages
 (use-package haskell-mode)
 (use-package lsp-haskell)
