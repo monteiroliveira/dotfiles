@@ -61,11 +61,15 @@
   :init
   (setq evil-want-integration t)
   (setq evil-want-keybinding nil)
+  (setq evil-split-window-below t)
+  (setq evil-vsplit-window-right t)
   :config
   (evil-mode 1))
 
 (use-package evil-collection
   :after evil
+  :init
+  (setq evil-collection-mode-list '(dashboard dired ibuffer))
   :config
   (evil-collection-init))
 
