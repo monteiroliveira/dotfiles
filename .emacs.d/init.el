@@ -208,6 +208,11 @@
     "bp" '(previous-buffer :which-key "Previous buffer")
     "bB" '(ibuffer-list-buffers :which-key "Ibuffer list buffers")
 
+    ;; Org
+    "o"  '(:ignore t :which-key "Org")
+    "ot" '(org-babel-tangle :which-key "Org Babel Tangle")
+    "oe" '(org-export-dispatch :which-key "Org Export Dispatch")
+
     ;; Emacs
     "e"  '(:ignore t :which-key "Emacs")
     "er" '((lambda () (interactive) (load-file "~/.emacs.d/init.el")) :which-key "Reload emacs config")))
@@ -259,6 +264,11 @@
   :config
   (setq org-ellipsis " ▼ ")
   (setq org-hide-emphasis-markers t)
+  (setq org-latex-pdf-process
+	'("pdflatex -interaction nonstopmode -output-directory %o %f"
+	  "bibtex %b"
+	  "pdflatex -interaction nonstopmode -output-directory %o %f"
+	  "pdflatex -interaction nonstopmode -output-directory %o %f"))
   (alpamacs/org-font-setup))
 
 (use-package org-superstar
@@ -266,6 +276,11 @@
   :hook (org-mode . org-superstar-mode)
   :custom
   (org-superstars-headline-bullets-list '("◉" "●" "○" "◆" "●" "○" "◆")))
+
+(use-package org-ref)
+
+(use-package org-auto-tangle
+  :hook (org-mode . org-auto-tangle-mode))
 
 ;; Auto-generate toc
 (use-package toc-org
