@@ -64,6 +64,7 @@
   (setq evil-split-window-below t)
   (setq evil-vsplit-window-right t)
   :config
+  (define-key evil-normal-state-map (kbd "TAB") 'evil-indent-line)
   (evil-mode 1))
 
 (use-package evil-collection
