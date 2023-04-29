@@ -232,7 +232,7 @@
 (use-package company
   :diminish
   :after lsp-mode
-  :hook ((lsp-mode prog-mode) . company-mode)
+  :hook ((lsp-mode prog-mode org-mode) . company-mode)
   :custom
   (company-minimum-prefix-lenght 1)
   (company-idle-delay 0.0))
