@@ -224,6 +224,10 @@
   :defer t
   :hook (lsp-mode . flycheck-mode))
 
+(require 'ispell
+	 (setq ispell-dictionary "pt_BR")
+	 (setq ispell-program-name "/usr/bin/aspell"))
+
 ;; Company for auto-completition
 (use-package company
   :diminish
