@@ -276,11 +276,11 @@
 	  "pdflatex -interaction nonstopmode -output-directory %o %f"))
   (alpamacs/org-font-setup))
 
-(use-package org-superstar
+(use-package org-bullets
   :after org
-  :hook (org-mode . org-superstar-mode)
+  :hook (org-mode . org-bullets-mode)
   :custom
-  (org-superstars-headline-bullets-list '("◉" "●" "○" "◆" "●" "○" "◆")))
+  (org-bullets-bullet-list '("◉" "●" "○" "◆" "●" "○" "◆")))
 
 (use-package org-ref)
 
