@@ -274,7 +274,7 @@
 (use-package org
   :hook (org-mode . alpamacs/org-mode-setup)
   :config
-  (setq org-ellipsis " ▼ ")
+  (setq org-ellipsis " ▼")
   (setq org-hide-emphasis-markers t)
   (setq org-latex-pdf-process
 	'("pdflatex -interaction nonstopmode -output-directory %o %f"
@@ -356,6 +356,11 @@
 ;; Magit
 (use-package magit
   :commands (magit-status magit-get-current-branch))
+
+
+(use-package vterm
+  :init (setq shell-file-name "/bin/fish"
+	      vterm-max-scrollback 5000))
 
 ;; CUSTOM FUNCTIONS
 ;; Interactively change the current frame's opacity.
