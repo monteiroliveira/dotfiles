@@ -64,7 +64,7 @@
   (setq evil-split-window-below t)
   (setq evil-vsplit-window-right t)
   :config
-  (define-key evil-normal-state-map (kbd "TAB") 'evil-indent-line)
+  (evil-global-set-key 'normal (kbd "TAB") 'evil-indent-line)
   (evil-mode 1))
 
 (use-package evil-collection
@@ -167,7 +167,7 @@
   (setq dashboard-banner-logo-title "Emacs Is More Than A Text Editor!")
   ;(setq dashboard-startup-banner "~/.emacs.d/images/alpaca300x300.png")  ;; use custom image as banner
   (setq dashboard-center-content nil) ;; set to 't' for centered content
-  (setq dashboard-items '((recents   . 5)
+  (setq dashboard-items '((recents   . 7)
                           (agenda    . 5)
                           (bookmarks . 3)
                           (projects  . 3)))
