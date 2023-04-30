@@ -208,15 +208,22 @@
     "bn" '(next-buffer :which-key "Next buffer")
     "bp" '(previous-buffer :which-key "Previous buffer")
     "bB" '(ibuffer-list-buffers :which-key "Ibuffer list buffers")
+    "bs" '(save-buffer :which-key "Save buffer")
 
     ;; Org
     "o"  '(:ignore t :which-key "Org")
     "ot" '(org-babel-tangle :which-key "Org Babel Tangle")
     "oe" '(org-export-dispatch :which-key "Org Export Dispatch")
 
+    ;; File
+    "f"  '(:ignore t :which-key "File")
+    "fw" '(write-file :which-key "Write file")
+
     ;; Emacs
     "e"  '(:ignore t :which-key "Emacs")
-    "er" '((lambda () (interactive) (load-file "~/.emacs.d/init.el")) :which-key "Reload emacs config")))
+    "er" '((lambda () (interactive) (load-file "~/.emacs.d/init.el")) :which-key "Reload emacs config")
+    "eq" '(save-buffers-kill-emacs :which-key "Save buffer and quit emacs")
+    "eQ" '(kill-emacs :which-key "Quit emacs")))
 
 ;; PRODUCTIVITY
 ;; Flycheck, for spell check
