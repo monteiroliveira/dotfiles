@@ -326,6 +326,8 @@
   :straight (doom-snippets :type git :host github :repo "doomemacs/snippets" :files ("*.el" "*")))
 
 ;; Languages
+(use-package rust-mode)
+
 (use-package haskell-mode)
 (use-package lsp-haskell)
 
@@ -333,7 +335,7 @@
   :commands (lsp lsp-deferred)
   :init
   (setq lsp-keymap-prefix "C-c l")
-  :hook ((haskell-mode c-mode cc-mode) . lsp)
+  :hook ((haskell-mode c-mode cc-mode rust-mode) . lsp)
   :config
   (lsp-enable-which-key-integration t)
   (setq lsp-headerline-breadcrumb-enable nil)
