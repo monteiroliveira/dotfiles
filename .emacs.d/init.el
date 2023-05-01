@@ -298,6 +298,14 @@
   :after org
   :hook (org-mode . evil-org-mode))
 
+(defun alpamacs/org-visual-fill ()
+  (setq visual-fill-column-width 150
+	visual-fill-column-center-text t)
+  (visual-fill-column-mode))
+
+  (use-package visual-fill-column
+    :defer t
+    :hook (org-mode . alpamacs/org-visual-fill))
 
 (use-package yasnippet
   :config

@@ -39,6 +39,7 @@
   - [[#org-auto-tangle][Org Auto Tangle]]
   - [[#toc-org][Toc org]]
   - [[#evil-org][Evil org]]
+  - [[#visual-fill-mode][Visual fill mode]]
 - [[#yasnippet][YASNIPPET]]
 - [[#language-support][LANGUAGE SUPPORT]]
   - [[#rust][Rust]]
@@ -448,7 +449,16 @@ Install use-package and enable ~:ensure t~ globally (if not installed it'll inst
     :hook (org-mode . evil-org-mode))
 #+end_src
 
+** Visual fill mode
 #+begin_src emacs-lisp
+  (defun alpamacs/org-visual-fill ()
+    (setq visual-fill-column-width 150
+	  visual-fill-column-center-text t)
+    (visual-fill-column-mode))
+
+    (use-package visual-fill-column
+      :defer t
+      :hook (org-mode . alpamacs/org-visual-fill))
 #+end_src
 
 * YASNIPPET
