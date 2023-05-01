@@ -13,6 +13,7 @@
 - [[#package-manager][PACKAGE MANAGER]]
   - [[#setup-packageel][Setup package.el]]
   - [[#use-package][Use-package]]
+  - [[#straight][Straight]]
 - [[#theme-and-appeareance][THEME AND APPEAREANCE]]
   - [[#doom-theme][Doom theme]]
   - [[#all-the-icons][All the icons]]
@@ -38,7 +39,6 @@
   - [[#org-auto-tangle][Org Auto Tangle]]
   - [[#toc-org][Toc org]]
   - [[#evil-org][Evil org]]
-- [[#straight][STRAIGHT]]
 - [[#yasnippet][YASNIPPET]]
 - [[#language-support][LANGUAGE SUPPORT]]
   - [[#rust][Rust]]
@@ -132,6 +132,23 @@ Install use-package and enable ~:ensure t~ globally (if not installed it'll inst
   (require 'use-package)
   (setq use-package-always-ensure t)
 #+end_src
+
+** Straight
+#+begin_src emacs-lisp
+  (defvar bootstrap-version)
+  (let ((bootstrap-file
+         (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+        (bootstrap-version 6))
+    (unless (file-exists-p bootstrap-file)
+      (with-current-buffer
+          (url-retrieve-synchronously
+           "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+           'silent 'inhibit-cookies)
+        (goto-char (point-max))
+        (eval-print-last-sexp)))
+    (load bootstrap-file nil 'nomessage))
+#+end_src
+
 
 * THEME AND APPEAREANCE
 ** Doom theme
@@ -431,20 +448,7 @@ Install use-package and enable ~:ensure t~ globally (if not installed it'll inst
     :hook (org-mode . evil-org-mode))
 #+end_src
 
-* STRAIGHT
 #+begin_src emacs-lisp
-  (defvar bootstrap-version)
-  (let ((bootstrap-file
-         (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-        (bootstrap-version 6))
-    (unless (file-exists-p bootstrap-file)
-      (with-current-buffer
-          (url-retrieve-synchronously
-           "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
-           'silent 'inhibit-cookies)
-        (goto-char (point-max))
-        (eval-print-last-sexp)))
-    (load bootstrap-file nil 'nomessage))
 #+end_src
 
 * YASNIPPET
