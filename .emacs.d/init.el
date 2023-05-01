@@ -4,7 +4,7 @@
 (tool-bar-mode -1)               ; Disable tool bar
 (tooltip-mode -1)                ; Disable tooltips
 (menu-bar-mode -1)               ; Disable menubar
-(set-fringe-mode 10)
+(set-fringe-mode 20)
 
 ;; Active line numbers
 (global-linum-mode t)
@@ -180,6 +180,7 @@
 
 (use-package general
   :config
+  (general-evil-setup t)
   (general-create-definer kbs/leader-key-def
     :states '(normal visual emacs)
     :prefix "SPC")
@@ -274,10 +275,10 @@
   (setq org-ellipsis " ▼")
   (setq org-hide-emphasis-markers t)
   (setq org-latex-pdf-process
-	'("pdflatex -interaction nonstopmode -output-directory %o %f"
-	  "bibtex %b"
-	  "pdflatex -interaction nonstopmode -output-directory %o %f"
-	  "pdflatex -interaction nonstopmode -output-directory %o %f"))
+        '("pdflatex -interaction nonstopmode -output-directory %o %f"
+          "bibtex %b"
+          "pdflatex -interaction nonstopmode -output-directory %o %f"
+          "pdflatex -interaction nonstopmode -output-directory %o %f"))
   (alpamacs/org-font-setup))
 
 (use-package org-bullets
