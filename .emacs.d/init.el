@@ -1,62 +1,79 @@
-;; Disable interface stuffs
 (setq inhibit-startup-message t) ; Disable startup menssage
 
-(scroll-bar-mode -1) ; Disable scroll bar
-(tool-bar-mode -1)   ; Disable tool bar
-(tooltip-mode -1)    ; Disable tooltips
-(menu-bar-mode -1)   ; Disable menubar
+(scroll-bar-mode -1)             ; Disable scroll bar
+(tool-bar-mode -1)               ; Disable tool bar
+(tooltip-mode -1)                ; Disable tooltips
+(menu-bar-mode -1)               ; Disable menubar
 (set-fringe-mode 10)
 
 ;; Active line numbers
 (global-linum-mode t)
 
+(global-prettify-symbols-mode t)
+
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+
+;; Stop make backup files
+(setq make-backup-files nil)
+
+(set-face-attribute 'default nil
+                    :font "JetBrainsMono Nerd Font"
+                    :height 110
+                    :weight 'medium)
+
+(set-face-attribute 'variable-pitch nil
+                    :font "Ubuntu Nerd Font"
+                    :height 115
+                    :weight 'medium)
+
+(set-face-attribute 'fixed-pitch nil
+                    :font "JetBrainsMono Nerd Font"
+                    :height 110
+                    :weight 'medium)
+
+(set-face-attribute 'font-lock-comment-face nil ; Set comments to italic
+                    :slant 'italic)
+(set-face-attribute 'font-lock-keyword-face nil
+                    :slant 'italic)
+(set-face-attribute 'font-lock-function-name-face nil
+                    :slant 'italic)
 
 ;;ZoomIn and ZoomOut
 (global-set-key (kbd "C-=") 'text-scale-increase)
 (global-set-key (kbd "C--") 'text-scale-decrease)
 
-;; Stop make backup files
-(setq make-backup-files nil)
-
-;; FONT SETTINGS
-(set-face-attribute 'default nil
-		    :font "JetBrainsMono Nerd Font"
-		    :height 110
-		    :weight 'medium)
-
-(set-face-attribute 'variable-pitch nil
-		    :font "Ubuntu Nerd Font"
-		    :height 115
-		    :weight 'medium)
-
-(set-face-attribute 'fixed-pitch nil
-		    :font "JetBrainsMono Nerd Font"
-		    :height 110
-		    :weight 'medium)
-
-(global-prettify-symbols-mode t)
-
-;; PACKAGE MANAGER
 (require 'package)
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
-			 ("org" . "https://orgmode.org/elpa/")
-			 ("elpa" . "https://elpa.gnu.org/packages/")))
+                         ("org" . "https://orgmode.org/elpa/")
+                         ("elpa" . "https://elpa.gnu.org/packages/")))
 
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
 
-;; Installing use-package on non-linux plataforms
 (unless (package-installed-p 'use-package)
   (package-install 'use-package))
 
 (require 'use-package)
 (setq use-package-always-ensure t)
 
-;; PACKAGES
-;; Evil mode - It's essesial for me and my life
+(use-package doom-themes
+  :config
+  (setq doom-themes-enable-bold t
+        doom-themes-enable-italic t)
+  (load-theme 'doom-one t))
+
+(use-package all-the-icons)
+(use-package all-the-icons-dired)
+
+(use-package rainbow-delimiters
+  :hook ((pog-mode eldoc-mode) . rainbow-delimiters-mode))
+
+(use-package beacon
+  :init
+  (beacon-mode))
+
 (use-package evil
   :init
   (setq evil-want-integration t)
@@ -74,25 +91,23 @@
   :config
   (evil-collection-init))
 
-;; Enable mode diminishing
 (use-package diminish)
 
-;; Ivy and counsel for completition
 (use-package ivy
   :diminish ivy-mode
   :bind (("C-s" . swiper)
-	 :map ivy-minibuffer-map
-	 ("TAB" . ivy-alt-done)
-	 ("C-l" . ivy-alt-done)
-	 ("C-j" . ivy-next-line)
-	 ("C-k" . ivy-previous-line)
-	 :map ivy-switch-buffer-map
-	 ("C-k" . ivy-previous-line)
-	 ("C-l" . ivy-done)
-	 ("C-d" . ivy-switch-buffer-kill)
-	 :map ivy-reverse-i-search-map
-	 ("C-k" . ivy-previous-line)
-	 ("C-d" . ivy-reverse-i-search-kill))
+         :map ivy-minibuffer-map
+         ("TAB" . ivy-alt-done)
+         ("C-l" . ivy-alt-done)
+         ("C-j" . ivy-next-line)
+         ("C-k" . ivy-previous-line)
+         :map ivy-switch-buffer-map
+         ("C-k" . ivy-previous-line)
+         ("C-l" . ivy-done)
+         ("C-d" . ivy-switch-buffer-kill)
+         :map ivy-reverse-i-search-map
+         ("C-k" . ivy-previous-line)
+         ("C-d" . ivy-reverse-i-search-kill))
   :config
   (setq ivy-to-use-virtual-buffers t)
   (setq enable-recursive-minibuffers t)
@@ -105,12 +120,11 @@
 
 (use-package counsel
   :bind (("M-x"     . counsel-M-x)
-	 ("C-x b"   . counsel-ibuffer)
-	 ("C-x C-f" . counsel-find-file))
+         ("C-x b"   . counsel-ibuffer)
+         ("C-x C-f" . counsel-find-file))
   :config
   (setq ivy-initial-inputs-alist nil))
 
-;; Which key
 (use-package which-key
   :init
   (which-key-mode)
@@ -122,7 +136,6 @@
   :init
   (smex-initialize))
 
-;; Helpful, for a better documentation
 (use-package helpful
   :custom
   (counsel-describe-function-function #'helpful-callable)
@@ -133,31 +146,6 @@
   ([remap describe-variable] . counsel-describe-variable)
   ([remap describe-key] . helpful-key))
 
-;; THEMES AND APPEARANCE
-(use-package all-the-icons)
-(use-package all-the-icons-dired)
-
-(use-package doom-themes
-  :config
-  (setq doom-themes-enable-bold t
-	doom-themes-enable-italic t)
-  (load-theme 'doom-one t))
-
-(set-face-attribute 'font-lock-comment-face nil ; Set comments to italic
-		    :slant 'italic)
-(set-face-attribute 'font-lock-keyword-face nil
-		    :slant 'italic)
-(set-face-attribute 'font-lock-function-name-face nil
-		    :slant 'italic)
-
-(use-package rainbow-delimiters
-  :hook ((pog-mode eldoc-mode) . rainbow-delimiters-mode))
-
-(use-package beacon
-  :init
-  (beacon-mode))
-
-;; Dashboard
 (use-package dashboard
   :init
   (setq dashboard-set-heading-icons t)
@@ -174,9 +162,8 @@
   :config
   (dashboard-setup-startup-hook)
   (dashboard-modify-heading-icons '((recents . "file-text")
-				    (bookmarks . "book"))))
+                                    (bookmarks . "book"))))
 
-;; GERAL KEYBINDS
 (use-package general
   :config
   (general-create-definer kbs/leader-key-def
@@ -225,17 +212,14 @@
     "eq" '(save-buffers-kill-emacs :which-key "Save buffer and quit emacs")
     "eQ" '(kill-emacs :which-key "Quit emacs")))
 
-;; PRODUCTIVITY
-;; Flycheck, for spell check
 (use-package flycheck
   :defer t
   :hook (lsp-mode . flycheck-mode))
 
-(require 'ispell
-	 (setq ispell-dictionary "pt_BR")
-	 (setq ispell-program-name "/usr/bin/aspell"))
+(require 'ispell)
+(setq ispell-dictionary "pt_BR")
+(setq ispell-program-name "/usr/bin/aspell")
 
-;; Company for auto-completition
 (use-package company
   :diminish
   :after lsp-mode
@@ -248,22 +232,16 @@
   :diminish
   :hook (company-mode . company-box-mode))
 
-;; ORG MODE
-(defun alpamacs/org-mode-setup ()
-  (org-indent-mode)
-  (visual-line-mode 1)
-  (diminish org-indent-mode))
-
 (defun alpamacs/org-font-setup ()
-    (dolist (face '((org-level-1 1.7 ultra-bold "#51afef")
-		    (org-level-2 1.6 extra-bold "#c678dd")
-		    (org-level-3 1.5 bold       "#98be65")
-		    (org-level-4 1.4 semi-bold  "#da8548")
-		    (org-level-5 1.3 normal     "#5699af")
-		    (org-level-6 1.2 normal     "#a9a1e1")
-		    (org-level-7 1.1 normal     "#46d9ff")
-		    (org-level-8 1.0 normal     "#ff6c6b")))
-      (set-face-attribute (car face) nil :font "Ubuntu Nerd Font" :weight (nth 2 face) :height (nth 1 face) :foreground (nth 3 face)))
+  (dolist (face '((org-level-1 1.7 ultra-bold "#51afef")
+                  (org-level-2 1.6 extra-bold "#c678dd")
+                  (org-level-3 1.5 bold       "#98be65")
+                  (org-level-4 1.4 semi-bold  "#da8548")
+                  (org-level-5 1.3 normal     "#5699af")
+                  (org-level-6 1.2 normal     "#a9a1e1")
+                  (org-level-7 1.1 normal     "#46d9ff")
+                  (org-level-8 1.0 normal     "#ff6c6b")))
+    (set-face-attribute (car face) nil :font "Ubuntu Nerd Font" :weight (nth 2 face) :height (nth 1 face) :foreground (nth 3 face)))
 
   ;; Set fixed-pitch to some org-faces
   (set-face-attribute 'org-block    nil :inherit 'fixed-pitch)
@@ -271,17 +249,21 @@
   (set-face-attribute 'org-table    nil :inherit '(shadow fixed-pitch))
   (set-face-attribute 'org-checkbox nil :inherit '(shadow fixed-pitch)))
 
+(defun alpamacs/org-mode-setup ()
+  (visual-line-mode 1)
+  (diminish org-indent-mode)
+  (alpamacs/org-fonts-setup))
+
 (use-package org
   :hook (org-mode . alpamacs/org-mode-setup)
   :config
   (setq org-ellipsis " ▼")
   (setq org-hide-emphasis-markers t)
   (setq org-latex-pdf-process
-	'("pdflatex -interaction nonstopmode -output-directory %o %f"
-	  "bibtex %b"
-	  "pdflatex -interaction nonstopmode -output-directory %o %f"
-	  "pdflatex -interaction nonstopmode -output-directory %o %f"))
-  (alpamacs/org-font-setup))
+        '("pdflatex -interaction nonstopmode -output-directory %o %f"
+          "bibtex %b"
+          "pdflatex -interaction nonstopmode -output-directory %o %f"
+          "pdflatex -interaction nonstopmode -output-directory %o %f")))
 
 (use-package org-bullets
   :after org
@@ -294,7 +276,6 @@
 (use-package org-auto-tangle
   :hook (org-mode . org-auto-tangle-mode))
 
-;; Auto-generate toc
 (use-package toc-org
   :hook (org-mode . toc-org-enable))
 
@@ -302,8 +283,6 @@
   :after org
   :hook (org-mode . evil-org-mode))
 
-;; DEVELOPMENT
-;; Straight
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
@@ -325,7 +304,6 @@
   :after yasnippet
   :straight (doom-snippets :type git :host github :repo "doomemacs/snippets" :files ("*.el" "*")))
 
-;; Languages
 (use-package rust-mode)
 
 (use-package haskell-mode)
@@ -344,7 +322,6 @@
 (use-package lsp-ui
   :hook (lsp-mode . lsp-ui-mode))
 
-;; Projectile
 (use-package projectile
   :diminish projectile-mode
   :config (projectile-mode)
@@ -353,35 +330,16 @@
 (use-package counsel-projectile
   :config (counsel-projectile-mode))
 
-;; Magit
 (use-package magit
   :commands (magit-status magit-get-current-branch))
 
-
 (use-package vterm
   :init (setq shell-file-name "/bin/fish"
-	      vterm-max-scrollback 5000))
+              vterm-max-scrollback 5000))
 
-;; CUSTOM FUNCTIONS
-;; Interactively change the current frame's opacity.
-;; OPACITY is an integer between 0 to 100, inclusive."
 (defun alpamacs/set-frame-opacity (opacity)
   (interactive
    (list (read-number "Opacity (0-100): "
                       (or (frame-parameter nil 'alpha)
                           100))))
   (set-frame-parameter nil 'alpha opacity))
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(lsp-ui smex org-contrib org-superstar lsp-haskell dashboard diminish company-box flycheck evil-magit magit counsel-projectile lsp-mode which-key use-package toc-org rainbow-delimiters org-bullets ivy-rich helpful general evil-collection doom-themes counsel all-the-icons-dired)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
