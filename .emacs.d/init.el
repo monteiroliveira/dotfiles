@@ -151,18 +151,19 @@
   (setq dashboard-set-heading-icons t)
   (setq dashboard-set-file-icons t)
   (setq dashboard-set-navigator t)
-  (setq dashboard-projects-switch-function 'counsel-projectile-switch-project-by-name)
-  (setq dashboard-banner-logo-title "Emacs Is More Than A Text Editor!")
+  (setq dashboard-startup-banner 'logo)
   ;(setq dashboard-startup-banner "~/.emacs.d/images/alpaca300x300.png")  ;; use custom image as banner
-  (setq dashboard-center-content nil) ;; set to 't' for centered content
+  (setq dashboard-banner-logo-title "Emacs Is More Than A Text Editor!")
+  (setq dashboard-projects-switch-function 'counsel-projectile-switch-project-by-name)
+  (setq dashboard-center-content nil)
   (setq dashboard-items '((recents   . 7)
-                          (agenda    . 5)
-                          (bookmarks . 3)
-                          (projects  . 3)))
+			  (agenda    . 5)
+			  (bookmarks . 5)
+			  (projects  . 5)))
   :config
   (dashboard-setup-startup-hook)
   (dashboard-modify-heading-icons '((recents . "file-text")
-                                    (bookmarks . "book"))))
+				    (bookmarks . "book"))))
 
 (use-package general
   :config
