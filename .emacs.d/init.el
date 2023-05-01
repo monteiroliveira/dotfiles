@@ -252,8 +252,7 @@
 
 (defun alpamacs/org-mode-setup ()
   (visual-line-mode 1)
-  (diminish org-indent-mode)
-  (alpamacs/org-fonts-setup))
+  (diminish org-indent-mode))
 
 (use-package org
   :hook (org-mode . alpamacs/org-mode-setup)
@@ -261,10 +260,11 @@
   (setq org-ellipsis " ▼")
   (setq org-hide-emphasis-markers t)
   (setq org-latex-pdf-process
-        '("pdflatex -interaction nonstopmode -output-directory %o %f"
-          "bibtex %b"
-          "pdflatex -interaction nonstopmode -output-directory %o %f"
-          "pdflatex -interaction nonstopmode -output-directory %o %f")))
+	'("pdflatex -interaction nonstopmode -output-directory %o %f"
+	  "bibtex %b"
+	  "pdflatex -interaction nonstopmode -output-directory %o %f"
+	  "pdflatex -interaction nonstopmode -output-directory %o %f"))
+  (alpamacs/org-font-setup))
 
 (use-package org-bullets
   :after org
