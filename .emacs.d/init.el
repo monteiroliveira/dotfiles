@@ -251,6 +251,7 @@
   (set-face-attribute 'org-checkbox nil :inherit '(shadow fixed-pitch)))
 
 (defun alpamacs/org-mode-setup ()
+  (org-indent-mode)
   (visual-line-mode 1)
   (diminish org-indent-mode))
 

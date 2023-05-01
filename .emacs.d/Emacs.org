@@ -381,6 +381,7 @@ Install use-package and enable ~:ensure t~ globally (if not installed it'll inst
 ** Org setup
 #+begin_src emacs-lisp
   (defun alpamacs/org-mode-setup ()
+    (org-indent-mode)
     (visual-line-mode 1)
     (diminish org-indent-mode))
 #+end_src
