@@ -75,6 +75,12 @@ Actived line numbers and prettify symbols mode.
 
   ;; Stop make backup files
   (setq make-backup-files nil)
+
+  (require 'vterm)
+  (dolist (mode '(org-mode-hook
+                  vterm-mode-hook
+                  eshell-mode-hook))
+    (add-hook mode (lambda () (linum-mode 0))))
 #+end_src
 
 * FONTS

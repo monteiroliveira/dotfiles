@@ -17,6 +17,12 @@
 ;; Stop make backup files
 (setq make-backup-files nil)
 
+(require 'vterm)
+(dolist (mode '(org-mode-hook
+                vterm-mode-hook
+                eshell-mode-hook))
+  (add-hook mode (lambda () (linum-mode 0))))
+
 (set-face-attribute 'default nil
                     :font "JetBrainsMono Nerd Font"
                     :height 110
