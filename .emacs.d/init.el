@@ -176,13 +176,13 @@
   (setq dashboard-projects-switch-function 'counsel-projectile-switch-project-by-name)
   (setq dashboard-center-content nil)
   (setq dashboard-items '((recents   . 7)
-			  (agenda    . 5)
-			  (bookmarks . 5)
-			  (projects  . 5)))
+                          (agenda    . 5)
+                          (bookmarks . 5)
+                          (projects  . 5)))
   :config
   (dashboard-setup-startup-hook)
   (dashboard-modify-heading-icons '((recents . "file-text")
-				    (bookmarks . "book"))))
+                                    (bookmarks . "book"))))
 
 (use-package general
   :config
