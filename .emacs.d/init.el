@@ -106,7 +106,7 @@
 (use-package evil-collection
   :after evil
   :init
-  (setq evil-collection-mode-list '(dashboard dired ibuffer))
+  (evil-collection-init '(dashboard dired ibuffer pdf))
   :config
   (evil-collection-init))
 
