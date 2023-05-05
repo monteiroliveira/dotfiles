@@ -7,7 +7,7 @@
 (set-fringe-mode 20)
 
 ;; Active line numbers
-(global-linum-mode t)
+(global-display-line-numbers-mode t)
 
 (global-prettify-symbols-mode t)
 
@@ -17,11 +17,11 @@
 ;; Stop make backup files
 (setq make-backup-files nil)
 
-(require 'vterm)
 (dolist (mode '(org-mode-hook
                 vterm-mode-hook
-                eshell-mode-hook))
-  (add-hook mode (lambda () (linum-mode 0))))
+                eshell-mode-hook
+                pdf-view-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 (set-face-attribute 'default nil
                     :font "JetBrainsMono Nerd Font"
