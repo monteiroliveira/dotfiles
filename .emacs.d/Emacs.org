@@ -48,6 +48,7 @@
 - [[#projectile][PROJECTILE]]
 - [[#magit][MAGIT]]
 - [[#vterm][VTERM]]
+- [[#pdf-tools][PDF TOOLS]]
 - [[#custom-functions][CUSTOM FUNCTIONS]]
 
 * ABOUT THIS CONFIG
@@ -529,6 +530,14 @@ Install use-package and enable ~:ensure t~ globally (if not installed it'll inst
   (use-package vterm
     :init (setq shell-file-name "/bin/fish"
                 vterm-max-scrollback 5000))
+#+end_src
+
+* PDF TOOLS
+#+begin_src emacs-lisp
+  (use-package pdf-tools
+    :mode ("\\.pdf\\'" . pdf-view-mode)
+    :init (setq pdf-view-display-size 'fit-page)
+    :config (pdf-tools-install))
 #+end_src
 
 * CUSTOM FUNCTIONS

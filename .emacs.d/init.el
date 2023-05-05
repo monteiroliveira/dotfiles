@@ -355,6 +355,11 @@
   :init (setq shell-file-name "/bin/fish"
               vterm-max-scrollback 5000))
 
+(use-package pdf-tools
+  :mode ("\\.pdf\\'" . pdf-view-mode)
+  :init (setq pdf-view-display-size 'fit-page)
+  :config (pdf-tools-install))
+
 (defun alpamacs/set-frame-opacity (opacity)
   (interactive
    (list (read-number "Opacity (0-100): "
