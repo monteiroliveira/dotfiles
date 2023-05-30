@@ -38,13 +38,6 @@
                     :height 110
                     :weight 'medium)
 
-(set-face-attribute 'font-lock-comment-face nil ; Set comments to italic
-                    :slant 'italic)
-(set-face-attribute 'font-lock-keyword-face nil
-                    :slant 'italic)
-(set-face-attribute 'font-lock-function-name-face nil
-                    :slant 'italic)
-
 ;;ZoomIn and ZoomOut
 (global-set-key (kbd "C-=") 'text-scale-increase)
 (global-set-key (kbd "C--") 'text-scale-decrease)
@@ -82,6 +75,13 @@
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t)
   (load-theme 'doom-one t))
+
+(set-face-attribute 'font-lock-comment-face nil ; Set comments to italic
+                    :slant 'italic)
+(set-face-attribute 'font-lock-keyword-face nil
+                    :slant 'italic)
+(set-face-attribute 'font-lock-function-name-face nil
+                    :slant 'italic)
 
 (use-package all-the-icons)
 (use-package all-the-icons-dired)
@@ -273,6 +273,7 @@
 (defun alpamacs/org-mode-setup ()
   (org-indent-mode)
   (visual-line-mode 1)
+  (setq evil-auto-indent nil)
   (diminish org-indent-mode))
 
 (use-package org
@@ -280,12 +281,19 @@
   :config
   (setq org-ellipsis " ▼")
   (setq org-hide-emphasis-markers t)
+  (setq org-src-preserve-indentation nil)
+  (setq org-edit-src-content-indentation 2)
   (setq org-latex-pdf-process
         '("pdflatex -interaction nonstopmode -output-directory %o %f"
           "bibtex %b"
           "pdflatex -interaction nonstopmode -output-directory %o %f"
           "pdflatex -interaction nonstopmode -output-directory %o %f"))
   (alpamacs/org-font-setup))
+
+(setq org-latex-listings 't)
+(require 'ox-latex)
+(add-to-list 'org-latex-packages-alist '("" "listings"))
+(add-to-list 'org-latex-packages-alist '("" "color"))
 
 (use-package org-bullets
   :after org
@@ -331,7 +339,7 @@
   :commands (lsp lsp-deferred)
   :init
   (setq lsp-keymap-prefix "C-c l")
-  :hook ((haskell-mode c-mode cc-mode rust-mode) . lsp)
+  :hook ((haskell-mode c-mode cc-mode rust-mode python-mode) . lsp)
   :config
   (lsp-enable-which-key-integration t)
   (setq lsp-headerline-breadcrumb-enable nil)
