@@ -295,6 +295,10 @@
 (add-to-list 'org-latex-packages-alist '("" "listings"))
 (add-to-list 'org-latex-packages-alist '("" "color"))
 
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((plantuml . t)))
+
 (use-package org-bullets
   :after org
   :hook (org-mode . org-bullets-mode)
@@ -355,6 +359,12 @@
 
 (use-package counsel-projectile
   :config (counsel-projectile-mode))
+
+(use-package plantuml-mode
+  :init
+  (setq plantuml-jar-path "~/.local/jar/plantuml.jar")
+  (setq org-plantuml-jar-path (expand-file-name "~/.local/jar/plantuml.jar"))
+  (setq plantuml-default-exec-mode 'jar))
 
 (use-package magit
   :commands (magit-status magit-get-current-branch))
