@@ -2,9 +2,9 @@ set -e fish_user_paths
 set -U fish_user_paths $HOME/.local/bin $HOME/.cargo/bin $HOME/.emacs.d/bin $HOME/.cabal/bin $HOME/.local/bin $fish_user_paths
 
 if status --is-login
-	if [ $(tty) = /dev/tty1 ] ;
-       exec startx
-	end
+   if [ $(tty) = /dev/tty1 ] ;
+      exec startx
+   end
 end
 
 source $HOME/.local/bin/fish_ssh_agent.fish
