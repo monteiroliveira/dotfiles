@@ -16,7 +16,7 @@ def init_widget_list():
             background=color['magenta']
         ),
         widget.TextBox(
-            text="",
+            text="\ue73c",
             fontsize=25,
             padding=0,
             background=color['magenta']
@@ -59,7 +59,7 @@ def init_widget_list():
         left_arrow(color['gray'], color['bg']),
         left_arrow(color['bg'], color['blue']),
         widget.TextBox(
-            text="",
+            text="\uebc6",
             fontsize=20,
             padding=2,
             background=color['blue']
@@ -71,8 +71,8 @@ def init_widget_list():
         ),
         left_arrow(color['blue'], color['magenta']),
         widget.TextBox(
-            text="",
-            fontsize=20,
+            text="\uf2c9",
+            fontsize=15,
             padding=4,
             background=color['magenta']
         ),
@@ -83,7 +83,7 @@ def init_widget_list():
         ),
         left_arrow(color['magenta'], color['blue']),
         widget.TextBox(
-            text="",
+            text="\uf0c7",
             fontsize=20,
             padding=4,
             background=color['blue']
@@ -101,8 +101,8 @@ def init_widget_list():
             background=color['magenta']
         ),
         widget.TextBox(
-            text="↻",
-            fontsize=15,
+            text="\uf487",
+            fontsize=20,
             background=color['magenta']
         ),
         widget.CheckUpdates(
@@ -121,7 +121,7 @@ def init_widget_list():
         ),
         left_arrow(color['magenta'], color['blue']),
         widget.TextBox(
-            text="",
+            text="\uf073",
             fontsize=20,
             padding=4,
             background=color['blue'],

@@ -26,13 +26,13 @@ error_symbol = "[✗](red)"
 vicmd_symbol = "[{N} ➜](bold cyan)"
 
 [directory]
-read_only = " "
+read_only = " \uf023"
 truncation_length = 10
 truncate_to_repo = true
 style = "bold italic cyan"
 
 [git_branch]
-symbol = "שׂ "
+symbol = "\uf418 "
 
 [git_state]
 style = "bold red"
