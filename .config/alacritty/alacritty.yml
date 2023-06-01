@@ -204,7 +204,7 @@ schemes:
       blue:    '#51afef'
       magenta: '#c678dd'
       cyan:    '#5699af'
-      white:   '#202328'
+      white:   '#abb2bf'
     bright:
       black:   '#5b6268'
       red:     '#da8548'
