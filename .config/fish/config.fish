@@ -13,9 +13,15 @@ source /opt/asdf-vm/asdf.fish
 starship init fish | source
 
 set fish_greeting
-set fish_vi_key_bindings
 set TERM 'xterm-256color'
 set EDITOR 'emacs'
+
+set fish_color_normal brcyan
+set fish_color_autosuggestion '#7d7d7d'
+set fish_color_command brcyan
+set fish_color_error '#ff6c6b'
+set fish_color_param brcyan
+set fish_color_quote '#dfdfdf' --bold
 
 alias ls='exa --icons'
 alias cat='bat --style=auto'
