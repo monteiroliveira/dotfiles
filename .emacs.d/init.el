@@ -262,7 +262,7 @@
                   (org-level-6 1.2 normal     "#a9a1e1")
                   (org-level-7 1.1 normal     "#46d9ff")
                   (org-level-8 1.0 normal     "#ff6c6b")))
-    (set-face-attribute (car face) nil :font "Ubuntu Nerd Font" :weight (nth 2 face) :height (nth 1 face) :foreground (nth 3 face)))
+    (set-face-attribute (nth 0 face) nil :font "Ubuntu Nerd Font" :weight (nth 2 face) :height (nth 1 face) :foreground (nth 3 face)))
 
   ;; Set fixed-pitch to some org-faces
   (set-face-attribute 'org-block    nil :inherit 'fixed-pitch)
