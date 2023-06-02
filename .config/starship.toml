@@ -21,9 +21,9 @@ disabled = false
 disabled = true
 
 [character]
-success_symbol = "[{I} ➜ ](bold cyan)"
+success_symbol = "[{I} ➜](bold cyan)"
 error_symbol = "[✗](red)"
-vicmd_symbol = "[{N} ➜ ](bold cyan)"
+vicmd_symbol = "[{N} ➜](bold cyan)"
 
 [directory]
 read_only = " \uf023"
