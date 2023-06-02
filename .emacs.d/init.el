@@ -334,11 +334,6 @@
   :after yasnippet
   :straight (doom-snippets :type git :host github :repo "doomemacs/snippets" :files ("*.el" "*")))
 
-(use-package rust-mode)
-
-(use-package haskell-mode)
-(use-package lsp-haskell)
-
 (use-package lsp-mode
   :commands (lsp lsp-deferred)
   :init
@@ -351,6 +346,15 @@
 
 (use-package lsp-ui
   :hook (lsp-mode . lsp-ui-mode))
+
+(use-package dap-mode)
+
+(use-package rust-mode)
+
+(use-package haskell-mode)
+(use-package lsp-haskell)
+
+;(use-package lsp-java)
 
 (use-package projectile
   :diminish projectile-mode

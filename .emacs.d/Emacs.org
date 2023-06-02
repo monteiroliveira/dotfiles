@@ -42,9 +42,11 @@
   - [[#visual-fill-mode][Visual fill mode]]
 - [[#yasnippet][YASNIPPET]]
 - [[#language-support][LANGUAGE SUPPORT]]
+  - [[#lsp][Lsp]]
+  - [[#debugger][Debugger]]
   - [[#rust][Rust]]
   - [[#haskell][Haskell]]
-  - [[#lsp][Lsp]]
+  - [[#java][Java]]
 - [[#projectile][PROJECTILE]]
 - [[#plantuml][PlantUML]]
 - [[#magit][MAGIT]]
@@ -494,17 +496,6 @@ Install use-package and enable ~:ensure t~ globally (if not installed it'll inst
 #+end_src
 
 * LANGUAGE SUPPORT
-** Rust
-#+begin_src emacs-lisp
-  (use-package rust-mode)
-#+end_src
-
-** Haskell
-#+begin_src emacs-lisp
-  (use-package haskell-mode)
-  (use-package lsp-haskell)
-#+end_src
-
 ** Lsp
 #+begin_src emacs-lisp
   (use-package lsp-mode
@@ -519,6 +510,27 @@ Install use-package and enable ~:ensure t~ globally (if not installed it'll inst
 
   (use-package lsp-ui
     :hook (lsp-mode . lsp-ui-mode))
+#+end_src
+
+** Debugger
+#+begin_src emacs-lisp
+  (use-package dap-mode)
+#+end_src
+
+** Rust
+#+begin_src emacs-lisp
+  (use-package rust-mode)
+#+end_src
+
+** Haskell
+#+begin_src emacs-lisp
+  (use-package haskell-mode)
+  (use-package lsp-haskell)
+#+end_src
+
+** Java
+#+begin_src emacs-lisp
+  ;(use-package lsp-java)
 #+end_src
 
 * PROJECTILE
