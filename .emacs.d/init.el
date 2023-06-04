@@ -137,6 +137,10 @@
   :init
   (ivy-rich-mode 1))
 
+(use-package ivy-posframe
+  :init
+  (ivy-posframe-mode))
+
 (use-package counsel
   :bind (("M-x"     . counsel-M-x)
          ("C-x b"   . counsel-ibuffer)
