@@ -1,0 +1,14 @@
+Config { font     = "xft:ubuntu-bold-10"
+       , bgColor  = "#282c34"
+       , fgColor  = "#f8f8f2"
+       , position = BottomSize L 100 22
+       , commands = [ Run Cpu ["-L", "3", "-H", "50", "--high"  , "red"] 15
+                    , Run Memory ["-t", "Mem: <used>M - <usedratio>%"] 15
+                    , Run Date "%a %Y-%m-%d - (%H:%M)" "date" 30
+		    , Run Com ".config/xmobar/trayer-padding-icon.sh" [] "trayerpad" 20
+                    , Run XMonadLog
+                    ]
+       , sepChar  = "%"
+       , alignSep = "}{"
+       , template = " %XMonadLog% }{ %cpu% | %memory% | %date% | %trayerpad% "
+       }
