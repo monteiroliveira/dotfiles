@@ -27,6 +27,7 @@
   - [[#rust][Rust]]
   - [[#c-and-c][C and C++]]
   - [[#java][Java]]
+  - [[#haskell][Haskell]]
 
 * INITIAL CONFIG
 ** Important definitions
@@ -222,4 +223,10 @@
 #+begin_src emacs-lisp
   (use-package lsp-java
     :hook (java-mode . lsp-deferred))
+#+end_src
+
+** Haskell
+#+begin_src emacs-lisp
+  (use-package haskell-mode
+    :mode "\\.hs\\'")
 #+end_src
