@@ -6,6 +6,7 @@
 * TABLE OF CONTENTS :toc:
 - [[#initial-config][INITIAL CONFIG]]
   - [[#important-definitions][Important definitions]]
+  - [[#theme-with-modus][Theme with modus]]
   - [[#fonts][Fonts]]
 - [[#package-manager][PACKAGE MANAGER]]
   - [[#use-package][Use-package]]
@@ -44,6 +45,17 @@
   (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
   (global-set-key (kbd "C-=") 'text-scale-increase)
   (global-set-key (kbd "C--") 'text-scale-decrease)
+
+  (setq backup-directory-alist '(("." . "~/.Trash")))
+#+end_src
+
+** Theme with modus
+#+begin_src emacs-lisp
+  (setq modus-themes-mode-line '(borderless)
+        modus-themes-bold-constructs t
+        modus-themes-italic-constructs t
+        modus-themes-headings '((t . (rainbow))))
+  (load-theme 'modus-vivendi t)
 #+end_src
 
 ** Fonts
