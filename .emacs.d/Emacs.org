@@ -18,7 +18,10 @@
   - [[#org-with-evil][Org with evil]]
 - [[#ivy][IVY]]
   - [[#counsel][Counsel]]
-- [[#flycheck][FLYCHECK]]
+- [[#spell-check][SPELL CHECK]]
+  - [[#ispell][Ispell]]
+  - [[#flyspell][Flyspell]]
+  - [[#flycheck][Flycheck]]
 - [[#company][COMPANY]]
 - [[#which-key][WHICH KEY]]
 - [[#shells-and-terminals][SHELLS AND TERMINALS]]
@@ -166,7 +169,22 @@
     (counsel-mode))
 #+end_src
 
-* FLYCHECK
+* SPELL CHECK
+** Ispell
+#+begin_src emacs-lisp
+  (require 'ispell)
+  (setq ispell-dictionary "pt_BR")
+  (setq ispell-program-name "/usr/bin/aspell")
+#+end_src
+
+** Flyspell
+#+begin_src emacs-lisp
+  (require 'flyspell)
+  (add-hook 'text-mode-hook 'flyspell-mode)
+  (add-hook 'prog-mode-hook 'flyspell-prog-mode)
+#+end_src
+
+** Flycheck
 #+begin_src emacs-lisp
   (use-package flycheck
     :init
