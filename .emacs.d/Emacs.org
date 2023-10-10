@@ -33,6 +33,7 @@
   - [[#c-and-c][C and C++]]
   - [[#java][Java]]
   - [[#haskell][Haskell]]
+  - [[#latex][LaTeX]]
 
 * INITIAL CONFIG
 ** Important definitions
@@ -267,4 +268,20 @@
 #+begin_src emacs-lisp
   (use-package haskell-mode
     :mode "\\.hs\\'")
+#+end_src
+
+** LaTeX
+#+begin_src emacs-lisp
+  (use-package auctex
+    :defer t
+    :hook (LaTeX-mode . (lambda () (setq TeX-view-program-selection '(((output-dvi has-no-display-manager)
+                                                "dvi2tty")
+                                               ((output-dvi style-pstricks)
+                                                "dvips and gv")
+                                               (output-dvi "xdvi")
+                                               (output-pdf "Zathura")
+                                               (output-html "xdg-open"))))))
+
+  (use-package lsp-latex
+    :hook (LaTeX-mode . lsp-deferred))
 #+end_src
