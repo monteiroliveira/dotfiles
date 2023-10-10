@@ -10,6 +10,7 @@
   - [[#fonts][Fonts]]
 - [[#package-manager][PACKAGE MANAGER]]
   - [[#use-package][Use-package]]
+- [[#undo-tree][UNDO TREE]]
 - [[#evil-mode][EVIL MODE]]
 - [[#org-mode][ORG MODE]]
   - [[#block-templates][Block Templates]]
@@ -86,6 +87,12 @@
   (setq use-package-always-ensure t)
 #+end_src
 
+* UNDO TREE
+#+begin_src emacs-lisp
+  (use-package undo-tree
+    :config (global-undo-tree-mode 1))
+#+end_src
+
 * EVIL MODE
 #+begin_src emacs-lisp
   (use-package evil
@@ -96,7 +103,8 @@
     (setq evil-want-keybinding nil)
     (setq evil-split-window-right t)
     (setq evil-split-window-below t)
-    (evil-mode))
+    (evil-mode)
+    (evil-set-undo-system 'undo-tree))
 
   (use-package evil-collection
     :after evil
