@@ -94,7 +94,9 @@
 * UNDO TREE
 #+begin_src emacs-lisp
   (use-package undo-tree
-    :config (global-undo-tree-mode 1))
+    :config
+    (setq undo-tree-auto-save-history nil)
+    (global-undo-tree-mode 1))
 #+end_src
 
 * EVIL MODE
