@@ -49,6 +49,12 @@ myLayoutHook = avoidStruts $ tall ||| Mirror tall ||| Full
 
 myXmobarPP :: PP
 myXmobarPP = def
+  { ppCurrent          = xmobarColor "#98be65" "" . wrap "[" "]"
+  , ppVisible          = xmobarColor "#98be65" ""
+  , ppHidden           = xmobarColor "#82aaff" "" . wrap "*" ""
+  , ppHiddenNoWindows  = xmobarColor "#f8f8f2" ""
+  , ppSep              = " | "
+  , ppTitle            = xmobarColor "#dfdfdf" "" }
 
 myStartupHook :: X ()
 myStartupHook = do
