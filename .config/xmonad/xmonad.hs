@@ -76,17 +76,22 @@ myShowWName = def
   , swn_fade    = 1.0
   , swn_bgcolor = "#1c1f24"
   , swn_color   = "#ffffff" }
+
+myKeys :: [(String, X ())]
+myKeys =
+  [("M-S-d", spawn "dmenu_run -g 5 -l 20 -z 650 -h 20 -bw 3")]
+
+xmobar0 :: StatusBarConfig
+xmobar0 = statusBarProp "xmobar ~/.config/xmobar/xmobarrc" $ pure myXmobarPP
   
 main :: IO ()
-main = do xmonad $ ewmhFullscreen $ ewmh $ withEasySB (statusBarProp "xmobar ~/.config/xmobar/xmobarrc" (pure myXmobarPP)) defToggleStrutsKey $ def
-            { modMask     = myModMask
-            , terminal    = myTerminal
-            , layoutHook  = showWName' myShowWName $ myLayoutHook
-            , startupHook = myStartupHook
-            , workspaces = myWorkspaces
-            , borderWidth = myBorderWidth
-            , normalBorderColor = myNormColor
+main = do xmonad $ withSB xmobar0 $ ewmhFullscreen $ ewmh . docks $ def
+            { modMask            = myModMask
+            , terminal           = myTerminal
+            , layoutHook         = showWName' myShowWName $ myLayoutHook
+            , startupHook        = myStartupHook
+            , workspaces         = myWorkspaces
+            , borderWidth        = myBorderWidth
+            , normalBorderColor  = myNormColor
             , focusedBorderColor = myFocusColor
-            }
-            `additionalKeysP`
-            [ ("M-S-d", spawn "dmenu_run") ]
+            } `additionalKeysP` myKeys
