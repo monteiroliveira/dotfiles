@@ -1,16 +1,17 @@
 Config { font     = "Ubuntu Bold 9"
-       , additionalFonts = [ "JetBrains Mono Nerd Font 15" ]
+       , additionalFonts = [ "JetBrains Mono Nerd Font 15"
+                           , "Font Awesome 11"]
        , bgColor  = "#282c34"
        , fgColor  = "#f8f8f2"
        , position = BottomSize L 100 24
-       , commands = [ Run Com "echo" ["<fn=1>\xe61f </fn>"] "haskell" 3600
-                    , Run Cpu ["-L", "3", "-H", "50", "--high"  , "red"] 15
-                    , Run Memory ["-t", "Mem: <used>m - <usedratio>%"] 15
-                    , Run Date "%a %Y-%m-%d - (%H:%M)" "date" 30
+       , commands = [ Run Com "echo" [" <fn=1>\xe61f</fn>   "] "haskell" 3600
+                    , Run Cpu ["-t", "<fn=2>\xf4bc</fn>   Cpu: <total>%", "-H", "50", "--high"  , "red"] 20
+                    , Run Memory ["-t", "<fn=2>\xf233</fn>   Mem: <used>m - <usedratio>%"] 20
+                    , Run Date "<fn=2>\xf017</fn> %a %Y-%m-%d - (%H:%M)" "date" 30
 		    , Run Com ".config/xmobar/trayer-padding-icon.sh" [] "trayerpad" 20
                     , Run XMonadLog
                     ]
        , sepChar  = "%"
        , alignSep = "}{"
-       , template = "  %haskell% | %XMonadLog% }{ %cpu% | %memory% | %date% | %trayerpad% "
+       , template = " %haskell% | %XMonadLog% }{ %cpu% | %memory% | %date% | %trayerpad% "
        }
