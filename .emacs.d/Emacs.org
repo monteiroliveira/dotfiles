@@ -46,6 +46,7 @@
   (menu-bar-mode -1)
 
   (global-display-line-numbers-mode 1)
+  (setq display-line-numbers-type 'relative)
 
   (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
   (global-set-key (kbd "C-=") 'text-scale-increase)
