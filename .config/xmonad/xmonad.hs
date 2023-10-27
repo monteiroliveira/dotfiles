@@ -52,8 +52,8 @@ myXmobarPP = def
   { ppCurrent          = xmobarColor "#98be65" "" . wrap "[" "]"
   , ppVisible          = xmobarColor "#98be65" ""
   , ppHidden           = xmobarColor "#82aaff" "" . wrap "*" ""
-  , ppHiddenNoWindows  = xmobarColor "#f8f8f2" ""
-  , ppSep              = " | "
+  , ppHiddenNoWindows  = xmobarColor "#ef50f2" ""
+  , ppSep              = " : "
   , ppTitle            = xmobarColor "#dfdfdf" "" }
 
 myStartupHook :: X ()
@@ -65,10 +65,9 @@ myStartupHook = do
   spawnOnce "volumeicon"
   spawnOnce "dunst"
   spawnOnce "nitrogen --restore &"
-  spawnOnce "trayer --edge bottom --align right --widthtype request --SetDockType true --padding 6 --SetPartialStrut true --expand true --monitor eDP-1 --transparent true --alpha 0 --tint 0x282c34 --height 22"
+  spawnOnce "trayer --edge bottom --align right --widthtype request --SetDockType true --padding 7 --SetPartialStrut true --expand true --monitor eDP-1 --transparent true --alpha 0 --tint 0x282c34 --height 22"
 
-myWorkspaces = [" www ", " dev ", " doc ", " sys ", " mus ", " vid ", " gfx ", " afk ", " aux "]
---myWorkspaces = [" 1:www ", " 2:dev ", " 3:doc ", " 4:sys ", " 5:mus ", " 6:vid ", " 7:gfx ", " 8:afk ", " 9:aux "]
+myWorkspaces = [" I ", " II ", " III ", " IV ", " V ", " VI ", " VII ", " VIII ", " IX "]
 
 myShowWName :: SWNConfig
 myShowWName = def
@@ -79,7 +78,9 @@ myShowWName = def
 
 myKeys :: [(String, X ())]
 myKeys =
-  [("M-S-d", spawn "dmenu_run -g 5 -l 20 -z 650 -h 20 -bw 3")]
+  [ ("M-d r", spawn "dm-run")
+  , ("M-d l", spawn "dm-logout")
+  ]
 
 xmobar0 :: StatusBarConfig
 xmobar0 = statusBarProp "xmobar ~/.config/xmobar/xmobarrc" $ pure myXmobarPP
