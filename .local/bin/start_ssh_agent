@@ -1,0 +1,58 @@
+#!/bin/bash
+
+function find_sockets(){
+    find /tmp/ssh* -type s -name "agent.*" 2> /dev/null
+}
+
+function set_socket(){
+    if [ $1 ]; then
+	if [ -S $1 ]; then
+	    export SSH_AUTH_SOCK=$1
+	    export SSH_AGENT_PID=$(echo $SSH_AUTH_SOCK | cut -d '/' -f4- | sed -e s/agent.//g)
+	    ssh-add
+	else
+	    echo "$1 is not a sockets"
+	    return 1
+	fi
+    fi
+}
+
+function main(){
+    # 0=agent running w/ key; 1=agent w/o key; 2=agent not running
+    local AGENT_RUN_STATE=$(ssh-add -l > /dev/null 2>&1; echo $?)
+
+    if [ $AGENT_RUN_STATE = 2 ]; then
+	echo "Agent is not running"
+	if [ $(find_sockets | wc -l) -eq 1 ]; then
+	    echo "Existing socket found"
+	    set_socket $(find_sockets)
+	else
+	    if [ $(find_sockets | wc -l) -eq 0 ]; then
+		echo "No socket found... Creating one"
+		eval "$(ssh-agent -s)"
+		ssh-add
+	    else
+		echo "Multiple Sockets finded"
+		for agent_socket in $(find_sockets)
+		do
+		    if [ $(find_sockets | wc -l) -eq 1 ]; then
+			set_socket $agent_socket
+			break
+		    else
+			echo "Removing extra socket" $agent_socket
+			rm $agent_socket
+		    fi
+		done
+	    fi
+	fi
+    elif [ $AGENT_RUN_STATE = 1 ]; then
+	echo "Agent running without key"
+	ssh-add
+    else
+	echo "Agent running with key"
+	echo "SOCK: $SSH_AUTH_SOCK"
+	echo "PID: $SSH_AGENT_PID"
+    fi
+}
+
+main
