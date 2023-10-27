@@ -297,13 +297,13 @@
   (use-package auctex
     :defer t
     :hook (LaTeX-mode . (lambda () (setq TeX-view-program-selection '(((output-dvi has-no-display-manager)
-                                                "dvi2tty")
-                                               ((output-dvi style-pstricks)
-                                                "dvips and gv")
-                                               (output-dvi "xdvi")
-                                               (output-pdf "Zathura")
-                                               (output-html "xdg-open"))))))
-
+                                                                       "dvi2tty")
+                                                                      ((output-dvi style-pstricks)
+                                                                       "dvips and gv")
+                                                                      (output-dvi "xdvi")
+                                                                      (output-pdf "Zathura")
+                                                                      (output-html "xdg-open"))))))
+  
   (use-package lsp-latex
     :hook (LaTeX-mode . lsp-deferred))
 #+end_src
