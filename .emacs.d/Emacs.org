@@ -288,7 +288,8 @@
 ** Haskell
 #+begin_src emacs-lisp
   (use-package haskell-mode
-    :mode "\\.hs\\'")
+    :mode "\\.hs\\'"
+    :hook (haskell-mode . lsp-deferred))
 #+end_src
 
 ** LaTeX
