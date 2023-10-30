@@ -18,6 +18,9 @@
   - [[#org-with-evil][Org with evil]]
 - [[#ivy][IVY]]
   - [[#counsel][Counsel]]
+- [[#all-the-icons][ALL THE ICONS]]
+- [[#rainbow-mode][RAINBOW MODE]]
+- [[#rainbow-delimiters][RAINBOW DELIMITERS]]
 - [[#spell-check][SPELL CHECK]]
   - [[#ispell][Ispell]]
   - [[#flyspell][Flyspell]]
@@ -175,6 +178,34 @@
     :bind (("M-x" . counsel-M-x))
     :config
     (counsel-mode))
+#+end_src
+
+
+* ALL THE ICONS
+#+begin_src emacs-lisp
+  (use-package all-the-icons
+    :if (display-graphic-p))
+
+  (use-package all-the-icons-dired
+    :after dired
+    :hook (dired-mode . (lambda () (all-the-icons-dired-mode t))))
+
+  (use-package all-the-icons-ivy
+    :init (all-the-icons-ivy-setup))
+
+  (use-package all-the-icons-ivy-rich
+    :init (all-the-icons-ivy-rich-mode t))
+#+end_src
+
+* RAINBOW MODE
+#+begin_src emacs-lisp
+  (use-package rainbow-mode)
+#+end_src
+
+* RAINBOW DELIMITERS
+#+begin_src emacs-lisp
+  (use-package rainbow-delimiters
+    :hook (prog-mode . rainbow-delimiters-mode))
 #+end_src
 
 * SPELL CHECK
