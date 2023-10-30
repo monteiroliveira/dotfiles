@@ -48,11 +48,15 @@
   (global-display-line-numbers-mode 1)
   (setq display-line-numbers-type 'relative)
 
+  (global-prettify-symbols-mode t)
+
   (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
   (global-set-key (kbd "C-=") 'text-scale-increase)
   (global-set-key (kbd "C--") 'text-scale-decrease)
 
   (setq backup-directory-alist '(("." . "~/.Trash")))
+
+  (add-to-list 'default-frame-alist '(alpha-background . 90))
 #+end_src
 
 ** Theme with modus
@@ -275,8 +279,8 @@
 
 ** C and C++
 #+begin_src emacs-lisp
-  (add-hook 'c-mode 'lsp-deferred)
-  (add-hook 'c++-mode 'lsp-deferred)
+  (add-hook 'c-mode-hook 'lsp-deferred)
+  (add-hook 'c++-mode-hook 'lsp-deferred)
 #+end_src
 
 ** Java
@@ -288,8 +292,11 @@
 ** Haskell
 #+begin_src emacs-lisp
   (use-package haskell-mode
-    :mode "\\.hs\\'"
-    :hook (haskell-mode . lsp-deferred))
+    :mode "\\.hs\\'")
+
+  (use-package lsp-haskell
+    :hook ((haskell-mode . lsp-deferred)
+           (haskell-literate-mode . lsp-deferred)))
 #+end_src
 
 ** LaTeX
