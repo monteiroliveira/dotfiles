@@ -42,6 +42,7 @@
   - [[#java][Java]]
   - [[#haskell][Haskell]]
   - [[#latex][LaTeX]]
+- [[#keybinds][KEYBINDS]]
 
 * INITIAL CONFIG
 ** Geral definitions
@@ -375,4 +376,51 @@
   
   (use-package lsp-latex
     :hook (LaTeX-mode . lsp-deferred))
+#+end_src
+
+* KEYBINDS
+#+begin_src emacs-lisp
+  (use-package general
+    :config
+    (general-create-definer alpa/leader-keys
+      :states '(normal insert visual emacs)
+      :keymaps 'override
+      :prefix "SPC"
+      :global-prefix "M-SPC")
+
+    (alpa/leader-keys
+      "SPC" '(counsel-M-x :wk "M-x")
+      "."   '(counsel-find-file :wk "Find file")
+      "M-u" '(universal-argument :wk "Universal argument"))
+
+    (alpa/leader-keys
+      "E"  '(:ignore t :wk "Emacs")
+      "Er" '((lambda () (interactive) (load-file user-init-file)) :wk "Reload Emacs"))
+
+    (alpa/leader-keys
+      "h"  '(:ignore t :wk "Help")
+      "hv" '(counsel-describe-variable :wk "Describe variable")
+      "hf" '(counsel-describe-function :wk "Describe function"))
+
+    (alpa/leader-keys
+      "b"  '(:ignore t :wk "Buffer")
+      "bi" '(counsel-ibuffer :wk "Ibuffer")
+      "bk" '(kill-this-buffer :wk "Kill buffer")
+      "br" '(revert-buffer :wk "Reload buffer"))
+
+    (alpa/leader-keys
+      "w"  '(:ignore t :wk "Windows")
+      "wc" '(evil-window-delete :wk "Close current windows")
+      "ws" '(evil-window-split :wk "Horizontal split")
+      "ws" '(evil-window-vsplit :wk "Vertical split")
+      "wh" '(evil-window-left :wk "Window left")
+      "wj" '(evil-window-down :wk "Window down")
+      "wk" '(evil-window-up :wk "Window up")
+      "wl" '(evil-window-right :wk "Window right")
+      "ww" '(evil-window-next :wk "Window next"))
+
+    (alpa/leader-keys
+      "f"  '(:ignore t :wk "File")
+      "fe" '(counsel-dired :wk "Dired")
+      "fC" '((lambda() (interactive) (find-file "~/.emacs.d/Emacs.org")) :wk "Open emacs config folder (.org)")))
 #+end_src
