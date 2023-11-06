@@ -5,7 +5,11 @@
 
 * TABLE OF CONTENTS :toc:
 - [[#initial-config][INITIAL CONFIG]]
-  - [[#important-definitions][Important definitions]]
+  - [[#geral-definitions][Geral definitions]]
+  - [[#esc-quit-everything][ESC quit everything]]
+  - [[#zoom-in-and-zoom-out][Zoom in and Zoom out]]
+  - [[#backup-directory][Backup directory]]
+  - [[#transparency][Transparency]]
   - [[#theme-with-modus][Theme with modus]]
   - [[#fonts][Fonts]]
 - [[#package-manager][PACKAGE MANAGER]]
@@ -39,7 +43,7 @@
   - [[#latex][LaTeX]]
 
 * INITIAL CONFIG
-** Important definitions
+** Geral definitions
 #+begin_src emacs-lisp
   (setq inhibit-startup-message t)
 
@@ -53,12 +57,27 @@
 
   (global-prettify-symbols-mode t)
 
+  (defalias 'yes-or-no-p 'y-or-n-p) ;; Turn 'yes' or 'no' question to 'y' or 'n'
+#+end_src
+
+** ESC quit everything
+#+begin_src emacs-lisp
   (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+#+end_src
+
+** Zoom in and Zoom out
+#+begin_src emacs-lisp
   (global-set-key (kbd "C-=") 'text-scale-increase)
   (global-set-key (kbd "C--") 'text-scale-decrease)
+#+end_src
 
+** Backup directory
+#+begin_src emacs-lisp
   (setq backup-directory-alist '(("." . "~/.Trash")))
+#+end_src
 
+** Transparency
+#+begin_src emacs-lisp
   (add-to-list 'default-frame-alist '(alpha-background . 90))
 #+end_src
 
@@ -92,8 +111,8 @@
 
 ** Use-package
 #+begin_src emacs-lisp
-  (unless (package-installed-p 'use-package)
-    (package-install 'use-package))
+  ;;(unless (package-installed-p 'use-package) ;; Install 'use-package' in non-linux plataforms
+  ;;  (package-install 'use-package))
 
   (require 'use-package)
   (setq use-package-always-ensure t)
@@ -133,9 +152,9 @@
     :hook ((org-mode . org-indent-mode)
            (org-mode . (lambda() (setq evil-auto-indent nil))))
     :config
-    (setq org-src-tab-acts-natively t)
-    (setq org-src-preserve-indentation nil)
-    (setq org-src-content-indentation 2))
+    (setq org-src-tab-acts-natively t
+          org-src-preserve-indentation nil
+          org-src-content-indentation 2))
 #+end_src
 
 ** Block Templates
@@ -161,12 +180,13 @@
   (use-package ivy
     :bind (("C-s" . swiper))
     :config
-    (setq ivy-use-virtual-buffers t)
-    (setq ivy-count-format "(%d/%d) ")
-    (setq enable-recursive-minibuffers t)
-    (ivy-mode))
+    (setq ivy-use-virtual-buffers t
+          ivy-count-format "(%d/%d) "
+          enable-recursive-minibuffers t)
+    :hook (after-init . ivy-mode))
 
   (use-package ivy-rich
+    :after ivy
     :init
     (ivy-rich-mode))
 #+end_src
@@ -175,11 +195,8 @@
 #+begin_src emacs-lisp
   (use-package counsel
     :after ivy
-    :bind (("M-x" . counsel-M-x))
-    :config
-    (counsel-mode))
+    :bind (("M-x" . counsel-M-x)))
 #+end_src
-
 
 * ALL THE ICONS
 #+begin_src emacs-lisp
@@ -188,7 +205,7 @@
 
   (use-package all-the-icons-dired
     :after dired
-    :hook (dired-mode . (lambda () (all-the-icons-dired-mode t))))
+    :hook (dired-mode . (lambda() (all-the-icons-dired-mode t))))
 
   (use-package all-the-icons-ivy
     :init (all-the-icons-ivy-setup))
@@ -199,7 +216,8 @@
 
 * RAINBOW MODE
 #+begin_src emacs-lisp
-  (use-package rainbow-mode)
+  (use-package rainbow-mode
+    :hook ((org-mode prog-mode) . rainbow-mode))
 #+end_src
 
 * RAINBOW DELIMITERS
@@ -226,18 +244,20 @@
 ** Flycheck
 #+begin_src emacs-lisp
   (use-package flycheck
-    :init
-    (global-flycheck-mode))
+    :hook (after-init . global-flycheck-mode))
 #+end_src
 
 * COMPANY
 #+begin_src emacs-lisp
   (use-package company
-    :custom
-    (company-idle-delay .1)
-    (company-minimum-prefix-length 1)
-    (company-show-numbers t)
-    (global-company-mode t))
+    :init
+    (setq company-minimum-prefix-lenght 2
+          company-require-match 'never
+          company-show-numbers t
+          company-global-modes
+          '(not vterm-mode
+                eshell-mode))
+    :hook (after-init . global-company-mode))
 
   (use-package company-box
     :after company
@@ -256,8 +276,8 @@
 #+begin_src emacs-lisp
   (use-package vterm
     :config
-    (setq shell-file-name "/bin/bash")
-    (setq shell-max-scrollback 5000))
+    (setq shell-file-name "/bin/bash"
+          shell-max-scrollback 5000))
 
   (use-package vterm-toggle
     :after vterm
@@ -287,8 +307,8 @@
     (setq lsp-keymap-prefix "C-c l")
     :config
     (lsp-enable-which-key-integration t)
-    (setq lsp-headerline-breadcrumb-enable nil)
-    (setq lsp-lens-enable nil))
+    (setq lsp-headerline-breadcrumb-enable nil
+          lsp-lens-enable nil))
 
   (use-package lsp-ui
     :hook (lsp-mode . lsp-ui-mode))
