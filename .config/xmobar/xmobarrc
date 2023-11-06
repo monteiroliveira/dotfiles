@@ -23,11 +23,11 @@ Config { font     = "Ubuntu Bold 9"
 
                     , Run Date "<fn=2>\xf017</fn> %a %Y-%m-%d - (%H:%M)" "date" 30
 
-		    , Run Com ".config/xmobar/trayer-padding-icon.sh" [] "trayerpad" 20
+		    , Run Com ".config/xmobar/trayer-padding-icon.sh" [] "trayerpad" 10
 
                     , Run XMonadLog
                     ]
        , sepChar  = "%"
        , alignSep = "}{"
-       , template = " %haskell% | %XMonadLog% }{ %penguin% %kernel%   :   %package% %pacupdates%   :   %cpu%   :   %memory%   :   %date% %trayerpad% "
+       , template = " %haskell% | %XMonadLog% }{ %penguin% %kernel%   :   %package% %pacupdates%   :   %cpu%   :   %memory%   :   %date%   : %trayerpad% "
        }
