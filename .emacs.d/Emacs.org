@@ -32,6 +32,7 @@
 - [[#company][COMPANY]]
 - [[#which-key][WHICH KEY]]
 - [[#shells-and-terminals][SHELLS AND TERMINALS]]
+  - [[#eshell][Eshell]]
   - [[#vterm][Vterm]]
 - [[#language-support][LANGUAGE SUPPORT]]
   - [[#language-server][Language Server]]
@@ -272,6 +273,16 @@
 #+end_src
 
 * SHELLS AND TERMINALS
+** Eshell
+#+begin_src emacs-lisp
+  (setq eshell-aliases-file  (concat user-emacs-directory "eshell/aliases")
+        eshell-history-size         5000
+        eshell-beffer-maximum-lines 5000
+        eshell-hist-ignoredups t
+        eshell-scroll-to-bottom-on-input t
+        eshell-highlight-prompt t)
+#+end_src
+
 ** Vterm
 #+begin_src emacs-lisp
   (use-package vterm
