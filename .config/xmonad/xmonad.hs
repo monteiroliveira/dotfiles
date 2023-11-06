@@ -18,6 +18,7 @@ import XMonad.Layout.Renamed
 import XMonad.Layout.ShowWName
 import XMonad.Layout.Spacing
 import XMonad.Layout.LayoutModifier
+import XMonad.Layout.NoBorders (smartBorders)
 
 myModMask :: KeyMask
 myModMask = mod4Mask
@@ -38,14 +39,17 @@ mySpacing :: Integer -> l a -> XMonad.Layout.LayoutModifier.ModifiedLayout Spaci
 mySpacing i = spacingRaw False (Border i i i i) True (Border i i i i) True
 
 tall = renamed [Replace "tall"]
+       $ smartBorders
        $ mySpacing 8
        $ Tall 1 (3/100) (1/2)
-       --    Tall nmaster delta ratio
-       --    nmaster = 1      -- Default number of windows in the master pane
-       --    ratio   = 1/2    -- Default proportion of screen occupied by master pane
-       --    delta   = 3/100  -- Percent of screen to increment by when resizing panes
+bTall = renamed [Replace "bTall"]
+        $ smartBorders
+        $ Tall 1 (3/100) (1/2)
+full = renamed [Replace "full"]
+       $ smartBorders
+       $ Full
 
-myLayoutHook = avoidStruts $ tall ||| Mirror tall ||| Full
+myLayoutHook = avoidStruts $ tall ||| bTall ||| full
 
 myXmobarPP :: PP
 myXmobarPP = def
