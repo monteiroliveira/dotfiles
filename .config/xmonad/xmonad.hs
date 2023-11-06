@@ -69,7 +69,7 @@ myStartupHook = do
   spawnOnce "volumeicon"
   spawnOnce "dunst"
   spawnOnce "nitrogen --restore &"
-  spawnOnce "trayer --edge bottom --align right --widthtype request --SetDockType true --padding 7 --SetPartialStrut true --expand true --monitor eDP-1 --transparent true --alpha 0 --tint 0x282c34 --height 22"
+  spawnOnce "trayer --edge bottom --align right --widthtype request --SetDockType true --padding 6 --SetPartialStrut true --expand true --monitor eDP-1 --transparent true --alpha 0 --tint 0x282c34 --height 22"
 
 myWorkspaces = [" I ", " II ", " III ", " IV ", " V ", " VI ", " VII ", " VIII ", " IX "]
 
