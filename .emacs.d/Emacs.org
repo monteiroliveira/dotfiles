@@ -43,6 +43,7 @@
   - [[#cc][C/C++]]
   - [[#csharp][CSharp]]
   - [[#latex][LaTeX]]
+  - [[#javascript-and-typescript][JavaScript and TypeScript]]
 - [[#keybinds][Keybinds]]
 
 * Let's begin
@@ -401,6 +402,19 @@ Require texlab server
 				   ("./configure"
 				    "--with-texmf-dir=$(dirname $(kpsexpand '$TEXMFHOME'))")
 				   ("make"))))
+#+end_src
+
+** JavaScript and TypeScript
+#+begin_src emacs-lisp
+(setup (:elpaca js2-mode)
+  (:file-match "\\.js\\'")
+  (:hook eglot-ensure))
+
+(setup (:elpaca typescript-mode)
+  (:file-match "\\.ts\\'")
+  (:hook eglot-ensure))
+
+(setup (:elpaca apheleia))
 #+end_src
 
 * Keybinds
