@@ -1,426 +1,452 @@
-#+title: Gnu Emacs Config
+#+title: GNU Emacs Config
 #+author: Guilherme Monteiro de Oliveira
 #+startup: showeverything
 #+property: header-args :tangle ./init.el
+#+options: toc:t
 
-* TABLE OF CONTENTS :toc:
-- [[#initial-config][INITIAL CONFIG]]
-  - [[#geral-definitions][Geral definitions]]
+* Table of contents :toc:
+- [[#lets-begin][Let's begin]]
   - [[#esc-quit-everything][ESC quit everything]]
-  - [[#zoom-in-and-zoom-out][Zoom in and Zoom out]]
+  - [[#zoomin-and-zoomout][ZoomIn and ZoomOut]]
   - [[#backup-directory][Backup directory]]
-  - [[#transparency][Transparency]]
-  - [[#theme-with-modus][Theme with modus]]
-  - [[#fonts][Fonts]]
-- [[#package-manager][PACKAGE MANAGER]]
-  - [[#use-package][Use-package]]
-- [[#undo-tree][UNDO TREE]]
-- [[#evil-mode][EVIL MODE]]
-- [[#org-mode][ORG MODE]]
-  - [[#block-templates][Block Templates]]
-  - [[#automatic-make-table-of-contents][Automatic make table of contents]]
-  - [[#org-with-evil][Org with evil]]
-- [[#ivy][IVY]]
-  - [[#counsel][Counsel]]
-- [[#all-the-icons][ALL THE ICONS]]
-- [[#rainbow-mode][RAINBOW MODE]]
-- [[#rainbow-delimiters][RAINBOW DELIMITERS]]
-- [[#spell-check][SPELL CHECK]]
-  - [[#ispell][Ispell]]
-  - [[#flyspell][Flyspell]]
-  - [[#flycheck][Flycheck]]
-- [[#company][COMPANY]]
-- [[#which-key][WHICH KEY]]
-- [[#shells-and-terminals][SHELLS AND TERMINALS]]
-  - [[#eshell][Eshell]]
+  - [[#add-custom-lisp-files-into-the-path][Add custom lisp files into the path]]
+- [[#theme-with-modus][Theme with modus]]
+- [[#transparency][Transparency]]
+- [[#fonts][Fonts]]
+- [[#package-management-with-elpacael][Package Management with Elpaca.el]]
+- [[#setupel][Setup.el]]
+  - [[#load-after--deffered-loading-][:load-after ( Deffered loading )]]
+  - [[#disabled--stop-evaluating-the-body-][:disabled ( Stop evaluating the body )]]
+  - [[#elpaca--config-setupel-to-work-with-elpacael-][:elpaca ( Config Setup.el to work with Elpaca.el )]]
+- [[#undo-tree][Undo tree]]
+- [[#evil-mode][Evil mode]]
+- [[#which-key][Which key]]
+- [[#org-mode][Org mode]]
+  - [[#blocks-templates][Blocks templates]]
+  - [[#automatic-make-the-table-of-contents][Automatic make the table of contents]]
+- [[#completition-system][Completition System]]
+  - [[#save-minibuffer-history][Save minibuffer history]]
+  - [[#vertico][Vertico]]
+  - [[#marginalia][Marginalia]]
+  - [[#consult][Consult]]
+  - [[#embark][Embark]]
+  - [[#orderless][Orderless]]
+  - [[#corfu][Corfu]]
+  - [[#ivy--disabled-][Ivy ( disabled )]]
+- [[#shells][Shells]]
   - [[#vterm][Vterm]]
-- [[#language-support][LANGUAGE SUPPORT]]
+  - [[#eshell][Eshell]]
+- [[#languages][Languages]]
   - [[#language-server][Language Server]]
-  - [[#golang][GoLang]]
-  - [[#rust][Rust]]
-  - [[#c-and-c][C and C++]]
-  - [[#java][Java]]
   - [[#haskell][Haskell]]
+  - [[#rust][Rust]]
+  - [[#cc][C/C++]]
+  - [[#csharp][CSharp]]
   - [[#latex][LaTeX]]
-- [[#keybinds][KEYBINDS]]
+- [[#keybinds][Keybinds]]
 
-* INITIAL CONFIG
-** Geral definitions
+* Let's begin
 #+begin_src emacs-lisp
-  (setq inhibit-startup-message t)
+;; -*- lexical-binding: t; -*-
+(setq inhibit-startup-message t)
 
-  (scroll-bar-mode -1)
-  (tool-bar-mode -1)
-  (tooltip-mode -1)
-  (menu-bar-mode -1)
+(scroll-bar-mode -1)
+(tool-bar-mode -1)
+(tooltip-mode -1)
+(menu-bar-mode -1)
 
-  (global-display-line-numbers-mode 1)
-  (setq display-line-numbers-type 'relative)
+(global-display-line-numbers-mode 1)
+(setq display-line-numbers-type 'relative)
 
-  (global-prettify-symbols-mode t)
+(global-prettify-symbols-mode t)
 
-  (defalias 'yes-or-no-p 'y-or-n-p) ;; Turn 'yes' or 'no' question to 'y' or 'n'
+(defalias 'yes-or-no-p 'y-or-n-p) ;; Turn 'yes' or 'no' question to 'y' or 'n'
 #+end_src
 
 ** ESC quit everything
 #+begin_src emacs-lisp
-  (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 #+end_src
 
-** Zoom in and Zoom out
+** ZoomIn and ZoomOut
 #+begin_src emacs-lisp
-  (global-set-key (kbd "C-=") 'text-scale-increase)
-  (global-set-key (kbd "C--") 'text-scale-decrease)
+(global-set-key (kbd "C-=") 'text-scale-increase)
+(global-set-key (kbd "C--") 'text-scale-decrease)
 #+end_src
 
 ** Backup directory
 #+begin_src emacs-lisp
-  (setq backup-directory-alist '(("." . "~/.Trash")))
+(setq backup-directory-alist '(("." . "~/.emacs.d/backup")))
 #+end_src
 
-** Transparency
+** Add custom lisp files into the path
 #+begin_src emacs-lisp
-  (add-to-list 'default-frame-alist '(alpha-background . 90))
+(add-to-list 'load-path "~/.emacs.d/lisp/")
 #+end_src
 
-** Theme with modus
+* Theme with modus
 #+begin_src emacs-lisp
-  (setq modus-themes-mode-line '(borderless)
-        modus-themes-bold-constructs t
-        modus-themes-italic-constructs t
-        modus-themes-headings '((t . (rainbow))))
-  (load-theme 'modus-vivendi t)
+(setq modus-themes-mode-line '(borderless)
+      modus-themes-bold-constructs t
+      modus-themes-italic-constructs t
+      modus-themes-headings '((t . (rainbow))))
+(load-theme 'modus-vivendi t)
 #+end_src
 
-** Fonts
+* Transparency
 #+begin_src emacs-lisp
-  (set-face-attribute 'default nil :height 125)
-  
-  (set-face-attribute 'font-lock-comment-face nil :slant 'italic)
-  (set-face-attribute 'font-lock-keyword-face nil :slant 'italic)
+(add-to-list 'default-frame-alist '(alpha-background . 80))
 #+end_src
 
-* PACKAGE MANAGER
+* Fonts
 #+begin_src emacs-lisp
-  (require 'package)
-  (setq package-archives '(("melpa" . "https://melpa.org/packages/")
-                           ("org"   . "https://orgmode.org/elpa/")
-                           ("elpa"  . "https://elpa.gnu.org/packages/")))
-  (package-initialize)
-  (unless package-archive-contents
-    (package-refresh-contents))
+(set-face-attribute 'default nil :font "JetBrainsMono Nerd Font" :height 125)
+
+(set-face-attribute 'font-lock-comment-face nil :slant 'italic)
+(set-face-attribute 'font-lock-keyword-face nil :slant 'italic)
 #+end_src
 
-** Use-package
+* Package Management with Elpaca.el
 #+begin_src emacs-lisp
-  ;;(unless (package-installed-p 'use-package) ;; Install 'use-package' in non-linux plataforms
-  ;;  (package-install 'use-package))
-
-  (require 'use-package)
-  (setq use-package-always-ensure t)
+(require 'alpamacs-elpaca) ;; Moved to lisp/alpamacs-elpaca.el
 #+end_src
 
-* UNDO TREE
+* Setup.el
+[[https://www.emacswiki.org/emacs/SetupEl][Setup.el]] by [[https://ruzkuku.com][pkal]] provide a macro to ease repetitive configurtion patterns in Emacs, and is an alternative to =use-package=.
 #+begin_src emacs-lisp
-  (use-package undo-tree
-    :config
-    (setq undo-tree-auto-save-history nil)
-    (global-undo-tree-mode 1))
+(elpaca setup (require 'setup))
+(elpaca-process-queues)
 #+end_src
 
-* EVIL MODE
+** :load-after ( Deffered loading )
 #+begin_src emacs-lisp
-  (use-package evil
-    :init
-    (setq evil-want-integration t)
-    (setq evil-want-C-u-scroll t)
-    (setq evil-want-C-i-jump nil)
-    (setq evil-want-keybinding nil)
-    (setq evil-split-window-right t)
-    (setq evil-split-window-below t)
-    (evil-mode)
-    (evil-set-undo-system 'undo-tree))
-
-  (use-package evil-collection
-    :after evil
-    :config
-    (setq evil-collection-mode-list '(dashboard dired ibuffer))
-    (evil-collection-init))
+(setup-define :load-after
+  (lambda (&rest features)
+    (let ((body `(require ',(setup-get 'feature))))
+      (dolist (feature (nreverse features))
+        (setq body `(with-eval-after-load ',feature ,body)))
+      body))
+:documentation "Load the current feature after FEATURES.")
 #+end_src
 
-* ORG MODE
+** :disabled ( Stop evaluating the body )
 #+begin_src emacs-lisp
-  (use-package org
-    :hook ((org-mode . org-indent-mode)
-           (org-mode . (lambda() (setq evil-auto-indent nil))))
-    :config
-    (setq org-src-tab-acts-natively t
-          org-src-preserve-indentation nil
-          org-src-content-indentation 2))
+(setup-define :disabled
+  #'setup-quit
+  :documentation "Unconditionally abort the evaluation of the current body.")
 #+end_src
 
-** Block Templates
+** :elpaca ( Config Setup.el to work with Elpaca.el )
 #+begin_src emacs-lisp
-  (require 'org-tempo)
+(defun setup-wrap-to-install-package (body _name)
+"Wrap BODY in an `elpaca' block if necessary.
+The body is wrapped in an `elpaca' block if `setup-attributes'
+contains an alist with the key `elpaca'."
+(if (assq 'elpaca setup-attributes)
+    `(elpaca ,(cdr (assq 'elpaca setup-attributes)) ,@(macroexp-unprogn body))
+  body))
+;; Add the wrapper function
+(add-to-list 'setup-modifier-list #'setup-wrap-to-install-package)
+(setup-define :elpaca
+  (lambda (order &rest recipe)
+    (push (cond
+	   ((eq order t) `(elpaca . ,(setup-get 'feature)))
+	   ((eq order nil) '(elpaca . nil))
+	   (`(elpaca . (,order ,@recipe))))
+	  setup-attributes)
+    ;; If the macro wouldn't return nil, it would try to insert the result of
+    ;; `push' which is the new value of the modified list. As this value usually
+    ;; cannot be evaluated, it is better to return nil which the byte compiler
+    ;; would optimize away anyway.
+    nil)
+  :documentation "Install ORDER with `elpaca'.
+The ORDER can be used to deduce the feature context."
+  :shorthand #'cadr)
 #+end_src
 
-** Automatic make table of contents
+* Undo tree
 #+begin_src emacs-lisp
-  (use-package toc-org
-    :hook (org-mode . toc-org-enable))
+(setup (:elpaca undo-tree)
+  (:option undo-tree-auto-save-history nil)
+  (global-undo-tree-mode 1))
 #+end_src
 
-** Org with evil
+* Evil mode
 #+begin_src emacs-lisp
-  (use-package evil-org
-    :after (org evil)
-    :hook (org-mode . evil-org-mode))
+(setup (:elpaca evil)
+  (:option evil-want-integration t
+	   evil-want-C-u-scroll t
+	   evil-want-C-i-jump nil
+	   evil-want-keybinding nil
+	   evil-split-window-right t
+	   evil-split-window-bellow t
+	   evil-undo-system 'undo-tree)
+  (evil-mode)
+
+  ;; Arrows keys are disabled in this config.
+  (defun alpamacs/dont-arrow ()
+    (interactive)
+    (message "Arrows keys are disabled hm."))
+  (evil-global-set-key 'normal (kbd "<left>")  'alpamacs/dont-arrow)
+  (evil-global-set-key 'normal (kbd "<right>") 'alpamacs/dont-arrow)
+  (evil-global-set-key 'normal (kbd "<up>")    'alpamacs/dont-arrow)
+  (evil-global-set-key 'normal (kbd "<down>")  'alpamacs/dont-arrow)
+
+  (evil-global-set-key 'motion (kbd "<left>")  'alpamacs/dont-arrow)
+  (evil-global-set-key 'motion (kbd "<right>") 'alpamacs/dont-arrow)
+  (evil-global-set-key 'motion (kbd "<up>")    'alpamacs/dont-arrow)
+  (evil-global-set-key 'motion (kbd "<down>")  'alpamacs/dont-arrow)
+
+  ;; Center the screen and scroll ('zz' and scroll)
+  (defun alpamacs/center-scroll-up ()
+    (interactive)
+    (recenter)
+    (evil-scroll-up 0))
+  (defun alpamacs/center-scroll-down ()
+    (interactive)
+    (recenter)
+    (evil-scroll-down 0))
+  (evil-global-set-key 'normal (kbd "C-u") 'alpamacs/center-scroll-up)
+  (evil-global-set-key 'normal (kbd "C-d") 'alpamacs/center-scroll-down)
+
+  (evil-global-set-key 'motion (kbd "C-u") 'alpamacs/center-scroll-up)
+  (evil-global-set-key 'motion (kbd "C-d") 'alpamacs/center-scroll-down))
+
+(setup (:elpaca evil-collection)
+  (:load-after evil)
+  (evil-collection-init))
 #+end_src
 
-* IVY
+* Which key
 #+begin_src emacs-lisp
-  (use-package ivy
-    :bind (("C-s" . swiper))
-    :config
-    (setq ivy-use-virtual-buffers t
-          ivy-count-format "(%d/%d) "
-          enable-recursive-minibuffers t)
-    :hook (after-init . ivy-mode))
-
-  (use-package ivy-rich
-    :after ivy
-    :init
-    (ivy-rich-mode))
+(setup (:elpaca which-key)
+  (:option which-key-idle-delay 0.3)
+  (which-key-mode))
 #+end_src
 
-** Counsel
+* Org mode
 #+begin_src emacs-lisp
-  (use-package counsel
-    :after ivy
-    :bind (("M-x" . counsel-M-x)))
+(setup (:elpaca org)
+  (:also-load org-tempo)
+  (:option org-edit-src-content-indentation 0)
+  (:hook org-indent-mode toc-org-mode))
 #+end_src
 
-* ALL THE ICONS
+** Blocks templates
 #+begin_src emacs-lisp
-  (use-package all-the-icons
-    :if (display-graphic-p))
-
-  (use-package all-the-icons-dired
-    :after dired
-    :hook (dired-mode . (lambda() (all-the-icons-dired-mode t))))
-
-  (use-package all-the-icons-ivy
-    :init (all-the-icons-ivy-setup))
-
-  (use-package all-the-icons-ivy-rich
-    :init (all-the-icons-ivy-rich-mode t))
+(setup org-tempo
+  (:when-loaded (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))))
 #+end_src
 
-* RAINBOW MODE
+** Automatic make the table of contents
 #+begin_src emacs-lisp
-  (use-package rainbow-mode
-    :hook ((org-mode prog-mode) . rainbow-mode))
+(setup (:elpaca toc-org))
 #+end_src
 
-* RAINBOW DELIMITERS
+* Completition System
+** Save minibuffer history
 #+begin_src emacs-lisp
-  (use-package rainbow-delimiters
-    :hook (prog-mode . rainbow-delimiters-mode))
+(setup savehist
+  (:option history-lenght 25)
+  (savehist-mode))
 #+end_src
 
-* SPELL CHECK
-** Ispell
+** Vertico
 #+begin_src emacs-lisp
-  (require 'ispell)
-  (setq ispell-dictionary "pt_BR")
-  (setq ispell-program-name "/usr/bin/aspell")
+(setup (:elpaca vertico)
+  (:with-map vertico-map
+    (:bind "C-j" vertico-next
+	   "C-k" vertico-previous))
+  (:option vertico-cycle t)
+  (vertico-mode))
 #+end_src
 
-** Flyspell
+** Marginalia
 #+begin_src emacs-lisp
-  (require 'flyspell)
-  (add-hook 'text-mode-hook 'flyspell-mode)
-  (add-hook 'prog-mode-hook 'flyspell-prog-mode)
+(setup (:elpaca marginalia)
+  (marginalia-mode))
 #+end_src
 
-** Flycheck
+** Consult
 #+begin_src emacs-lisp
-  (use-package flycheck
-    :hook (after-init . global-flycheck-mode))
+(setup (:elpaca consult)
+  (:global "C-s" consult-line
+	   "C-M-l" consult-imenu)
+  (:with-map minibuffer-local-map
+    (:bind "C-r" consult-history)))
 #+end_src
 
-* COMPANY
+** Embark
 #+begin_src emacs-lisp
-  (use-package company
-    :init
-    (setq company-minimum-prefix-lenght 2
-          company-require-match 'never
-          company-show-numbers t
-          company-global-modes
-          '(not vterm-mode
-                eshell-mode))
-    :hook (after-init . global-company-mode))
+(setup (:elpaca embark)
+  (:also-load embark-consult)
+  (:global "C-S-a" embark-act)
+  (:with-map minibuffer-local-map
+    (:bind "C-d" embark-act)))
 
-  (use-package company-box
-    :after company
-    :hook (company-mode . company-box-mode))
+(setup (:elpaca embark-consult))
 #+end_src
 
-* WHICH KEY
+** Orderless
 #+begin_src emacs-lisp
-  (use-package which-key
-    :init
-    (which-key-mode))
+(setup (:elpaca orderless)
+  (:require)
+  (:option completion-styles '(orderless)
+	   completion-category-overrides '((file (styles partial-completion)))))
 #+end_src
 
-* SHELLS AND TERMINALS
-** Eshell
+** Corfu
 #+begin_src emacs-lisp
-  (setq eshell-aliases-file  (concat user-emacs-directory "eshell/aliases")
-        eshell-history-size         5000
-        eshell-beffer-maximum-lines 5000
-        eshell-hist-ignoredups t
-        eshell-scroll-to-bottom-on-input t
-        eshell-highlight-prompt t)
+(setup (:elpaca corfu)
+  (:option corfu-cycle t
+	   corfu-auto t
+	   corfu-auto-prefix 2
+	   corfu-auto-delay 0.0)
+  (:with-map corfu-map
+    (:bind "C-j" corfu-next
+	   "C-k" corfu-previous
+	   "TAB" corfu-insert
+	   "C-f" corfu-insert))
+  (global-corfu-mode))
 #+end_src
 
+** Ivy ( disabled )
+#+begin_src emacs-lisp
+(setup (:elpaca counsel)
+  (:disabled)
+  (:load-after ivy))
+
+(setup (:elpaca ivy)
+  (:disabled)
+  (:bind "C-s" swiper
+	 "M-x" counsel-M-x)
+  (:with-map ivy-minibuffer-map
+    (:bind "C-j" ivy-next-line
+	   "C-k" ivy-previous-line))
+  (:option ivy-use-virtual-buffers t
+	   ivy-count-format "(%d/%d) "
+	   enable-recursive-minibuffers t)
+  (ivy-mode))
+
+(setup (:elpaca ivy-rich)
+  (:disabled)
+  (:load-after ivy)
+  (ivy-rich-mode))
+#+end_src
+
+* Shells
 ** Vterm
 #+begin_src emacs-lisp
-  (use-package vterm
-    :config
-    (setq shell-file-name "/bin/bash"
-          shell-max-scrollback 5000))
-
-  (use-package vterm-toggle
-    :after vterm
-    :config
-    (setq vterm-toggle-fullscreen-p nil)
-    (add-to-list 'display-buffer-alist
-             '((lambda (buffer-or-name _)
-                   (let ((buffer (get-buffer buffer-or-name)))
-                     (with-current-buffer buffer
-                       (or (equal major-mode 'vterm-mode)
-                           (string-prefix-p vterm-buffer-name (buffer-name buffer))))))
-                (display-buffer-reuse-window display-buffer-at-bottom)
-                ;;(display-buffer-reuse-window display-buffer-in-direction)
-                ;;display-buffer-in-direction/direction/dedicated is added in emacs27
-                ;;(direction . bottom)
-                ;;(dedicated . t) ;dedicated is supported in emacs27
-                (reusable-frames . visible)
-                (window-height . 0.3))))
+(setup (:elpaca vterm)
+  (:option shell-file-name "/bin/bash"
+	   shell-max-scrollback 5000))
 #+end_src
 
-* LANGUAGE SUPPORT
+** Eshell
+#+begin_src emacs-lisp
+(setup eshell
+  (:option eshell-history-size 5000
+	   eshell-beffer-maximum-lines 5000
+	   eshell-scroll-to-bottom-on-input t
+	   eshell-highlight-prompt t))
+#+end_src
+
+* Languages
 ** Language Server
 #+begin_src emacs-lisp
-  (use-package lsp-mode
-    :commands (lsp lsp-deferred)
-    :init
-    (setq lsp-keymap-prefix "C-c l")
-    :config
-    (lsp-enable-which-key-integration t)
-    (setq lsp-headerline-breadcrumb-enable nil
-          lsp-lens-enable nil))
-
-  (use-package lsp-ui
-    :hook (lsp-mode . lsp-ui-mode))
-#+end_src
-
-** GoLang
-#+begin_src emacs-lisp
-  (use-package go-mode
-    :mode "\\.go\\'"
-    :hook (go-mode . lsp-deferred))
-#+end_src
-
-** Rust
-#+begin_src emacs-lisp
-  (use-package rust-mode
-    :mode "\\.rs\\'"
-    :hook (rust-mode . lsp-deferred))
-#+end_src
-
-** C and C++
-#+begin_src emacs-lisp
-  (add-hook 'c-mode-hook 'lsp-deferred)
-  (add-hook 'c++-mode-hook 'lsp-deferred)
-#+end_src
-
-** Java
-#+begin_src emacs-lisp
-  (use-package lsp-java
-    :hook (java-mode . lsp-deferred))
+(setup eglot)
 #+end_src
 
 ** Haskell
+Require haskell-language-server
 #+begin_src emacs-lisp
-  (use-package haskell-mode
-    :mode "\\.hs\\'")
+(setup (:elpaca haskell-mode)
+  (:file-match "\\.hs\\'")
+  (:hook eglot-ensure))
+#+end_src
 
-  (use-package lsp-haskell
-    :hook ((haskell-mode . lsp-deferred)
-           (haskell-literate-mode . lsp-deferred)))
+** Rust
+Require rust-analyzer server
+#+begin_src emacs-lisp
+(setup (:elpaca rust-mode)
+  (:file-match "\\.rs\\'")
+  (:hook eglot-ensure))
+#+end_src
+
+** C/C++
+Require clang server
+#+begin_src emacs-lisp
+(setup c-mode
+  (:hook eglot-ensure))
+
+(setup c++-mode
+  (:hook eglot-ensure))
+#+end_src
+
+** CSharp
+Require omnisharp server
+#+begin_src emacs-lisp
+(setup csharp-mode
+  (:hook eglot-ensure))
 #+end_src
 
 ** LaTeX
+Require texlab server
 #+begin_src emacs-lisp
-  (use-package auctex
-    :defer t
-    :hook (LaTeX-mode . (lambda () (setq TeX-view-program-selection '(((output-dvi has-no-display-manager)
-                                                                       "dvi2tty")
-                                                                      ((output-dvi style-pstricks)
-                                                                       "dvips and gv")
-                                                                      (output-dvi "xdvi")
-                                                                      (output-pdf "Zathura")
-                                                                      (output-html "xdg-open"))))))
-  
-  (use-package lsp-latex
-    :hook (LaTeX-mode . lsp-deferred))
+(setup LaTex-mode
+  (:hook eglot-ensure))
+
+;; Borrowed from https://github.com/progfolio/elpaca/issues/181
+(setup (:elpaca auctex :pre-build (("./autogen.sh")
+				   ("./configure"
+				    "--with-texmf-dir=$(dirname $(kpsexpand '$TEXMFHOME'))")
+				   ("make"))))
 #+end_src
 
-* KEYBINDS
+* Keybinds
 #+begin_src emacs-lisp
-  (use-package general
-    :config
-    (general-create-definer alpa/leader-keys
-      :states '(normal insert visual emacs)
-      :keymaps 'override
-      :prefix "SPC"
-      :global-prefix "M-SPC")
+(setup (:elpaca general)
+  (general-evil-setup t)
+  (general-create-definer alpamacs/leader-keys
+			  :states '(normal insert visual emacs)
+			  :keymaps 'override
+			  :prefix "SPC"
+			  :global-prefix "M-SPC")
 
-    (alpa/leader-keys
-      "SPC" '(counsel-M-x :wk "M-x")
-      "."   '(counsel-find-file :wk "Find file")
-      "M-u" '(universal-argument :wk "Universal argument"))
+  (alpamacs/leader-keys
+    "SPC" '(M-x :wk "M-x")
+    "."   '(find-file :wk "Find file")
+    "M-u" '(universal-argument :wk "Universal argument"))
 
-    (alpa/leader-keys
-      "E"  '(:ignore t :wk "Emacs")
-      "Er" '((lambda () (interactive) (load-file user-init-file)) :wk "Reload Emacs"))
+  (alpamacs/leader-keys
+    "E"  '(:ignore t :wk "Emacs")
+    "Er" '((lambda () (interactive) (load-file user-init-file) (ignore (elpaca-process-queues))) :wk "Reload Emacs")
+    "Ee" '(elpaca-log :wk "Elpaca log"))
 
-    (alpa/leader-keys
-      "h"  '(:ignore t :wk "Help")
-      "hv" '(counsel-describe-variable :wk "Describe variable")
-      "hf" '(counsel-describe-function :wk "Describe function"))
+  (alpamacs/leader-keys
+    "h"  '(:ignore t :wk "Help")
+    "hv" '(describe-variable :wk "Describe variable")
+    "hf" '(describe-function :wk "Describe function"))
 
-    (alpa/leader-keys
-      "b"  '(:ignore t :wk "Buffer")
-      "bi" '(counsel-ibuffer :wk "Ibuffer")
-      "bk" '(kill-this-buffer :wk "Kill buffer")
-      "br" '(revert-buffer :wk "Reload buffer"))
+  (alpamacs/leader-keys
+    "b"  '(:ignore t :wk "Buffer")
+    "bi" '(ibuffer :wk "Ibuffer")
+    "bk" '(kill-this-buffer :wk "Kill buffer")
+    "br" '(revert-buffer :wk "Reload buffer"))
+  
+  (alpamacs/leader-keys
+    "w"  '(:ignore t :wk "Windows")
+    "wc" '(evil-window-delete :wk "Close current windows")
+    "ws" '(evil-window-split :wk "Horizontal split")
+    "wv" '(evil-window-vsplit :wk "Vertical split")
+    "wh" '(evil-window-left :wk "Window left")
+    "wj" '(evil-window-down :wk "Window down")
+    "wk" '(evil-window-up :wk "Window up")
+    "wl" '(evil-window-right :wk "Window right")
+    "ww" '(evil-window-next :wk "Window next"))
 
-    (alpa/leader-keys
-      "w"  '(:ignore t :wk "Windows")
-      "wc" '(evil-window-delete :wk "Close current windows")
-      "ws" '(evil-window-split :wk "Horizontal split")
-      "ws" '(evil-window-vsplit :wk "Vertical split")
-      "wh" '(evil-window-left :wk "Window left")
-      "wj" '(evil-window-down :wk "Window down")
-      "wk" '(evil-window-up :wk "Window up")
-      "wl" '(evil-window-right :wk "Window right")
-      "ww" '(evil-window-next :wk "Window next"))
-
-    (alpa/leader-keys
-      "f"  '(:ignore t :wk "File")
-      "fe" '(counsel-dired :wk "Dired")
-      "fC" '((lambda() (interactive) (find-file "~/.emacs.d/Emacs.org")) :wk "Open emacs config folder (.org)")))
+  (alpamacs/leader-keys
+    "f"  '(:ignore t :wk "File")
+    "fe" '(counsel-dired :wk "Dired")
+    "fC" '((lambda() (interactive) (find-file "~/.emacs.d/Emacs.org")) :wk "Open emacs config folder (.org)")))
 #+end_src
