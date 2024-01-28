@@ -293,7 +293,8 @@ The ORDER can be used to deduce the feature context."
 #+begin_src emacs-lisp
 (setup (:elpaca orderless)
   (:require)
-  (:option completion-styles '(orderless)
+  (:option completion-styles '(orderless basic)
+	   completion-category-defaults nil
 	   completion-category-overrides '((file (styles partial-completion)))))
 #+end_src
 
@@ -303,7 +304,8 @@ The ORDER can be used to deduce the feature context."
   (:option corfu-cycle t
 	   corfu-auto t
 	   corfu-auto-prefix 2
-	   corfu-auto-delay 0.0)
+	   corfu-auto-delay 0.0
+	   corfu-styles '(orderless-fast basic))
   (:with-map corfu-map
     (:bind "C-j" corfu-next
 	   "C-k" corfu-previous
@@ -453,7 +455,7 @@ Require texlab server
 
   (alpamacs/leader-keys
     "b"  '(:ignore t :wk "Buffer")
-    "bi" '(ibuffer :wk "Ibuffer")
+    "bi" '(consult-buffer :wk "Ibuffer")
     "bk" '(kill-this-buffer :wk "Kill buffer")
     "br" '(revert-buffer :wk "Reload buffer"))
   
