@@ -44,6 +44,7 @@
   - [[#csharp][CSharp]]
   - [[#latex][LaTeX]]
   - [[#javascript-and-typescript][JavaScript and TypeScript]]
+  - [[#-web-][" Web "]]
 - [[#keybinds][Keybinds]]
 
 * Let's begin
@@ -410,11 +411,19 @@ Require texlab server
   (:file-match "\\.js\\'")
   (:hook eglot-ensure))
 
+(setup (:elpaca rjsx-mode))
+
 (setup (:elpaca typescript-mode)
   (:file-match "\\.ts\\'")
   (:hook eglot-ensure))
 
 (setup (:elpaca apheleia))
+#+end_src
+
+** " Web "
+#+begin_src emacs-lisp
+(setup (:elpaca web-mode)
+  (:file-match "\\.\\(html?\\|css\\|ejs\\|jsx\\|tsx\\)\\'"))
 #+end_src
 
 * Keybinds
