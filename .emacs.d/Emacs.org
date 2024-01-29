@@ -32,7 +32,6 @@
   - [[#embark][Embark]]
   - [[#orderless][Orderless]]
   - [[#corfu][Corfu]]
-  - [[#ivy--disabled-][Ivy ( disabled )]]
 - [[#shells][Shells]]
   - [[#vterm][Vterm]]
   - [[#eshell][Eshell]]
@@ -102,7 +101,7 @@
 
 * Fonts
 #+begin_src emacs-lisp
-(set-face-attribute 'default nil :font "JetBrainsMono Nerd Font" :height 125)
+(set-face-attribute 'default nil :font "FantasqueSansM Nerd Font Mono" :height 165)
 
 (set-face-attribute 'font-lock-comment-face nil :slant 'italic)
 (set-face-attribute 'font-lock-keyword-face nil :slant 'italic)
@@ -312,30 +311,6 @@ The ORDER can be used to deduce the feature context."
 	   "TAB" corfu-insert
 	   "C-f" corfu-insert))
   (global-corfu-mode))
-#+end_src
-
-** Ivy ( disabled )
-#+begin_src emacs-lisp
-(setup (:elpaca counsel)
-  (:disabled)
-  (:load-after ivy))
-
-(setup (:elpaca ivy)
-  (:disabled)
-  (:bind "C-s" swiper
-	 "M-x" counsel-M-x)
-  (:with-map ivy-minibuffer-map
-    (:bind "C-j" ivy-next-line
-	   "C-k" ivy-previous-line))
-  (:option ivy-use-virtual-buffers t
-	   ivy-count-format "(%d/%d) "
-	   enable-recursive-minibuffers t)
-  (ivy-mode))
-
-(setup (:elpaca ivy-rich)
-  (:disabled)
-  (:load-after ivy)
-  (ivy-rich-mode))
 #+end_src
 
 * Shells
