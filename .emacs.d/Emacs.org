@@ -13,11 +13,11 @@
 - [[#theme-with-modus][Theme with modus]]
 - [[#transparency][Transparency]]
 - [[#fonts][Fonts]]
-- [[#package-management-with-elpacael][Package Management with Elpaca.el]]
+- [[#package-management-with-straightel][Package Management with Straight.el]]
 - [[#setupel][Setup.el]]
   - [[#load-after--deffered-loading-][:load-after ( Deffered loading )]]
   - [[#disabled--stop-evaluating-the-body-][:disabled ( Stop evaluating the body )]]
-  - [[#elpaca--config-setupel-to-work-with-elpacael-][:elpaca ( Config Setup.el to work with Elpaca.el )]]
+  - [[#pkg--config-setupel-to-work-with-straightel-][:pkg ( Config Setup.el to work with Straight.el )]]
 - [[#undo-tree][Undo tree]]
 - [[#evil-mode][Evil mode]]
 - [[#which-key][Which key]]
@@ -107,16 +107,30 @@
 (set-face-attribute 'font-lock-keyword-face nil :slant 'italic)
 #+end_src
 
-* Package Management with Elpaca.el
+* Package Management with Straight.el
 #+begin_src emacs-lisp
-(require 'alpamacs-elpaca) ;; Moved to lisp/alpamacs-elpaca.el
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name
+        "straight/repos/straight.el/bootstrap.el"
+        (or (bound-and-true-p straight-base-dir)
+            user-emacs-directory)))
+      (bootstrap-version 7))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
 #+end_src
 
 * Setup.el
 [[https://www.emacswiki.org/emacs/SetupEl][Setup.el]] by [[https://ruzkuku.com][pkal]] provide a macro to ease repetitive configurtion patterns in Emacs, and is an alternative to =use-package=.
 #+begin_src emacs-lisp
-(elpaca setup (require 'setup))
-(elpaca-process-queues)
+(straight-use-package '(setup :type git :host nil :repo "https://git.sr.ht/~pkal/setup"))
+(require 'setup)
 #+end_src
 
 ** :load-after ( Deffered loading )
@@ -137,44 +151,34 @@
   :documentation "Unconditionally abort the evaluation of the current body.")
 #+end_src
 
-** :elpaca ( Config Setup.el to work with Elpaca.el )
+** :pkg ( Config Setup.el to work with Straight.el )
 #+begin_src emacs-lisp
-(defun setup-wrap-to-install-package (body _name)
-"Wrap BODY in an `elpaca' block if necessary.
-The body is wrapped in an `elpaca' block if `setup-attributes'
-contains an alist with the key `elpaca'."
-(if (assq 'elpaca setup-attributes)
-    `(elpaca ,(cdr (assq 'elpaca setup-attributes)) ,@(macroexp-unprogn body))
-  body))
-;; Add the wrapper function
-(add-to-list 'setup-modifier-list #'setup-wrap-to-install-package)
-(setup-define :elpaca
-  (lambda (order &rest recipe)
-    (push (cond
-	   ((eq order t) `(elpaca . ,(setup-get 'feature)))
-	   ((eq order nil) '(elpaca . nil))
-	   (`(elpaca . (,order ,@recipe))))
-	  setup-attributes)
-    ;; If the macro wouldn't return nil, it would try to insert the result of
-    ;; `push' which is the new value of the modified list. As this value usually
-    ;; cannot be evaluated, it is better to return nil which the byte compiler
-    ;; would optimize away anyway.
-    nil)
-  :documentation "Install ORDER with `elpaca'.
-The ORDER can be used to deduce the feature context."
-  :shorthand #'cadr)
+(setup-define :pkg
+  (lambda (recipe)
+    `(unless (straight-use-package ',recipe)
+       ,(setup-quit)))
+  :documentation
+  "Install RECIPE with `straight-use-package'.
+This macro can be used as HEAD, and will replace itself with the
+first RECIPE's package."
+  :repeatable t
+  :shorthand (lambda (sexp)
+               (let ((recipe (cadr sexp)))
+                 (if (consp recipe)
+                     (car recipe)
+                   recipe))))
 #+end_src
 
 * Undo tree
 #+begin_src emacs-lisp
-(setup (:elpaca undo-tree)
+(setup (:pkg undo-tree)
   (:option undo-tree-auto-save-history nil)
   (global-undo-tree-mode 1))
 #+end_src
 
 * Evil mode
 #+begin_src emacs-lisp
-(setup (:elpaca evil)
+(setup (:pkg evil)
   (:option evil-want-integration t
 	   evil-want-C-u-scroll t
 	   evil-want-C-i-jump nil
@@ -213,21 +217,21 @@ The ORDER can be used to deduce the feature context."
   (evil-global-set-key 'motion (kbd "C-u") 'alpamacs/center-scroll-up)
   (evil-global-set-key 'motion (kbd "C-d") 'alpamacs/center-scroll-down))
 
-(setup (:elpaca evil-collection)
+(setup (:pkg evil-collection)
   (:load-after evil)
   (evil-collection-init))
 #+end_src
 
 * Which key
 #+begin_src emacs-lisp
-(setup (:elpaca which-key)
+(setup (:pkg which-key)
   (:option which-key-idle-delay 0.3)
   (which-key-mode))
 #+end_src
 
 * Org mode
 #+begin_src emacs-lisp
-(setup (:elpaca org)
+(setup (:pkg org)
   (:also-load org-tempo)
   (:option org-edit-src-content-indentation 0)
   (:hook org-indent-mode toc-org-mode))
@@ -241,7 +245,7 @@ The ORDER can be used to deduce the feature context."
 
 ** Automatic make the table of contents
 #+begin_src emacs-lisp
-(setup (:elpaca toc-org))
+(setup (:pkg toc-org))
 #+end_src
 
 * Completition System
@@ -254,7 +258,7 @@ The ORDER can be used to deduce the feature context."
 
 ** Vertico
 #+begin_src emacs-lisp
-(setup (:elpaca vertico)
+(setup (:pkg vertico)
   (:with-map vertico-map
     (:bind "C-j" vertico-next
 	   "C-k" vertico-previous))
@@ -264,13 +268,13 @@ The ORDER can be used to deduce the feature context."
 
 ** Marginalia
 #+begin_src emacs-lisp
-(setup (:elpaca marginalia)
+(setup (:pkg marginalia)
   (marginalia-mode))
 #+end_src
 
 ** Consult
 #+begin_src emacs-lisp
-(setup (:elpaca consult)
+(setup (:pkg consult)
   (:global "C-s" consult-line
 	   "C-M-l" consult-imenu)
   (:with-map minibuffer-local-map
@@ -279,18 +283,18 @@ The ORDER can be used to deduce the feature context."
 
 ** Embark
 #+begin_src emacs-lisp
-(setup (:elpaca embark)
+(setup (:pkg embark)
   (:also-load embark-consult)
   (:global "C-S-a" embark-act)
   (:with-map minibuffer-local-map
     (:bind "C-d" embark-act)))
 
-(setup (:elpaca embark-consult))
+(setup (:pkg embark-consult))
 #+end_src
 
 ** Orderless
 #+begin_src emacs-lisp
-(setup (:elpaca orderless)
+(setup (:pkg orderless)
   (:require)
   (:option completion-styles '(orderless basic)
 	   completion-category-defaults nil
@@ -299,7 +303,7 @@ The ORDER can be used to deduce the feature context."
 
 ** Corfu
 #+begin_src emacs-lisp
-(setup (:elpaca corfu)
+(setup (:pkg corfu)
   (:option corfu-cycle t
 	   corfu-auto t
 	   corfu-auto-prefix 2
@@ -316,7 +320,7 @@ The ORDER can be used to deduce the feature context."
 * Shells
 ** Vterm
 #+begin_src emacs-lisp
-(setup (:elpaca vterm)
+(setup (:pkg vterm)
   (:option shell-file-name "/bin/bash"
 	   shell-max-scrollback 5000))
 #+end_src
@@ -339,7 +343,7 @@ The ORDER can be used to deduce the feature context."
 ** Haskell
 Require haskell-language-server
 #+begin_src emacs-lisp
-(setup (:elpaca haskell-mode)
+(setup (:pkg haskell-mode)
   (:file-match "\\.hs\\'")
   (:hook eglot-ensure))
 #+end_src
@@ -347,7 +351,7 @@ Require haskell-language-server
 ** Rust
 Require rust-analyzer server
 #+begin_src emacs-lisp
-(setup (:elpaca rust-mode)
+(setup (:pkg rust-mode)
   (:file-match "\\.rs\\'")
   (:hook eglot-ensure))
 #+end_src
@@ -375,37 +379,33 @@ Require texlab server
 (setup LaTex-mode
   (:hook eglot-ensure))
 
-;; Borrowed from https://github.com/progfolio/elpaca/issues/181
-(setup (:elpaca auctex :pre-build (("./autogen.sh")
-				   ("./configure"
-				    "--with-texmf-dir=$(dirname $(kpsexpand '$TEXMFHOME'))")
-				   ("make"))))
+(setup (:pkg auctex))
 #+end_src
 
 ** JavaScript and TypeScript
 #+begin_src emacs-lisp
-(setup (:elpaca js2-mode)
+(setup (:pkg js2-mode)
   (:file-match "\\.js\\'")
   (:hook eglot-ensure))
 
-(setup (:elpaca rjsx-mode))
+(setup (:pkg rjsx-mode))
 
-(setup (:elpaca typescript-mode)
+(setup (:pkg typescript-mode)
   (:file-match "\\.ts\\'")
   (:hook eglot-ensure))
 
-(setup (:elpaca apheleia))
+(setup (:pkg apheleia))
 #+end_src
 
 ** " Web "
 #+begin_src emacs-lisp
-(setup (:elpaca web-mode)
+(setup (:pkg web-mode)
   (:file-match "\\.\\(html?\\|css\\|ejs\\|jsx\\|tsx\\)\\'"))
 #+end_src
 
 * Keybinds
 #+begin_src emacs-lisp
-(setup (:elpaca general)
+(setup (:pkg general)
   (general-evil-setup t)
   (general-create-definer alpamacs/leader-keys
 			  :states '(normal insert visual emacs)
@@ -420,8 +420,7 @@ Require texlab server
 
   (alpamacs/leader-keys
     "E"  '(:ignore t :wk "Emacs")
-    "Er" '((lambda () (interactive) (load-file user-init-file) (ignore (elpaca-process-queues))) :wk "Reload Emacs")
-    "Ee" '(elpaca-log :wk "Elpaca log"))
+    "Er" '((lambda () (interactive) (load-file user-init-file)) :wk "Reload Emacs"))
 
   (alpamacs/leader-keys
     "h"  '(:ignore t :wk "Help")
