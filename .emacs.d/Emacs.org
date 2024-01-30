@@ -262,8 +262,15 @@ first RECIPE's package."
   (:with-map vertico-map
     (:bind "C-j" vertico-next
 	   "C-k" vertico-previous))
-  (:option vertico-cycle t)
-  (vertico-mode))
+  (:option vertico-cycle t
+	   vertico-multiform-commands
+	   '((describe-variable (:not posframe))
+	     (describe-function (:not posframe))
+	     (t posframe)))
+  (vertico-mode)
+  (vertico-multiform-mode))
+
+(setup (:pkg vertico-posframe))
 #+end_src
 
 ** Marginalia
@@ -383,6 +390,7 @@ Require texlab server
 #+end_src
 
 ** JavaScript and TypeScript
+Require typescript server
 #+begin_src emacs-lisp
 (setup (:pkg js2-mode)
   (:file-match "\\.js\\'")
