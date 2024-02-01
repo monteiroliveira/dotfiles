@@ -189,33 +189,33 @@ first RECIPE's package."
   (evil-mode)
 
   ;; Arrows keys are disabled in this config.
-  (defun alpamacs/dont-arrow ()
+  (defun mo/dont-arrow ()
     (interactive)
     (message "Arrows keys are disabled hm."))
-  (evil-global-set-key 'normal (kbd "<left>")  'alpamacs/dont-arrow)
-  (evil-global-set-key 'normal (kbd "<right>") 'alpamacs/dont-arrow)
-  (evil-global-set-key 'normal (kbd "<up>")    'alpamacs/dont-arrow)
-  (evil-global-set-key 'normal (kbd "<down>")  'alpamacs/dont-arrow)
+  (evil-global-set-key 'normal (kbd "<left>")  'mo/dont-arrow)
+  (evil-global-set-key 'normal (kbd "<right>") 'mo/dont-arrow)
+  (evil-global-set-key 'normal (kbd "<up>")    'mo/dont-arrow)
+  (evil-global-set-key 'normal (kbd "<down>")  'mo/dont-arrow)
 
-  (evil-global-set-key 'motion (kbd "<left>")  'alpamacs/dont-arrow)
-  (evil-global-set-key 'motion (kbd "<right>") 'alpamacs/dont-arrow)
-  (evil-global-set-key 'motion (kbd "<up>")    'alpamacs/dont-arrow)
-  (evil-global-set-key 'motion (kbd "<down>")  'alpamacs/dont-arrow)
+  (evil-global-set-key 'motion (kbd "<left>")  'mo/dont-arrow)
+  (evil-global-set-key 'motion (kbd "<right>") 'mo/dont-arrow)
+  (evil-global-set-key 'motion (kbd "<up>")    'mo/dont-arrow)
+  (evil-global-set-key 'motion (kbd "<down>")  'mo/dont-arrow)
 
   ;; Center the screen and scroll ('zz' and scroll)
-  (defun alpamacs/center-scroll-up ()
+  (defun mo/center-scroll-up ()
     (interactive)
     (recenter)
     (evil-scroll-up 0))
-  (defun alpamacs/center-scroll-down ()
+  (defun mo/center-scroll-down ()
     (interactive)
     (recenter)
     (evil-scroll-down 0))
-  (evil-global-set-key 'normal (kbd "C-u") 'alpamacs/center-scroll-up)
-  (evil-global-set-key 'normal (kbd "C-d") 'alpamacs/center-scroll-down)
+  (evil-global-set-key 'normal (kbd "C-u") 'mo/center-scroll-up)
+  (evil-global-set-key 'normal (kbd "C-d") 'mo/center-scroll-down)
 
-  (evil-global-set-key 'motion (kbd "C-u") 'alpamacs/center-scroll-up)
-  (evil-global-set-key 'motion (kbd "C-d") 'alpamacs/center-scroll-down))
+  (evil-global-set-key 'motion (kbd "C-u") 'mo/center-scroll-up)
+  (evil-global-set-key 'motion (kbd "C-d") 'mo/center-scroll-down))
 
 (setup (:pkg evil-collection)
   (:load-after evil)
@@ -415,33 +415,34 @@ Require typescript server
 #+begin_src emacs-lisp
 (setup (:pkg general)
   (general-evil-setup t)
-  (general-create-definer alpamacs/leader-keys
+  (general-create-definer mo/leader-keys
 			  :states '(normal insert visual emacs)
 			  :keymaps 'override
 			  :prefix "SPC"
 			  :global-prefix "M-SPC")
 
-  (alpamacs/leader-keys
+  (mo/leader-keys
     "SPC" '(M-x :wk "M-x")
     "."   '(find-file :wk "Find file")
     "M-u" '(universal-argument :wk "Universal argument"))
 
-  (alpamacs/leader-keys
+  (mo/leader-keys
     "E"  '(:ignore t :wk "Emacs")
     "Er" '((lambda () (interactive) (load-file user-init-file)) :wk "Reload Emacs"))
 
-  (alpamacs/leader-keys
+  (mo/leader-keys
     "h"  '(:ignore t :wk "Help")
     "hv" '(describe-variable :wk "Describe variable")
-    "hf" '(describe-function :wk "Describe function"))
+    "hf" '(describe-function :wk "Describe function")
+    "ht" '(consult-theme :wk "Load theme"))
 
-  (alpamacs/leader-keys
+  (mo/leader-keys
     "b"  '(:ignore t :wk "Buffer")
     "bi" '(consult-buffer :wk "Ibuffer")
     "bk" '(kill-this-buffer :wk "Kill buffer")
     "br" '(revert-buffer :wk "Reload buffer"))
   
-  (alpamacs/leader-keys
+  (mo/leader-keys
     "w"  '(:ignore t :wk "Windows")
     "wc" '(evil-window-delete :wk "Close current windows")
     "ws" '(evil-window-split :wk "Horizontal split")
@@ -452,8 +453,16 @@ Require typescript server
     "wl" '(evil-window-right :wk "Window right")
     "ww" '(evil-window-next :wk "Window next"))
 
-  (alpamacs/leader-keys
+  (mo/leader-keys
+    "p"  '(:ignore t :wk "Project")
+    "pf" '(consult-fd :wk "Project file")
+    "ps" '(consult-ripgrep :wk "Project search")
+    "pg" '(consult-git-grep :wk "Project git search")
+    "pi" '(consult-imenu :wk "Project imenu search")
+    "pl" '(consult-line :wk "project line search"))
+
+  (mo/leader-keys
     "f"  '(:ignore t :wk "File")
-    "fe" '(counsel-dired :wk "Dired")
+    "fe" '(dired :wk "Dired")
     "fC" '((lambda() (interactive) (find-file "~/.emacs.d/Emacs.org")) :wk "Open emacs config folder (.org)")))
 #+end_src
