@@ -345,12 +345,6 @@ first RECIPE's package."
 ** Language Server
 #+begin_src emacs-lisp
 (setup (:pkg lsp-mode)
-  (:hook-into haskell-mode
-	      rust-mode
-	      c-mode c++-mode csharp-mode
-	      LaTeX-mode
-	      js2-mode typescript-mode
-	      python-mode)
   (:option lsp-headerline-breadcrumb-enable nil))
 
 (setup (:pkg lsp-ui))
@@ -360,6 +354,7 @@ first RECIPE's package."
 Require haskell-language-server
 #+begin_src emacs-lisp
 (setup (:pkg haskell-mode)
+  (:hook lsp)
   (:file-match "\\.hs\\'"))
 #+end_src
 
@@ -367,27 +362,32 @@ Require haskell-language-server
 Require rust-analyzer server
 #+begin_src emacs-lisp
 (setup (:pkg rust-mode)
+  (:hook lsp)
   (:file-match "\\.rs\\'"))
 #+end_src
 
 ** C/C++
 Require clang server
 #+begin_src emacs-lisp
-(setup c-mode)
+(setup c-mode
+  (:hook lsp))
 
-(setup c++-mode)
+(setup c++-mode
+  (:hook lsp))
 #+end_src
 
 ** CSharp
 Require omnisharp server
 #+begin_src emacs-lisp
-(setup csharp-mode)
+(setup csharp-mode
+  (:hook lsp))
 #+end_src
 
 ** LaTeX
 Require texlab server
 #+begin_src emacs-lisp
-(setup LaTex-mode)
+(setup LaTex-mode
+  (:hook lsp))
 
 (setup (:pkg auctex))
 #+end_src
@@ -396,11 +396,13 @@ Require texlab server
 Require typescript server
 #+begin_src emacs-lisp
 (setup (:pkg js2-mode)
+  (:hook lsp)
   (:file-match "\\.js\\'"))
 
 (setup (:pkg rjsx-mode))
 
 (setup (:pkg typescript-mode)
+  (:hook lsp)
   (:file-match "\\.ts\\'"))
 
 (setup (:pkg apheleia))
@@ -409,6 +411,7 @@ Require typescript server
 ** " Web "
 #+begin_src emacs-lisp
 (setup (:pkg web-mode)
+  (:hook lsp)
   (:file-match "\\.\\(html?\\|css\\|ejs\\|jsx\\|tsx\\)\\'"))
 #+end_src
 
