@@ -344,47 +344,50 @@ first RECIPE's package."
 * Languages
 ** Language Server
 #+begin_src emacs-lisp
-(setup eglot)
+(setup (:pkg lsp-mode)
+  (:hook-into haskell-mode
+	      rust-mode
+	      c-mode c++-mode csharp-mode
+	      LaTeX-mode
+	      js2-mode typescript-mode
+	      python-mode)
+  (:option lsp-headerline-breadcrumb-enable nil))
+
+(setup (:pkg lsp-ui))
 #+end_src
 
 ** Haskell
 Require haskell-language-server
 #+begin_src emacs-lisp
 (setup (:pkg haskell-mode)
-  (:file-match "\\.hs\\'")
-  (:hook eglot-ensure))
+  (:file-match "\\.hs\\'"))
 #+end_src
 
 ** Rust
 Require rust-analyzer server
 #+begin_src emacs-lisp
 (setup (:pkg rust-mode)
-  (:file-match "\\.rs\\'")
-  (:hook eglot-ensure))
+  (:file-match "\\.rs\\'"))
 #+end_src
 
 ** C/C++
 Require clang server
 #+begin_src emacs-lisp
-(setup c-mode
-  (:hook eglot-ensure))
+(setup c-mode)
 
-(setup c++-mode
-  (:hook eglot-ensure))
+(setup c++-mode)
 #+end_src
 
 ** CSharp
 Require omnisharp server
 #+begin_src emacs-lisp
-(setup csharp-mode
-  (:hook eglot-ensure))
+(setup csharp-mode)
 #+end_src
 
 ** LaTeX
 Require texlab server
 #+begin_src emacs-lisp
-(setup LaTex-mode
-  (:hook eglot-ensure))
+(setup LaTex-mode)
 
 (setup (:pkg auctex))
 #+end_src
@@ -393,14 +396,12 @@ Require texlab server
 Require typescript server
 #+begin_src emacs-lisp
 (setup (:pkg js2-mode)
-  (:file-match "\\.js\\'")
-  (:hook eglot-ensure))
+  (:file-match "\\.js\\'"))
 
 (setup (:pkg rjsx-mode))
 
 (setup (:pkg typescript-mode)
-  (:file-match "\\.ts\\'")
-  (:hook eglot-ensure))
+  (:file-match "\\.ts\\'"))
 
 (setup (:pkg apheleia))
 #+end_src
