@@ -414,12 +414,9 @@ Require omnisharp server
 ** Python
 #+begin_src emacs-lisp
 (setup (:pkg python-mode)
-  (defun mo/python-custom-mode-hook ()
-    (add-to-list 'company-backends 'company-anaconda))
-  (:hook lsp
-	 mo/python-custom-mode-hook))
+  (:hook lsp))
 
-(setup (:pkg company-anaconda))
+(setup (:pkg lsp-pyright))
 #+end_src
 
 ** LaTeX
