@@ -260,10 +260,22 @@ first RECIPE's package."
 
 ** Vertico
 #+begin_src emacs-lisp
+(defun mo/minibuffer-backward-kill (arg)
+  "When minibuffer is completing a file name delete up to parent folder, otherwise delete a word"
+  (interactive "p")
+  (if minibuffer-completing-file-name
+      ;; Borrowed from https://github.com/raxod502/selectrum/issues/498#issuecomment-803283608
+      (if (string-match-p "/." (minibuffer-contents))
+          (zap-up-to-char (- arg) ?/)
+        (delete-minibuffer-contents))
+    (delete-word (- arg))))
+
 (setup (:pkg vertico)
   (:with-map vertico-map
     (:bind "C-j" vertico-next
 	   "C-k" vertico-previous))
+  (:with-map minibuffer-local-map
+    (:bind "M-h" mo/minibuffer-backward-kill))
   (:option vertico-cycle t
 	   vertico-multiform-commands
 	   '((describe-variable (:not posframe))
@@ -405,7 +417,7 @@ Require omnisharp server
   (defun mo/python-custom-mode-hook ()
     (add-to-list 'company-backends 'company-anaconda))
   (:hook lsp
-	 'mo/python-custom-mode-hook))
+	 mo/python-custom-mode-hook))
 
 (setup (:pkg company-anaconda))
 #+end_src
