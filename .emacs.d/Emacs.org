@@ -32,6 +32,7 @@
   - [[#embark][Embark]]
   - [[#orderless][Orderless]]
   - [[#corfu][Corfu]]
+  - [[#company][Company]]
 - [[#shells][Shells]]
   - [[#vterm][Vterm]]
   - [[#eshell][Eshell]]
@@ -41,6 +42,7 @@
   - [[#rust][Rust]]
   - [[#cc][C/C++]]
   - [[#csharp][CSharp]]
+  - [[#python][Python]]
   - [[#latex][LaTeX]]
   - [[#javascript-and-typescript][JavaScript and TypeScript]]
   - [[#-web-][" Web "]]
@@ -311,6 +313,7 @@ first RECIPE's package."
 ** Corfu
 #+begin_src emacs-lisp
 (setup (:pkg corfu)
+  (:disabled)
   (:option corfu-cycle t
 	   corfu-auto t
 	   corfu-auto-prefix 2
@@ -322,6 +325,19 @@ first RECIPE's package."
 	   "TAB" corfu-insert
 	   "C-f" corfu-insert))
   (global-corfu-mode))
+#+end_src
+
+** Company
+#+begin_src emacs-lisp
+(setup (:pkg company)
+  (:option company-minimum-prefix-length 2
+	   company-idle-delay 0.0)
+  (:with-map company-active-map
+    (:bind "TAB" company-complete-selection))
+  (global-company-mode))
+
+(setup (:pkg company-box)
+  (:hook-into company-mode))
 #+end_src
 
 * Shells
@@ -383,6 +399,17 @@ Require omnisharp server
   (:hook lsp))
 #+end_src
 
+** Python
+#+begin_src emacs-lisp
+(setup (:pkg python-mode)
+  (defun mo/python-custom-mode-hook ()
+    (add-to-list 'company-backends 'company-anaconda))
+  (:hook lsp
+	 'mo/python-custom-mode-hook))
+
+(setup (:pkg company-anaconda))
+#+end_src
+
 ** LaTeX
 Require texlab server
 #+begin_src emacs-lisp
@@ -413,6 +440,8 @@ Require typescript server
 (setup (:pkg web-mode)
   (:hook lsp)
   (:file-match "\\.\\(html?\\|css\\|ejs\\|jsx\\|tsx\\)\\'"))
+
+(setup (:pkg restclient))
 #+end_src
 
 * Keybinds
