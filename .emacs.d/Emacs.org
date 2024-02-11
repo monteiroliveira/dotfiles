@@ -377,6 +377,8 @@ Require haskell-language-server
 (setup (:pkg haskell-mode)
   (:hook lsp)
   (:file-match "\\.hs\\'"))
+
+(setup (:pkg lsp-haskell))
 #+end_src
 
 ** Rust
@@ -434,7 +436,8 @@ Require typescript server
   (:hook lsp)
   (:file-match "\\.ts\\'"))
 
-(setup (:pkg apheleia))
+(setup (:pkg apheleia)
+  (apheleia-global-mode))
 #+end_src
 
 ** " Web "
