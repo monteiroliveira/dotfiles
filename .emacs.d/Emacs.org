@@ -276,15 +276,8 @@ first RECIPE's package."
 	   "C-k" vertico-previous))
   (:with-map minibuffer-local-map
     (:bind "M-h" mo/minibuffer-backward-kill))
-  (:option vertico-cycle t
-	   vertico-multiform-commands
-	   '((describe-variable (:not posframe))
-	     (describe-function (:not posframe))
-	     (t posframe)))
-  (vertico-mode)
-  (vertico-multiform-mode))
-
-(setup (:pkg vertico-posframe))
+  (:option vertico-cycle t)
+  (vertico-mode))
 #+end_src
 
 ** Marginalia
