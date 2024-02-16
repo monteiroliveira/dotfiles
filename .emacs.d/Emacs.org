@@ -98,7 +98,7 @@
 
 * Transparency
 #+begin_src emacs-lisp
-(add-to-list 'default-frame-alist '(alpha-background . 80))
+(add-to-list 'default-frame-alist '(alpha-background . 86))
 #+end_src
 
 * Fonts
@@ -436,8 +436,7 @@ Require typescript server
   (:hook lsp)
   (:file-match "\\.ts\\'"))
 
-(setup (:pkg apheleia)
-  (apheleia-global-mode))
+(setup (:pkg apheleia))
 #+end_src
 
 ** " Web "
