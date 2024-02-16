@@ -499,6 +499,16 @@ Require typescript server
     "pl" '(consult-line :wk "project line search"))
 
   (mo/leader-keys
+    "l" '(:ignore t :which-key "Lsp")
+    "ld" 'xref-find-definitions
+    "lr" 'xref-find-references
+    "ln" 'lsp-ui-find-next-reference
+    "lp" 'lsp-ui-find-prev-reference
+    "le" 'lsp-ui-flycheck-list
+    "lS" 'lsp-ui-sideline-mode
+    "lX" 'lsp-execute-code-action))
+
+  (mo/leader-keys
     "f"  '(:ignore t :wk "File")
     "fe" '(dired :wk "Dired")
     "fC" '((lambda() (interactive) (find-file "~/.emacs.d/Emacs.org")) :wk "Open emacs config folder (.org)")))
