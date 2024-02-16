@@ -3,7 +3,6 @@ import XMonad
 
 -- Utils
 import XMonad.Util.EZConfig (additionalKeysP, mkKeymap)
-import XMonad.Util.Ungrab
 import XMonad.Util.Loggers
 import XMonad.Util.SpawnOnce
 
