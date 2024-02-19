@@ -18,6 +18,7 @@
   - [[#load-after--deffered-loading-][:load-after ( Deffered loading )]]
   - [[#disabled--stop-evaluating-the-body-][:disabled ( Stop evaluating the body )]]
   - [[#pkg--config-setupel-to-work-with-straightel-][:pkg ( Config Setup.el to work with Straight.el )]]
+- [[#diminish][Diminish]]
 - [[#undo-tree][Undo tree]]
 - [[#evil-mode][Evil mode]]
 - [[#which-key][Which key]]
@@ -172,9 +173,15 @@ first RECIPE's package."
                    recipe))))
 #+end_src
 
+* Diminish
+#+begin_src emacs-lisp
+(setup (:pkg diminish))
+#+end_src
+
 * Undo tree
 #+begin_src emacs-lisp
 (setup (:pkg undo-tree)
+  (diminish 'undo-tree-mode)
   (:option undo-tree-auto-save-history nil)
   (global-undo-tree-mode 1))
 #+end_src
@@ -221,6 +228,7 @@ first RECIPE's package."
   (evil-global-set-key 'motion (kbd "C-d") 'mo/center-scroll-down))
 
 (setup (:pkg evil-collection)
+  (diminish 'evil-collection-unimpaired-mode)
   (:load-after evil)
   (evil-collection-init))
 #+end_src
@@ -228,6 +236,7 @@ first RECIPE's package."
 * Which key
 #+begin_src emacs-lisp
 (setup (:pkg which-key)
+  (diminish 'which-key-mode)
   (:option which-key-idle-delay 0.3)
   (which-key-mode))
 #+end_src
@@ -235,6 +244,7 @@ first RECIPE's package."
 * Org mode
 #+begin_src emacs-lisp
 (setup (:pkg org)
+  (diminish 'org-indent-mode)
   (:also-load org-tempo)
   (:option org-edit-src-content-indentation 0)
   (:hook org-indent-mode toc-org-mode))
@@ -336,6 +346,7 @@ first RECIPE's package."
 ** Company
 #+begin_src emacs-lisp
 (setup (:pkg company)
+  (diminish 'company-mode)
   (:option company-minimum-prefix-length 2
 	   company-idle-delay 0.0)
   (:with-map company-active-map
@@ -343,6 +354,7 @@ first RECIPE's package."
   (global-company-mode))
 
 (setup (:pkg company-box)
+  (diminish 'company-box-mode)
   (:hook-into company-mode))
 #+end_src
 
