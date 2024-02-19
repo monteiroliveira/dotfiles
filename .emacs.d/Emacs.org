@@ -8,7 +8,7 @@
 - [[#lets-begin][Let's begin]]
   - [[#esc-quit-everything][ESC quit everything]]
   - [[#zoomin-and-zoomout][ZoomIn and ZoomOut]]
-  - [[#backup-directory][Backup directory]]
+  - [[#stop-make-backup-files][Stop make backup files]]
   - [[#add-custom-lisp-files-into-the-path][Add custom lisp files into the path]]
 - [[#theme-with-modus][Theme with modus]]
 - [[#transparency][Transparency]]
@@ -41,6 +41,7 @@
   - [[#haskell][Haskell]]
   - [[#rust][Rust]]
   - [[#cc][C/C++]]
+  - [[#golang][Golang]]
   - [[#csharp][CSharp]]
   - [[#python][Python]]
   - [[#latex][LaTeX]]
@@ -77,9 +78,9 @@
 (global-set-key (kbd "C--") 'text-scale-decrease)
 #+end_src
 
-** Backup directory
+** Stop make backup files
 #+begin_src emacs-lisp
-(setq backup-directory-alist '(("." . "~/.emacs.d/backup")))
+(setq make-backup-files nil)
 #+end_src
 
 ** Add custom lisp files into the path
@@ -399,6 +400,12 @@ Require clang server
   (:hook lsp))
 #+end_src
 
+** Golang
+#+begin_src emacs-lisp
+(setup (:pkg go-mode)
+  (:hook lsp))
+#+end_src
+
 ** CSharp
 Require omnisharp server
 #+begin_src emacs-lisp
@@ -506,7 +513,7 @@ Require typescript server
     "lp" 'lsp-ui-find-prev-reference
     "le" 'lsp-ui-flycheck-list
     "lS" 'lsp-ui-sideline-mode
-    "lX" 'lsp-execute-code-action))
+    "lX" 'lsp-execute-code-action)
 
   (mo/leader-keys
     "f"  '(:ignore t :wk "File")
