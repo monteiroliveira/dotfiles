@@ -45,7 +45,6 @@
   - [[#rust][Rust]]
   - [[#cc][C/C++]]
   - [[#golang][Golang]]
-  - [[#csharp][CSharp]]
   - [[#python][Python]]
   - [[#latex][LaTeX]]
   - [[#javascript-and-typescript][JavaScript and TypeScript]]
@@ -102,12 +101,12 @@
 
 * Transparency
 #+begin_src emacs-lisp
-(add-to-list 'default-frame-alist '(alpha-background . 86))
+(add-to-list 'default-frame-alist '(alpha-background . 93))
 #+end_src
 
 * Fonts
 #+begin_src emacs-lisp
-(set-face-attribute 'default nil :font "FantasqueSansM Nerd Font Mono" :height 165)
+(set-face-attribute 'default nil :font "FantasqueSansM Nerd Font Mono" :height 135)
 
 (set-face-attribute 'font-lock-comment-face nil :slant 'italic)
 (set-face-attribute 'font-lock-keyword-face nil :slant 'italic)
@@ -389,7 +388,7 @@ first RECIPE's package."
 ** Vterm
 #+begin_src emacs-lisp
 (setup (:pkg vterm)
-  (:option shell-file-name "/bin/bash"
+  (:option shell-file-name "/usr/bin/fish"
 	   shell-max-scrollback 5000))
 #+end_src
 
@@ -419,7 +418,8 @@ first RECIPE's package."
 Require haskell-language-server
 #+begin_src emacs-lisp
 (setup (:pkg haskell-mode)
-  (:file-match "\\.hs\\'"))
+  (:file-match "\\.hs\\'")
+  (:hook lsp))
 
 (setup (:pkg lsp-haskell))
 #+end_src
@@ -428,7 +428,8 @@ Require haskell-language-server
 Require rust-analyzer server
 #+begin_src emacs-lisp
 (setup (:pkg rust-mode)
-  (:file-match "\\.rs\\'"))
+  (:file-match "\\.rs\\'")
+  (:hook lsp))
 #+end_src
 
 ** C/C++
@@ -441,18 +442,16 @@ Require clang server
 
 ** Golang
 #+begin_src emacs-lisp
-(setup (:pkg go-mode))
-#+end_src
-
-** CSharp
-Require omnisharp server
-#+begin_src emacs-lisp
-(setup csharp-mode)
+(setup (:pkg go-mode)
+  (:file-match "\\.go\\'")
+  (:hook lsp))
 #+end_src
 
 ** Python
 #+begin_src emacs-lisp
-(setup (:pkg python-mode))
+(setup (:pkg python-mode)
+  (:file-match "\\.py\\'")
+  (:hook lsp))
 
 (setup (:pkg lsp-pyright))
 #+end_src
