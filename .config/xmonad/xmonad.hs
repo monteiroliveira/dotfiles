@@ -64,11 +64,10 @@ myStartupHook = do
   spawnOnce "lxsession"
   spawnOnce "picom"
   spawnOnce "nm-applet"
-  spawnOnce "cbatticon"
   spawnOnce "volumeicon"
   spawnOnce "dunst"
   spawnOnce "nitrogen --restore &"
-  spawnOnce "trayer --edge bottom --align right --widthtype request --SetDockType true --padding 6 --SetPartialStrut true --expand true --monitor eDP-1 --transparent true --alpha 0 --tint 0x282c34 --height 22"
+  spawnOnce "trayer --edge bottom --align right --widthtype request --SetDockType true --padding 6 --SetPartialStrut true --expand true --monitor HDMI-0 --transparent true --alpha 0 --tint 0x282c34 --height 22"
 
 myWorkspaces = [" I ", " II ", " III ", " IV ", " V ", " VI ", " VII ", " VIII ", " IX "]
 
@@ -81,7 +80,7 @@ myShowWName = def
 
 myKeys :: [(String, X ())]
 myKeys =
-  [ ("M-d r", spawn "dm-run")
+  [ ("M-d r", spawn "dmenu_run")
   , ("M-d l", spawn "dm-logout")
   ]
 
