@@ -219,33 +219,33 @@ first RECIPE's package."
   (evil-mode)
 
   ;; Arrows keys are disabled in this config.
-  (defun mo/dont-arrow ()
+  (defun gmo/dont-arrow ()
     (interactive)
     (message "Arrows keys are disabled hm."))
-  (evil-global-set-key 'normal (kbd "<left>")  'mo/dont-arrow)
-  (evil-global-set-key 'normal (kbd "<right>") 'mo/dont-arrow)
-  (evil-global-set-key 'normal (kbd "<up>")    'mo/dont-arrow)
-  (evil-global-set-key 'normal (kbd "<down>")  'mo/dont-arrow)
+  (evil-global-set-key 'normal (kbd "<left>")  'gmo/dont-arrow)
+  (evil-global-set-key 'normal (kbd "<right>") 'gmo/dont-arrow)
+  (evil-global-set-key 'normal (kbd "<up>")    'gmo/dont-arrow)
+  (evil-global-set-key 'normal (kbd "<down>")  'gmo/dont-arrow)
 
-  (evil-global-set-key 'motion (kbd "<left>")  'mo/dont-arrow)
-  (evil-global-set-key 'motion (kbd "<right>") 'mo/dont-arrow)
-  (evil-global-set-key 'motion (kbd "<up>")    'mo/dont-arrow)
-  (evil-global-set-key 'motion (kbd "<down>")  'mo/dont-arrow)
+  (evil-global-set-key 'motion (kbd "<left>")  'gmo/dont-arrow)
+  (evil-global-set-key 'motion (kbd "<right>") 'gmo/dont-arrow)
+  (evil-global-set-key 'motion (kbd "<up>")    'gmo/dont-arrow)
+  (evil-global-set-key 'motion (kbd "<down>")  'gmo/dont-arrow)
 
   ;; Center the screen and scroll ('zz' and scroll)
-  (defun mo/center-scroll-up ()
+  (defun gmo/center-scroll-up ()
     (interactive)
     (recenter)
     (evil-scroll-up 0))
-  (defun mo/center-scroll-down ()
+  (defun gmo/center-scroll-down ()
     (interactive)
     (recenter)
     (evil-scroll-down 0))
-  (evil-global-set-key 'normal (kbd "C-u") 'mo/center-scroll-up)
-  (evil-global-set-key 'normal (kbd "C-d") 'mo/center-scroll-down)
+  (evil-global-set-key 'normal (kbd "C-u") 'gmo/center-scroll-up)
+  (evil-global-set-key 'normal (kbd "C-d") 'gmo/center-scroll-down)
 
-  (evil-global-set-key 'motion (kbd "C-u") 'mo/center-scroll-up)
-  (evil-global-set-key 'motion (kbd "C-d") 'mo/center-scroll-down))
+  (evil-global-set-key 'motion (kbd "C-u") 'gmo/center-scroll-up)
+  (evil-global-set-key 'motion (kbd "C-d") 'gmo/center-scroll-down))
 
 (setup (:pkg evil-collection)
   (:load-after evil)
@@ -297,7 +297,7 @@ first RECIPE's package."
 
 ** Vertico
 #+begin_src emacs-lisp
-(defun mo/minibuffer-backward-kill (arg)
+(defun gmo/minibuffer-backward-kill (arg)
   "When minibuffer is completing a file name delete up to parent folder, otherwise delete a word"
   (interactive "p")
   (if minibuffer-completing-file-name
@@ -312,7 +312,7 @@ first RECIPE's package."
     (:bind "C-j" vertico-next
 	   "C-k" vertico-previous))
   (:with-map minibuffer-local-map
-    (:bind "M-h" mo/minibuffer-backward-kill))
+    (:bind "M-h" gmo/minibuffer-backward-kill))
   (:option vertico-cycle t)
   (vertico-mode))
 #+end_src
@@ -490,34 +490,34 @@ Require typescript server
 #+begin_src emacs-lisp
 (setup (:pkg general)
   (general-evil-setup t)
-  (general-create-definer mo/leader-keys
-			  :states '(normal insert visual emacs)
-			  :keymaps 'override
-			  :prefix "SPC"
-			  :global-prefix "M-SPC")
+  (general-create-definer gmo/leader-keys
+    :states '(normal insert visual emacs)
+    :keymaps 'override
+    :prefix "SPC"
+    :global-prefix "M-SPC")
 
-  (mo/leader-keys
+  (gmo/leader-keys
     "SPC" '(M-x :wk "M-x")
     "."   '(find-file :wk "Find file")
     "M-u" '(universal-argument :wk "Universal argument"))
 
-  (mo/leader-keys
+  (gmo/leader-keys
     "E"  '(:ignore t :wk "Emacs")
     "Er" '((lambda () (interactive) (load-file user-init-file)) :wk "Reload Emacs"))
 
-  (mo/leader-keys
+  (gmo/leader-keys
     "h"  '(:ignore t :wk "Help")
     "hv" '(describe-variable :wk "Describe variable")
     "hf" '(describe-function :wk "Describe function")
     "ht" '(consult-theme :wk "Load theme"))
 
-  (mo/leader-keys
+  (gmo/leader-keys
     "b"  '(:ignore t :wk "Buffer")
     "bi" '(consult-buffer :wk "Ibuffer")
     "bk" '(kill-this-buffer :wk "Kill buffer")
     "br" '(revert-buffer :wk "Reload buffer"))
   
-  (mo/leader-keys
+  (gmo/leader-keys
     "w"  '(:ignore t :wk "Windows")
     "wc" '(evil-window-delete :wk "Close current windows")
     "ws" '(evil-window-split :wk "Horizontal split")
@@ -528,7 +528,7 @@ Require typescript server
     "wl" '(evil-window-right :wk "Window right")
     "ww" '(evil-window-next :wk "Window next"))
 
-  (mo/leader-keys
+  (gmo/leader-keys
     "p"  '(:ignore t :wk "Project")
     "pf" '(consult-fd :wk "Project file")
     "ps" '(consult-ripgrep :wk "Project search")
@@ -536,7 +536,7 @@ Require typescript server
     "pi" '(consult-imenu :wk "Project imenu search")
     "pl" '(consult-line :wk "project line search"))
 
-  (mo/leader-keys
+  (gmo/leader-keys
     "l" '(:ignore t :which-key "Lsp")
     "ld" 'xref-find-definitions
     "lr" 'xref-find-references
@@ -546,7 +546,7 @@ Require typescript server
     "lS" 'lsp-ui-sideline-mode
     "lX" 'lsp-execute-code-action)
 
-  (mo/leader-keys
+  (gmo/leader-keys
     "f"  '(:ignore t :wk "File")
     "fe" '(dired :wk "Dired")
     "fC" '((lambda() (interactive) (find-file "~/.emacs.d/Emacs.org")) :wk "Open emacs config folder (.org)")))
