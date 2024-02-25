@@ -5,6 +5,7 @@ import XMonad
 import XMonad.Util.EZConfig (additionalKeysP, mkKeymap)
 import XMonad.Util.Loggers
 import XMonad.Util.SpawnOnce
+import XMonad.Util.Hacks (windowedFullscreenFixEventHook, trayerAboveXmobarEventHook, trayerPaddingXmobarEventHook)
 
 -- Hooks
 import XMonad.Hooks.ManageDocks (avoidStruts, docks, manageDocks, ToggleStruts(..))
@@ -61,13 +62,14 @@ myXmobarPP = def
 
 myStartupHook :: X ()
 myStartupHook = do
+  spawn "killall trayer"
   spawnOnce "lxsession"
   spawnOnce "picom"
   spawnOnce "nm-applet"
   spawnOnce "volumeicon"
   spawnOnce "dunst"
   spawnOnce "nitrogen --restore &"
-  spawnOnce "trayer --edge bottom --align right --widthtype request --SetDockType true --padding 6 --SetPartialStrut true --expand true --monitor HDMI-0 --transparent true --alpha 0 --tint 0x282c34 --height 22"
+  spawn ("sleep 2 && trayer --edge top --align right --widthtype request --SetDockType true --padding 6 --SetPartialStrut true --expand true --monitor 1 --transparent true --alpha 0 --tint 0x282c34 --height 22")
 
 myWorkspaces = [" I ", " II ", " III ", " IV ", " V ", " VI ", " VII ", " VIII ", " IX "]
 
@@ -84,11 +86,17 @@ myKeys =
   , ("M-d l", spawn "dm-logout")
   ]
 
+myHandleEventHook = handleEventHook def
+  <> trayerAboveXmobarEventHook <> trayerPaddingXmobarEventHook <> windowedFullscreenFixEventHook
+
 xmobar0 :: StatusBarConfig
-xmobar0 = statusBarProp "xmobar ~/.config/xmobar/xmobarrc" $ pure myXmobarPP
+xmobar0 = statusBarProp "xmobar -x 0 ~/.config/xmobar/xmobarrc" $ pure myXmobarPP
+
+xmobar1 :: StatusBarConfig
+xmobar1 = statusBarProp "xmobar -x 1 ~/.config/xmobar/xmobarrc1" $ pure myXmobarPP
   
 main :: IO ()
-main = do xmonad $ withSB xmobar0 $ ewmhFullscreen $ ewmh . docks $ def
+main = do xmonad $ withSB (xmobar0 <> xmobar1) $ ewmhFullscreen $ ewmh . docks $ def
             { modMask            = myModMask
             , terminal           = myTerminal
             , layoutHook         = showWName' myShowWName $ myLayoutHook
@@ -97,4 +105,5 @@ main = do xmonad $ withSB xmobar0 $ ewmhFullscreen $ ewmh . docks $ def
             , borderWidth        = myBorderWidth
             , normalBorderColor  = myNormColor
             , focusedBorderColor = myFocusColor
+            , handleEventHook    = myHandleEventHook
             } `additionalKeysP` myKeys

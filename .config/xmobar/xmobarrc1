@@ -9,8 +9,6 @@ Config { font     = "Ubuntu Bold 9"
        , commands = [
 		      Run Com "echo" [" <fn=1>\xe61f</fn>   "] "haskell" 0
 
-		    , Run XPropertyLog "_XMONAD_TRAYPAD"
-
 		    , Run Com "echo" ["<fn=2>\xf487</fn>   "] "package" 0
 
 		    , Run Com ".local/bin/pacupdates" [] "pacupdates" 600
@@ -29,5 +27,5 @@ Config { font     = "Ubuntu Bold 9"
                     ]
        , sepChar  = "%"
        , alignSep = "}{"
-       , template = " %haskell% | %XMonadLog% }{ %penguin% %kernel%   :   %package% %pacupdates%   :   %cpu%   :   %memory%   :   %date%   :   %_XMONAD_TRAYPAD% "
+       , template = " %haskell% | %XMonadLog% }{ %penguin% %kernel%   :   %package% %pacupdates%   :   %cpu%   :   %memory%   :   %date%   "
        }
