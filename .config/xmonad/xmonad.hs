@@ -12,6 +12,7 @@ import XMonad.Hooks.ManageDocks (avoidStruts, docks, manageDocks, ToggleStruts(.
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.StatusBar
 import XMonad.Hooks.StatusBar.PP
+import XMonad.Hooks.WindowSwallowing
 
 -- Layout
 import XMonad.Layout.Renamed
@@ -86,8 +87,10 @@ myKeys =
   , ("M-d l", spawn "dm-logout")
   ]
 
+mySwallowEventHook = swallowEventHook (className =? "Alacritty") (return True)
+
 myHandleEventHook = handleEventHook def
-  <> trayerAboveXmobarEventHook <> trayerPaddingXmobarEventHook <> windowedFullscreenFixEventHook
+  <> trayerPaddingXmobarEventHook <> windowedFullscreenFixEventHook <> mySwallowEventHook
 
 xmobar0 :: StatusBarConfig
 xmobar0 = statusBarProp "xmobar -x 0 ~/.config/xmobar/xmobarrc" $ pure myXmobarPP
