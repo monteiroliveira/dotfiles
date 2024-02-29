@@ -70,7 +70,7 @@ myStartupHook = do
   spawnOnce "volumeicon"
   spawnOnce "dunst"
   spawnOnce "nitrogen --restore &"
-  spawn ("sleep 2 && trayer --edge top --align right --widthtype request --SetDockType true --padding 6 --SetPartialStrut true --expand true --monitor 1 --transparent true --alpha 0 --tint 0x282c34 --height 22")
+  spawn ("sleep 2 && trayer --edge top --align right --widthtype request --SetDockType true --SetPartialStrut true --expand true --monitor 1 --transparent true --alpha 0 --tint 0x282c34 --height 22")
 
 myWorkspaces = [" I ", " II ", " III ", " IV ", " V ", " VI ", " VII ", " VIII ", " IX "]
 
@@ -96,7 +96,7 @@ xmobar0 :: StatusBarConfig
 xmobar0 = statusBarProp "xmobar -x 0 ~/.config/xmobar/xmobarrc" $ pure myXmobarPP
 
 xmobar1 :: StatusBarConfig
-xmobar1 = statusBarProp "xmobar -x 1 ~/.config/xmobar/xmobarrc1" $ pure myXmobarPP
+xmobar1 = statusBarProp "xmobar -x 1 ~/.config/xmobar/xmobarrc" $ pure myXmobarPP
   
 main :: IO ()
 main = do xmonad $ withSB (xmobar0 <> xmobar1) $ ewmhFullscreen $ ewmh . docks $ def
