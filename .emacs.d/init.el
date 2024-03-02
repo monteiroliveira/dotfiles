@@ -1,5 +1,7 @@
 ;; -*- lexical-binding: t; -*-
 (setq inhibit-startup-message t)
+(setq display-line-numbers-type 'relative)
+(setq make-backup-files nil)
 
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
@@ -7,18 +9,10 @@
 (menu-bar-mode -1)
 
 (global-display-line-numbers-mode 1)
-(setq display-line-numbers-type 'relative)
 
 (global-prettify-symbols-mode t)
 
 (defalias 'yes-or-no-p 'y-or-n-p) ;; Turn 'yes' or 'no' question to 'y' or 'n'
-
-(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-
-(global-set-key (kbd "C-=") 'text-scale-increase)
-(global-set-key (kbd "C--") 'text-scale-decrease)
-
-(setq make-backup-files nil)
 
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 
@@ -36,8 +30,7 @@
 (require 'gmo-straight)
 (require 'gmo-setup)
 
-(setup eldoc
-  (:diminish))
+(setup eldoc (:diminish))
 
 (setup (:pkg undo-tree)
   (:diminish)
@@ -50,7 +43,6 @@
   (which-key-mode))
 
 (setup LaTex-mode)
-
 (setup (:pkg auctex))
 
 (setup (:pkg apheleia))
