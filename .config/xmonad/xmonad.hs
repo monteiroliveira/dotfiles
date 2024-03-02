@@ -13,6 +13,7 @@ import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.StatusBar
 import XMonad.Hooks.StatusBar.PP
 import XMonad.Hooks.WindowSwallowing
+import XMonad.Hooks.ManageHelpers (isFullscreen, doFullFloat)
 
 -- Layout
 import XMonad.Layout.Renamed
@@ -20,6 +21,8 @@ import XMonad.Layout.ShowWName
 import XMonad.Layout.Spacing
 import XMonad.Layout.LayoutModifier
 import XMonad.Layout.NoBorders (smartBorders)
+
+import XMonad.Layout.SimplestFloat
 
 -- Prompt
 import XMonad.Prompt
@@ -43,18 +46,28 @@ myFocusColor = "#46d9ff"
 mySpacing :: Integer -> l a -> XMonad.Layout.LayoutModifier.ModifiedLayout Spacing l a
 mySpacing i = spacingRaw False (Border i i i i) True (Border i i i i) True
 
-tall = renamed [Replace "tall"]
-       $ smartBorders
-       $ mySpacing 8
-       $ Tall 1 (3/100) (1/2)
-bTall = renamed [Replace "bTall"]
-        $ smartBorders
-        $ Tall 1 (3/100) (1/2)
-full = renamed [Replace "full"]
-       $ smartBorders
-       $ Full
+tall   = renamed [Replace "tall"]
+         $ smartBorders
+         $ mySpacing 8
+         $ Tall 1 (3/100) (1/2)
+bTall  = renamed [Replace "bTall"]
+         $ smartBorders
+         $ Tall 1 (3/100) (1/2)
+floats = renamed[Replace "floats"]
+         $ smartBorders
+         $ simplestFloat
+full   = renamed [Replace "full"]
+         $ smartBorders
+         $ Full
 
-myLayoutHook = avoidStruts $ tall ||| bTall ||| full
+myLayoutHook = avoidStruts $ tall ||| bTall ||| floats ||| full
+
+myManageHook :: ManageHook
+myManageHook = composeAll
+  [ className =? "dialog"  --> doFloat
+  , className =? "toolbar" --> doFloat
+  , className =? "confirm" --> doFloat
+  , isFullscreen           --> doFullFloat ]
 
 myXmobarPP :: PP
 myXmobarPP = def
@@ -103,7 +116,9 @@ myKeys =
   , ("M-S-r", spawn "xmonad --restart")
 
   , ("M-S-<Return>", shellPrompt myPromptConfig)
-  , ("M-<Return>"  , spawn myTerminal) ]
+  , ("M-<Return>"  , spawn myTerminal)
+
+  , ("M-S-b", sendMessage ToggleStruts) ]
 
 mySwallowEventHook = swallowEventHook (className =? "Alacritty") (return True)
 
@@ -122,6 +137,7 @@ main = do xmonad $ withSB (xmobar0 <> xmobar1) $ ewmhFullscreen $ ewmh . docks $
             , terminal           = myTerminal
             , layoutHook         = showWName' myShowWName $ myLayoutHook
             , startupHook        = myStartupHook
+            , manageHook         = myManageHook <+> manageDocks
             , workspaces         = myWorkspaces
             , borderWidth        = myBorderWidth
             , normalBorderColor  = myNormColor
