@@ -1,13 +1,12 @@
 Config { font     = "Ubuntu Bold 9"
        , additionalFonts = [ "JetBrains Mono Nerd Font 15"
-                           , "Font Awesome 11"]
+                           , "Font Awesome 11" ]
        , bgColor  = "#282c34"
        , fgColor  = "#f8f8f2"
        , position = TopSize L 100 24
        , persistent   = True
        , lowerOnStart = True
-       , commands = [
-		      Run Com "echo" [" <fn=1>\xe61f</fn>   "] "haskell" 0
+       , commands = [ Run Com "echo" [" <fn=1>\xe61f</fn>   "] "haskell" 0
 
 		    , Run XPropertyLog "_XMONAD_TRAYPAD"
 
@@ -25,9 +24,7 @@ Config { font     = "Ubuntu Bold 9"
 
                     , Run Date "<fn=2>\xf017</fn>  %a %Y-%m-%d - (%H:%M)" "date" 30
 
-                    , Run XMonadLog
-                    ]
+                    , Run XMonadLog ]
        , sepChar  = "%"
        , alignSep = "}{"
-       , template = " %haskell% | %XMonadLog% }{ %penguin% %kernel%   :   %package% %pacupdates%   :   %cpu%   :   %memory%   :   %date%   :   %_XMONAD_TRAYPAD% "
-       }
+       , template = " %haskell% | %XMonadLog% }{ %penguin% %kernel%   :   %package% %pacupdates%   :   %cpu%   :   %memory%   :   %date%   :   %_XMONAD_TRAYPAD% " }
