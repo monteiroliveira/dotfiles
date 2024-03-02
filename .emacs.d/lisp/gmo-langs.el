@@ -28,6 +28,10 @@
   (:file-match "\\.go\\'")
   (:hook lsp))
 
+(setup LaTex-mode)
+
+(setup (:pkg auctex))
+
 (setup (:pkg python-mode)
   (setup (:pkg lsp-pyright))
   (:file-match "\\.py\\'")

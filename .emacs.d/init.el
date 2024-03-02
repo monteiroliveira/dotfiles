@@ -1,7 +1,9 @@
 ;; -*- lexical-binding: t; -*-
-(setq inhibit-startup-message t)
-(setq display-line-numbers-type 'relative)
-(setq make-backup-files nil)
+(setq inhibit-startup-message t
+      display-line-numbers-type 'relative
+      make-backup-files nil)
+
+(set-default-coding-systems 'utf-8)
 
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
@@ -12,9 +14,9 @@
 
 (global-prettify-symbols-mode t)
 
-(defalias 'yes-or-no-p 'y-or-n-p) ;; Turn 'yes' or 'no' question to 'y' or 'n'
-
 (add-to-list 'load-path "~/.emacs.d/lisp/")
+
+(defalias 'yes-or-no-p 'y-or-n-p) ;; Turn 'yes' or 'no' question to 'y' or 'n'
 
 (setq modus-themes-mode-line '(borderless)
       modus-themes-bold-constructs t
@@ -41,9 +43,6 @@
   (:diminish)
   (:option which-key-idle-delay 0.3)
   (which-key-mode))
-
-(setup LaTex-mode)
-(setup (:pkg auctex))
 
 (setup (:pkg apheleia))
 
