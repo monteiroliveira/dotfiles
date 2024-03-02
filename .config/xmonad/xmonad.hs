@@ -21,6 +21,10 @@ import XMonad.Layout.Spacing
 import XMonad.Layout.LayoutModifier
 import XMonad.Layout.NoBorders (smartBorders)
 
+-- Prompt
+import XMonad.Prompt
+import XMonad.Prompt.Shell (shellPrompt)
+
 myModMask :: KeyMask
 myModMask = mod4Mask
 
@@ -81,11 +85,25 @@ myShowWName = def
   , swn_bgcolor = "#1c1f24"
   , swn_color   = "#ffffff" }
 
+myPromptConfig :: XPConfig
+myPromptConfig = def
+  { font              = "xft:Ubuntu:size=11"
+  , bgColor           = "#292d3e"
+  , fgColor           = "#d0d0d0"
+  , bgHLight          = "#c792ea"
+  , fgHLight          = "#000000"
+  , alwaysHighlight   = True
+  , promptBorderWidth = 0
+  , height            = 24
+  , position          = Top }
+
 myKeys :: [(String, X ())]
 myKeys =
-  [ ("M-d r", spawn "dmenu_run")
-  , ("M-d l", spawn "dm-logout")
-  ]
+  [ ("M-C-r", spawn "xmonad --recompile")
+  , ("M-S-r", spawn "xmonad --restart")
+
+  , ("M-S-<Return>", shellPrompt myPromptConfig)
+  , ("M-<Return>"  , spawn myTerminal) ]
 
 mySwallowEventHook = swallowEventHook (className =? "Alacritty") (return True)
 
