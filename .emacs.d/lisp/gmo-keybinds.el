@@ -55,6 +55,13 @@
     "pl" '(consult-line :wk "project line search"))
 
   (gmo/leader-keys
+    "d"  '(:ignore t :wk "Dired")
+    "dd" '(dired :wk "Open Dired")
+    "dn" '(:ignore t :wk "Neotree")
+    "dno" '(neotree-dir :wk "Open neotree")
+    "dnh" '(neotree-hide :wk "Hide neotree"))
+
+  (gmo/leader-keys
     "l" '(:ignore t :which-key "Lsp")
     "ld" 'xref-find-definitions
     "lr" 'xref-find-references

@@ -31,6 +31,7 @@
 
 (require 'gmo-straight)
 (require 'gmo-setup)
+(require 'gmo-ui)
 
 (setup eldoc (:diminish))
 
@@ -38,11 +39,6 @@
   (:diminish)
   (:option undo-tree-auto-save-history nil)
   (global-undo-tree-mode 1))
-
-(setup (:pkg which-key)
-  (:diminish)
-  (:option which-key-idle-delay 0.3)
-  (which-key-mode))
 
 (setup (:pkg apheleia))
 
