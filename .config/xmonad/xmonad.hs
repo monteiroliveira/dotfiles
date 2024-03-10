@@ -80,27 +80,27 @@ myXmobarPP = def
 
 myStartupHook :: X ()
 myStartupHook = do
-  spawn "killall trayer"
+  spawn     "killall trayer"
   spawnOnce "lxsession"
   spawnOnce "picom"
   spawnOnce "nm-applet"
   spawnOnce "volumeicon"
   spawnOnce "dunst"
   spawnOnce "nitrogen --restore &"
-  spawn ("sleep 2 && trayer --edge top --align right --widthtype request --SetDockType true --SetPartialStrut true --expand true --monitor 1 --transparent true --alpha 0 --tint 0x282c34 --height 22")
+  spawn     ("sleep 2 && trayer --edge top --align right --widthtype request --SetDockType true --SetPartialStrut true --expand true --monitor 1 --padding 6 --transparent true --alpha 0 --tint 0x282c34 --height 22")
 
 myWorkspaces = [" I ", " II ", " III ", " IV ", " V ", " VI ", " VII ", " VIII ", " IX "]
 
 myShowWName :: SWNConfig
 myShowWName = def
-  { swn_font    = "xft:Ubuntu:bold:size=60"
+  { swn_font    = "xft:Ubuntu:bold:size=60:antialias=true:hinting=true"
   , swn_fade    = 1.0
   , swn_bgcolor = "#1c1f24"
   , swn_color   = "#ffffff" }
 
 myPromptConfig :: XPConfig
 myPromptConfig = def
-  { font              = "xft:Ubuntu:size=11"
+  { font              = "xft:Mononoki Nerd Font:size=11:antialias=true:hinting=true"
   , bgColor           = "#292d3e"
   , fgColor           = "#d0d0d0"
   , bgHLight          = "#c792ea"
