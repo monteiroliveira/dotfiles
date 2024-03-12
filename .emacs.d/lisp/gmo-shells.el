@@ -2,7 +2,7 @@
 
 ;;; Code:
 (setup (:pkg vterm)
-  (:option shell-file-name "/usr/bin/fish"
+  (:option shell-file-name "/bin/bash"
 	   shell-max-scrollback 5000))
 
 (setup eshell

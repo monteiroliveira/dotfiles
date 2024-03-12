@@ -58,22 +58,17 @@
     "d"  '(:ignore t :wk "Dired")
     "dd" '(dired :wk "Open Dired")
     "dn" '(:ignore t :wk "Neotree")
-    "dno" '(neotree-dir :wk "Open neotree")
+    "dnn" '(neotree-dir :wk "Open neotree")
     "dnh" '(neotree-hide :wk "Hide neotree"))
 
   (gmo/leader-keys
-    "l" '(:ignore t :which-key "Lsp")
-    "ld" 'xref-find-definitions
-    "lr" 'xref-find-references
+    "l"  '(:ignore t :which-key "Lsp")
+    "ld" '(xref-find-definitions :wk "Go to definition")
+    "lr" '(xref-find-references :wk "Go to reference")
     "ln" 'lsp-ui-find-next-reference
     "lp" 'lsp-ui-find-prev-reference
     "le" 'lsp-ui-flycheck-list
     "lS" 'lsp-ui-sideline-mode
-    "lX" 'lsp-execute-code-action)
-
-  (gmo/leader-keys
-    "f"  '(:ignore t :wk "File")
-    "fe" '(dired :wk "Dired")
-    "fC" '((lambda() (interactive) (find-file "~/.emacs.d/Emacs.org")) :wk "Open emacs config folder (.org)")))
+    "lX" 'lsp-execute-code-action))
 
 (provide 'gmo-keybinds)
