@@ -4,7 +4,7 @@
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
-[ -f $HOME/.local/bin/ssh_start ] && . $HOME/.local/bin/ssh_start --add
+[ -f $HOME/.local/bin/sshagt ] && . $HOME/.local/bin/sshagt --add
 
 if [ $(tty) == /dev/tty1 ]; then
     exec startx
