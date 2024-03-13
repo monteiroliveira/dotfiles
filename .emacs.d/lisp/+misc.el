@@ -5,6 +5,8 @@
   (:option undo-tree-auto-save-history nil)
   (global-undo-tree-mode 1))
 
+(setup (:pkg magit))
+
 (setup eldoc (:diminish))
 
 (provide '+misc)
