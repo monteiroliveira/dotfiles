@@ -1,4 +1,4 @@
-;;; lisp/gmo-org.el --- Org mode -*- lexical-binding: t; -*-
+;;; lisp/+org.el --- Org mode -*- lexical-binding: t; -*-
 
 ;;; Code:
 (setup (:pkg org)

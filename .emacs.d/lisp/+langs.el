@@ -1,4 +1,4 @@
-;;; lisp/gmo-langs.el --- Langs configs and enhancements -*- lexical-binding: t; -*-
+;;; lisp/+langs.el --- Langs configs and enhancements -*- lexical-binding: t; -*-
 
 ;;; Code:
 (setup (:pkg lsp-mode)

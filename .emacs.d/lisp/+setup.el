@@ -1,4 +1,4 @@
-;;; lisp/gmo-setup.el --- Setup.el config -*- lexical-binding: t; -*-
+;;; lisp/+setup.el --- Setup.el config -*- lexical-binding: t; -*-
 
 ;;; Code:
 (straight-use-package '(setup :type git :host nil :repo "https://git.sr.ht/~pkal/setup"))

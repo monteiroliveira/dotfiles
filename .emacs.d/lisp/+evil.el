@@ -1,4 +1,4 @@
-;;; lisp/gmo-evil.el --- Evil mode and addons -*- lexical-binding: t; -*-
+;;; lisp/+evil.el --- Evil mode and addons -*- lexical-binding: t; -*-
 
 ;;; Code:
 (setup (:pkg evil)

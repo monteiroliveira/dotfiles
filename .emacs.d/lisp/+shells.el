@@ -1,4 +1,4 @@
-;;; lisp/gmo-shells.el --- Shells config -*- lexical-binding: t; -*-
+;;; lisp/+shells.el --- Shells config -*- lexical-binding: t; -*-
 
 ;;; Code:
 (setup (:pkg vterm)

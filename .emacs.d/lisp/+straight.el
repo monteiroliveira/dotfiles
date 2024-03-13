@@ -1,4 +1,4 @@
-;;; lisp/gmo-straight.el --- Give me Straight.el -*- lexical-binding: t; -*-
+;;; lisp/+straight.el --- Give me Straight.el -*- lexical-binding: t; -*-
 
 ;;; Code:
 (defvar bootstrap-version)

@@ -1,4 +1,4 @@
-;;; lisp/gmo-keybinds.el --- General Emacs keybinds -*- lexical-binding: t; -*-
+;;; lisp/+keybinds.el --- General Emacs keybinds -*- lexical-binding: t; -*-
 
 ;;; Code:
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)

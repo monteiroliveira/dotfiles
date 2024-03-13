@@ -1,4 +1,4 @@
-;;; lisp/gmo-ui.el --- UI Config and enhancements -*- lexical-binding: t; -*-
+;;; lisp/+ui.el --- UI Config and enhancements -*- lexical-binding: t; -*-
 
 (setup (:pkg which-key)
   (:diminish)
