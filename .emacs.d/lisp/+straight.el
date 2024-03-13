@@ -1,4 +1,4 @@
-;;; lisp/gmo-straight.el --- Install Straight.el -*- lexical-binding: t; -*-
+;;; lisp/gmo-straight.el --- Give me Straight.el -*- lexical-binding: t; -*-
 
 ;;; Code:
 (defvar bootstrap-version)
@@ -17,4 +17,4 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
-(provide 'gmo-straight)
+(provide '+straight)

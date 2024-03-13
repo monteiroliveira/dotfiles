@@ -1,4 +1,4 @@
-;;; lisp/gmo-completion.el --- Install and configure completion packages -*- lexical-binding: t; -*-
+;;; lisp/+completion.el --- Completion enhancements  -*- lexical-binding: t; -*-
 
 ;;; Code:
 (setup savehist
@@ -61,4 +61,4 @@
   (:diminish)
   (:hook-into company-mode))
 
-(provide 'gmo-completion)
+(provide '+completion)

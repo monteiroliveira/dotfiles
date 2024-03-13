@@ -1,4 +1,4 @@
-;;; lisp/gmo-ui.el --- UI Config -*- lexical-binding: t; -*-
+;;; lisp/gmo-ui.el --- UI Config and enhancements -*- lexical-binding: t; -*-
 
 (setup (:pkg which-key)
   (:diminish)
@@ -9,4 +9,4 @@
   (:option neo-smart-open t
 	   neo-show-hidden-files t))
 
-(provide 'gmo-ui)
+(provide '+ui)

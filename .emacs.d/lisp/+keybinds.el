@@ -1,4 +1,4 @@
-;;; lisp/gmo-keybinds.el --- Configure emacs keybinds using general.el -*- lexical-binding: t; -*-
+;;; lisp/gmo-keybinds.el --- General Emacs keybinds -*- lexical-binding: t; -*-
 
 ;;; Code:
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
@@ -71,4 +71,4 @@
     "lS" 'lsp-ui-sideline-mode
     "lX" 'lsp-execute-code-action))
 
-(provide 'gmo-keybinds)
+(provide '+keybinds)

@@ -1,11 +1,10 @@
-;;; lisp/gmo-org.el --- Install and configure org mode -*- lexical-binding: t; -*-
+;;; lisp/gmo-org.el --- Org mode -*- lexical-binding: t; -*-
 
 ;;; Code:
 (setup (:pkg org)
   (:also-load org-tempo)
   (:option org-edit-src-content-indentation 0)
   (:hook org-indent-mode toc-org-mode)
-
   (eval-after-load "org-indent"
     '(progn
        (:diminish org-indent-mode))))
@@ -15,4 +14,4 @@
 
 (setup (:pkg toc-org))
 
-(provide 'gmo-org)
+(provide '+org)

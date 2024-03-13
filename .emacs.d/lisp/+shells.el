@@ -1,4 +1,4 @@
-;;; lisp/gmo-shells.el --- Install config vterm and configure eshell and vterm -*- lexical-binding: t; -*-
+;;; lisp/gmo-shells.el --- Shells config -*- lexical-binding: t; -*-
 
 ;;; Code:
 (setup (:pkg vterm)
@@ -11,4 +11,4 @@
 	   eshell-scroll-to-bottom-on-input t
 	   eshell-highlight-prompt t))
 
-(provide 'gmo-shells)
+(provide '+shells)

@@ -1,4 +1,4 @@
-;;; lisp/gmo-setup.el --- Install and configure Setup.el -*- lexical-binding: t; -*-
+;;; lisp/gmo-setup.el --- Setup.el config -*- lexical-binding: t; -*-
 
 ;;; Code:
 (straight-use-package '(setup :type git :host nil :repo "https://git.sr.ht/~pkal/setup"))
@@ -45,4 +45,4 @@ current mode."
       body))
   :documentation "Load the current feature after FEATURES.")
 
-(provide 'gmo-setup)
+(provide '+setup)

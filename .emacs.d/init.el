@@ -24,27 +24,18 @@
       modus-themes-headings '((t . (rainbow))))
 (load-theme 'modus-vivendi t)
 
-(set-face-attribute 'default nil :font "FantasqueSansM Nerd Font Mono" :height 135)
+(set-face-attribute 'default nil :font "JetBrainsMono Nerd Font" :height 135)
 
 (set-face-attribute 'font-lock-comment-face nil :slant 'italic)
 (set-face-attribute 'font-lock-keyword-face nil :slant 'italic)
 
-(require 'gmo-straight)
-(require 'gmo-setup)
-(require 'gmo-ui)
-
-(setup eldoc (:diminish))
-
-(setup (:pkg undo-tree)
-  (:diminish)
-  (:option undo-tree-auto-save-history nil)
-  (global-undo-tree-mode 1))
-
-(setup (:pkg apheleia))
-
-(require 'gmo-evil)
-(require 'gmo-org)
-(require 'gmo-completion)
-(require 'gmo-shells)
-(require 'gmo-langs)
-(require 'gmo-keybinds)
+(require '+straight)
+(require '+setup)
+(require '+ui)
+(require '+misc)
+(require '+evil)
+(require '+org)
+(require '+completion)
+(require '+shells)
+(require '+langs)
+(require '+keybinds)

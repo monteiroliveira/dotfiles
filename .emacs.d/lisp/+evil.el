@@ -1,4 +1,4 @@
-;;; lisp/gmo-evil.el --- Intall and configure evil mode and your modules -*- lexical-binding: t; -*-
+;;; lisp/gmo-evil.el --- Evil mode and addons -*- lexical-binding: t; -*-
 
 ;;; Code:
 (setup (:pkg evil)
@@ -32,4 +32,4 @@
   (:load-after evil)
   (global-evil-surround-mode 1))
 
-(provide 'gmo-evil)
+(provide '+evil)

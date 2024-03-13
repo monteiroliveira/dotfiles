@@ -1,4 +1,4 @@
-;;; lisp/gmo-langs.el --- Install and configure lsp and many p langs -*- lexical-binding: t; -*-
+;;; lisp/gmo-langs.el --- Langs configs and enhancements -*- lexical-binding: t; -*-
 
 ;;; Code:
 (setup (:pkg lsp-mode)
@@ -50,4 +50,6 @@
 (setup (:pkg web-mode)
   (:file-match "\\.\\(html?\\|css\\|ejs\\|jsx\\|tsx\\)\\'"))
 
-(provide 'gmo-langs)
+(setup (:pkg apheleia))
+
+(provide '+langs)
