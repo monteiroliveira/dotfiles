@@ -36,7 +36,6 @@
 	   completion-category-overrides '((file (styles partial-completion)))))
 
 (setup (:pkg corfu)
-  (:disabled)
   (:option corfu-cycle t
 	   corfu-auto t
 	   corfu-auto-prefix 2
@@ -50,6 +49,7 @@
   (global-corfu-mode))
 
 (setup (:pkg company)
+  (:disabled)
   (:diminish)
   (:option company-minimum-prefix-length 2
 	   company-idle-delay nil)

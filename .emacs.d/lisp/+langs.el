@@ -50,6 +50,7 @@
 (setup (:pkg web-mode)
   (:file-match "\\.\\(html?\\|css\\|ejs\\|jsx\\|tsx\\)\\'"))
 
-(setup (:pkg apheleia))
+(setup (:pkg apheleia)
+  (apheleia-global-mode +1))
 
 (provide '+langs)
