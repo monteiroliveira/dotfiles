@@ -51,6 +51,7 @@
   (:file-match "\\.\\(html?\\|css\\|ejs\\|jsx\\|tsx\\)\\'"))
 
 (setup (:pkg apheleia)
+  (:diminish)
   (apheleia-global-mode +1))
 
 (provide '+langs)

@@ -58,6 +58,7 @@
   (global-company-mode))
 
 (setup (:pkg company-box)
+  (:disabled)
   (:diminish)
   (:hook-into company-mode))
 
