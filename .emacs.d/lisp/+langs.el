@@ -11,8 +11,8 @@
 
 (setup (:pkg haskell-mode)
   (setup (:pkg lsp-haskell))
-  (:file-match "\\.hs\\'")
-  (:hook lsp))
+  (:hook lsp)
+  (:file-match "\\.hs\\'"))
 
 (setup (:pkg rust-mode)
   (:file-match "\\.rs\\'")
@@ -28,9 +28,10 @@
   (:file-match "\\.go\\'")
   (:hook lsp))
 
-(setup LaTex-mode)
-
-(setup (:pkg auctex))
+(setup LaTeX-mode
+  (setup (:pkg lsp-latex))
+  (:hook lsp)
+  (setup (:pkg auctex)))
 
 (setup (:pkg python-mode)
   (setup (:pkg lsp-pyright))
