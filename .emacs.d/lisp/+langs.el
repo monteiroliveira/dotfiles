@@ -53,6 +53,11 @@
 
 (setup (:pkg apheleia)
   (:diminish)
+  (:require apheleia)
+  (setf (alist-get 'ormolu apheleia-formatters)
+	'("ormolu" "--no-cabal" "--stdin-input-file" filepath))
+  (setf (alist-get 'haskell-mode apheleia-mode-alist) ;; Using ormolu because brittany is unmaintained
+	'ormolu)
   (apheleia-global-mode +1))
 
 (provide '+langs)
