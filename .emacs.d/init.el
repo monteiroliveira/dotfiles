@@ -12,7 +12,7 @@
 
 (global-display-line-numbers-mode 1)
 
-(global-prettify-symbols-mode t)
+;; (global-prettify-symbols-mode t)
 
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 
