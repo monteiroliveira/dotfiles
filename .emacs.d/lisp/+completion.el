@@ -3,6 +3,7 @@
 ;;; Code:
 (setup savehist
   (:option history-lenght 25)
+
   (savehist-mode))
 
 (setup (:pkg vertico)
@@ -32,33 +33,18 @@
 (setup (:pkg orderless)
   (:require)
   (:option completion-styles '(orderless basic)
-	   completion-category-defaults nil
-	   completion-category-overrides '((file (styles partial-completion)))))
-
-(setup (:pkg corfu)
-  (:option corfu-cycle t
-	   corfu-auto t
-	   corfu-auto-prefix 2
-	   corfu-auto-delay 0.0
-	   corfu-styles '(orderless-fast basic))
-  (:with-map corfu-map
-    (:bind "C-j" corfu-next
-	   "C-k" corfu-previous
-	   "TAB" corfu-insert
-	   "C-f" corfu-insert))
-  (global-corfu-mode))
+           completion-category-defaults nil
+           completion-category-overrides '((file (styles partial-completion)))))
 
 (setup (:pkg company)
-  (:disabled)
   (:diminish)
   (:option company-minimum-prefix-length 2
-	   company-idle-delay nil)
+	   company-idle-delay 0.0)
   (:with-map company-active-map
     (:bind "TAB" company-complete-selection))
   (global-company-mode))
 
 (setup (:pkg company-box)
-  (:disabled)
   (:diminish)
   (:hook-into company-mode))
 
