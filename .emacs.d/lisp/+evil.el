@@ -12,7 +12,7 @@
   (:with-map (evil-normal-state-map
 	      evil-motion-state-map)
     (:bind "C-u" (lambda () (interactive) (recenter) (evil-scroll-up 0))
-	   "C-d" (lambda () (interactive) (recenter) (evil-scroll-down 0)))
+	   "C-d" (lambda () (interactive) (recenter) (evil-scroll-down 0))))
   (evil-mode))
 
 (setup (:pkg evil-collection)
@@ -22,10 +22,19 @@
     '(progn
        (:diminish evil-collection-unimpaired-mode))))
 
+(setup (:pkg evil-mc)
+  (:diminish)
+  (:load-after evil)
+  (global-evil-mc-mode 1))
+
+(setup (:pkg evil-multiedit)
+  (:load-after evil)
+  (evil-multiedit-default-keybinds))
+
 (setup (:pkg evil-commentary)
   (:load-after evil)
   (:with-map evil-normal-state-map
-    (:bind "gc" evil-commentary))))
+    (:bind "gc" evil-commentary)))
 
 (setup (:pkg evil-surround)
   (:diminish)
