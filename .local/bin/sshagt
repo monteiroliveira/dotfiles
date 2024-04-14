@@ -20,10 +20,11 @@ function find_agent_process() {
 }
 
 function kill_extra_agents() {
-    for (( pids=1; pids < $(find_agent_process | wc -l); pids++ )); do
+    local TOTAL_AGENTS=$(find_agent_process | wc -l)
+    for (( pids=1; pids < $TOTAL_AGENTS; pids++ )); do
 	local CURRENT_PID=$(find_agent_process \
 				| tr "\n" "/" \
-				| cut -d '/' -f$pids)
+				| cut -d '/' -f1)
 	echo "Killing SSH Agent with PID: $CURRENT_PID"
 	kill $CURRENT_PID
     done
