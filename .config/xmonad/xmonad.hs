@@ -14,6 +14,7 @@ import XMonad.Layout.Renamed
 import XMonad.Layout.ShowWName
 import XMonad.Layout.SimplestFloat
 import XMonad.Layout.Spacing
+import XMonad.Layout.Tabbed
 -- Prompt
 import XMonad.Prompt
 import XMonad.Prompt.Shell (shellPrompt)
@@ -41,6 +42,17 @@ myFocusColor = "#46d9ff"
 mySpacing :: Integer -> l a -> XMonad.Layout.LayoutModifier.ModifiedLayout Spacing l a
 mySpacing i = spacingRaw False (Border i i i i) True (Border i i i i) True
 
+myTabTheme =
+  def
+    { fontName = "xft:Mononoki Nerd Font:size=11:antialias=true:hinting=true",
+      activeColor = "#46d9ff",
+      inactiveColor = "#202328",
+      activeBorderColor = "#46d9ff",
+      inactiveBorderColor = "#282c34",
+      activeTextColor = "#282c34",
+      inactiveTextColor = "#dfdfdf"
+    }
+
 tall =
   renamed [Replace "tall"] $
     smartBorders $
@@ -62,7 +74,11 @@ full =
     smartBorders $
       Full
 
-myLayoutHook = avoidStruts $ tall ||| bTall ||| floats ||| full
+tabs =
+  renamed [Replace "tabs"] $
+    tabbed shrinkText myTabTheme
+
+myLayoutHook = avoidStruts $ tall ||| bTall ||| floats ||| full ||| tabs
 
 myManageHook :: ManageHook
 myManageHook =
