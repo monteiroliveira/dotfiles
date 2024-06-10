@@ -18,12 +18,6 @@
 
 (defalias 'yes-or-no-p 'y-or-n-p) ;; Turn 'yes' or 'no' question to 'y' or 'n'
 
-(setq modus-themes-mode-line '(borderless)
-      modus-themes-bold-constructs t
-      modus-themes-italic-constructs t
-      modus-themes-headings '((t . (rainbow))))
-(load-theme 'modus-vivendi t)
-
 (set-face-attribute 'default nil :font "JetBrainsMono Nerd Font" :height 135)
 
 (set-face-attribute 'font-lock-comment-face nil :slant 'italic)

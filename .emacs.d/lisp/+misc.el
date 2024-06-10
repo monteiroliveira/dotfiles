@@ -9,4 +9,12 @@
 
 (setup eldoc (:diminish))
 
+(setup (:pkg doom-themes))
+
+(setq modus-themes-mode-line '(borderless)
+      modus-themes-bold-constructs t
+      modus-themes-italic-constructs t
+      modus-themes-headings '((t . (rainbow))))
+(load-theme 'doom-one t)
+
 (provide '+misc)
