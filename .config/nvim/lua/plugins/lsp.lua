@@ -103,7 +103,8 @@ return {
                 vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
                 vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
                 vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
-                vim.keymap.set("n", "<leader>ma", vim.cmd.Mason)
+                vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, opts)
+                vim.keymap.set("n", "<leader>ma", vim.cmd.Mason, opts)
             end,
         })
     end
