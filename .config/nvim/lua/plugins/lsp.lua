@@ -18,18 +18,20 @@ return {
     config = function()
         local cmp = require('cmp')
         local cmp_lsp = require("cmp_nvim_lsp")
-        local capabilities = cmp_lsp.default_capabilities()
+        local capabilities = cmp_lsp.default_capabilities() -- Set up lspconfig
 
-        require("mason").setup()
+        require("mason").setup() -- Just load mason
         require("mason-lspconfig").setup({
             ensure_installed = {
                 "lua_ls",
+                "clangd",
                 "rust_analyzer",
-                "tsserver",
+                "tsserver", -- You don't deserve that
                 "gopls",
                 "pyright",
             },
             handlers = {
+                -- Default server "hook"
                 function(server_name)
                     require("lspconfig")[server_name].setup {
                         capabilities = capabilities,
@@ -57,6 +59,7 @@ return {
 
         local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
+        -- CMP Basic setup: https://github.com/hrsh7th/nvim-cmp
         cmp.setup({
             snippet = {
                 expand = function(args)

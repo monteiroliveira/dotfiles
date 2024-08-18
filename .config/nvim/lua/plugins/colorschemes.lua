@@ -16,7 +16,19 @@ return {
                     transparency = false,
                 },
             })
-            vim.cmd("colorscheme rose-pine")
+            -- vim.cmd("colorscheme rose-pine")
+        end
+    },
+    {
+        "catppuccin/nvim",
+        name = "catppuccin",
+        -- priority = 1000,
+        config = function()
+            require("catppuccin").setup({
+                flavor = "mocha",
+                term_colors = true,
+            })
+            vim.cmd("colorscheme catppuccin")
         end
     },
 }
