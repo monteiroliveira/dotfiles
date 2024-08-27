@@ -96,8 +96,8 @@ myXmobarPP =
       ppVisible = xmobarColor "#98be65" "",
       ppHidden = xmobarColor "#82aaff" "" . wrap "*" "",
       ppHiddenNoWindows = xmobarColor "#ef50f2" "",
-      ppSep = " : ",
-      ppTitle = xmobarColor "#dfdfdf" ""
+      ppTitle = xmobarColor "#dfdfdf" "" . shorten 50,
+      ppSep = " : "
     }
 
 myStartupHook :: X ()

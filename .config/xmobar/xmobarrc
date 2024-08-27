@@ -6,25 +6,27 @@ Config { font     = "Ubuntu Bold 10"
        , position = TopSize L 100 24
        , persistent   = True
        , lowerOnStart = True
+       , sepChar  = "%"
+       , alignSep = "}{"
+
        , commands = [ Run Com "echo" [" <fn=1>\xe61f</fn>   "] "haskell" 0
 
-		    , Run XPropertyLog "_XMONAD_TRAYPAD"
+		            , Run XPropertyLog "_XMONAD_TRAYPAD"
 
-		    , Run Com "echo" ["<fn=2>\xf487</fn>   "] "package" 0
+		            , Run Com "echo" ["<fn=2>\xf487</fn>   "] "package" 0
 
-		    , Run Com ".local/bin/pacupdates" [] "pacupdates" 600
+		            , Run Com ".local/bin/pacupdates" [] "pacupdates" 600
 
-		    , Run Com "echo" ["<fn=2>\xebc6</fn>   "] "penguin" 0
+		            , Run Com "echo" ["<fn=2>\xebc6</fn>   "] "penguin" 0
 
-		    , Run Com "uname" ["-r"] "kernel" 0
+		            , Run Com "uname" ["-r"] "kernel" 0
 		    
                     , Run Cpu ["-t", "<fn=2>\xf4bc</fn>   Cpu: <total>%", "-H", "50", "--high"  , "red"] 20
 
                     , Run Memory ["-t", "<fn=2>\xf233</fn>   Mem: <used>m - <usedratio>%"] 20
 
-                    , Run Date "<fn=2>\xf017</fn>  %a %Y-%m-%d - (%H:%M)" "date" 30
+                    , Run Date "<fn=2>\xf017</fn>    %A %Y-%m-%d - (%H:%M)" "date" 30
 
                     , Run XMonadLog ]
-       , sepChar  = "%"
-       , alignSep = "}{"
-       , template = " %haskell% | %XMonadLog% }{ %penguin% %kernel%   :   %package% %pacupdates%   :   %cpu%   :   %memory%   :   %date%   :%_XMONAD_TRAYPAD% " }
+
+       , template = " %haskell% | %XMonadLog% }    %date%   { %penguin% %kernel%   :   %package% %pacupdates%   :   %cpu%   :   %memory%   :%_XMONAD_TRAYPAD% " }
