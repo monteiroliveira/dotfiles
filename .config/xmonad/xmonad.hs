@@ -20,7 +20,7 @@ import XMonad.Prompt
 import XMonad.Prompt.Shell (shellPrompt)
 -- Utils
 import XMonad.Util.EZConfig (additionalKeysP, mkKeymap)
-import XMonad.Util.Hacks (trayerAboveXmobarEventHook, trayerPaddingXmobarEventHook, windowedFullscreenFixEventHook)
+import XMonad.Util.Hacks (trayerAboveXmobarEventHook, trayerPaddingXmobarEventHook, windowedFullscreenFixEventHook, javaHack)
 import XMonad.Util.Loggers
 import XMonad.Util.SpawnOnce
 
@@ -92,12 +92,12 @@ myManageHook =
 myXmobarPP :: PP
 myXmobarPP =
   def
-    { ppCurrent = xmobarColor "#98be65" "" . wrap "[" "]",
+    { ppCurrent = xmobarColor "#ef50f2" "" . wrap "[" "]",
       ppVisible = xmobarColor "#98be65" "",
       ppHidden = xmobarColor "#82aaff" "" . wrap "*" "",
-      ppHiddenNoWindows = xmobarColor "#ef50f2" "",
-      ppTitle = xmobarColor "#dfdfdf" "" . shorten 50,
-      ppSep = " : "
+      ppHiddenNoWindows = xmobarColor "#dfdfdf" "",
+      ppTitle = xmobarColor "#dfdfdf" "" . shorten 75,
+      ppSep = "   "
     }
 
 myStartupHook :: X ()
@@ -108,7 +108,10 @@ myStartupHook = do
   spawnOnce "volumeicon"
   spawnOnce "dunst"
   spawnOnce "nitrogen --restore &"
-  spawn ("sleep 2 && trayer --edge top --align right --widthtype request --SetDockType true --SetPartialStrut true --expand true --monitor 1 --padding 6 --transparent true --alpha 0 --tint 0x282c34 --height 22")
+  spawn ("sleep 2 && \
+    \ trayer --edge top --align right --padding 6 \
+    \--widthtype request --SetDockType true --SetPartialStrut true --expand true \
+    \--monitor 1 --transparent true --alpha 0 --tint 0x282c34 --height 23")
 
 myWorkspaces = [" I ", " II ", " III ", " IV ", " V ", " VI ", " VII ", " VIII ", " IX "]
 
@@ -132,7 +135,7 @@ myPromptConfig =
       alwaysHighlight = True,
       promptBorderWidth = 0,
       height = 24,
-      position = Top
+      position = Bottom
     }
 
 myKeys :: [(String, X ())]
@@ -149,6 +152,7 @@ mySwallowEventHook = swallowEventHook (className =? "Alacritty") (return True)
 myHandleEventHook =
   handleEventHook def
     <> trayerPaddingXmobarEventHook
+    <> trayerAboveXmobarEventHook
     <> windowedFullscreenFixEventHook
     <> mySwallowEventHook
 
@@ -164,6 +168,7 @@ main = do
     withSB (xmobar0 <> xmobar1) $
       ewmhFullscreen $
         ewmh . docks $
+        javaHack $
           def
             { modMask = myModMask,
               terminal = myTerminal,
