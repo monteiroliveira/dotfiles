@@ -16,7 +16,7 @@ return {
                     transparency = false,
                 },
             })
-            -- vim.cmd("colorscheme rose-pine")
+            vim.cmd("colorscheme rose-pine-moon")
         end
     },
     {
@@ -28,7 +28,7 @@ return {
                 flavor = "mocha",
                 term_colors = true,
             })
-            vim.cmd("colorscheme catppuccin")
+            -- vim.cmd("colorscheme catppuccin")
         end
     },
 }
