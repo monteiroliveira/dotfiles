@@ -56,10 +56,7 @@
 
   (gmo/leader-keys
     "d"  '(:ignore t :wk "Dired")
-    "dd" '(dired :wk "Open Dired")
-    "dn" '(:ignore t :wk "Neotree")
-    "dnn" '(neotree-dir :wk "Open neotree")
-    "dnh" '(neotree-hide :wk "Hide neotree"))
+    "dd" '(dired :wk "Open Dired"))
 
   (gmo/leader-keys
     "l"  '(:ignore t :which-key "Lsp")
