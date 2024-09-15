@@ -31,5 +31,4 @@
 (require '+org)
 (require '+completion)
 (require '+shells)
-(require '+langs)
 (require '+keybinds)
