@@ -18,7 +18,7 @@ return {
                 "lua_ls",
                 "clangd",
                 "rust_analyzer",
-                "tsserver", -- You don't deserve that
+                -- "tsserver", -- You don't deserve that
                 "gopls",
                 "pyright",
             },
