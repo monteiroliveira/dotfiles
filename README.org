@@ -1,2 +1,73 @@
-# dotfiles
-My personal dotfiles
+#+TITLE: My personal config files
+#+AUTHOR: Guilherme Monteiro de Oliveira
+#+OPTIONS: toc:t
+
+* TABLE OF CONTENTS                                                     :toc:
+- [[#preface][PREFACE]]
+  - [[#what-is-a-dotfile][What is a dotfile]]
+- [[#xmonad][XMONAD]]
+  - [[#keybinds][Keybinds]]
+  - [[#dependencies][Dependencies]]
+
+* PREFACE
+English isn't my first language, so I'm sorry for the errors.
+
+This file contains a description and explanation of my config files. It's include:
+- [[https://github.com/monteiroliveira/dotfiles/blob/master/.config/xmonad/xmonad.hs][Xmonad]];
+- [[https://github.com/monteiroliveira/dotfiles/blob/master/.config/xmobar/xmobarrc][Xmobar]];
+- [[https://github.com/monteiroliveira/dotfiles/blob/master/.config/tmux/tmux.conf][Tmux]];
+- [[https://github.com/monteiroliveira/dotfiles/blob/master/.config/alacritty/alacritty.toml][Alacritty]];
+- [[https://github.com/monteiroliveira/dotfiles/blob/master/.config/picom/picom.conf][Picom]];
+- [[https://github.com/monteiroliveira/dotfiles/blob/master/.bashrc][Bashrc]];
+- [[https://github.com/monteiroliveira/dotfiles/blob/master/.bash_profile][Bash profile]];
+- Any scripts in ~.local~.
+
+** What is a dotfile
+By definition, dotfiles are "/configuration files for various programs, and they help those programs manage their functionality/".
+This repository with my files was created by a git using a bare repository created in my home directory in Linux (using Arch btw).
+
+It has two forms to clone this repository:
+*** Clone the repository with only git clone
+#+BEGIN_SRC shell
+  git clone https://github.com/monteiroliveira/dotfiles.git .dot
+#+END_SRC
+
+*** Clone the repository with bare parameter
+#+BEGIN_SRC shell
+  git clone --bare https://github.com/monteiroliveira/dotfiles.git $HOME/.dot
+  # Set the alias in your shell or just in line
+  alias dot="/usr/bin/git --git-dir=$HOME/.dot --work-tree=$HOME"
+  dot checkout
+#+END_SRC
+
+* XMONAD
+"/Xmonad is a tiling window manager for X. Windows are arranged automatically to tile the screen without gaps or overlap, maximising screen use. All features of the window manager are accessible from the keyboard: a mouse is strictly optional. Xmonad is written and extensible in Haskell./" - [[https://xmonad.org/about.html][About Xmonad]]
+
+#+CAPTION: Desktop image with xmonad
+#+NAME: fig:desktop.png
+#+ATTR_HTML: :alt Desktop :aling center
+[[https://raw.githubusercontent.com/monteiroliveira/dotfiles/refs/heads/assets/Pictures/screenshots/desktop.png]]
+
+I started using xmonad as a way to learn Haskell in the practice, and now xmonad is my main window manager.
+You can find the xmonad configuration file in ~.config/xmonad/xmonad.hs~ or [[https://github.com/monteiroliveira/dotfiles/blob/master/.config/xmonad/xmonad.hs][Xmonad config file]].
+
+** Keybinds
+|----------------+------------------------------------------------------|
+| Keybind        | Description                                          |
+|----------------+------------------------------------------------------|
+| ~M-C-r~        | Recompile Xmonad                                     |
+| ~M-S-r~        | Restart Xmonad                                       |
+| ~M-S-<Return>~ | Spawn a spawn prompt (like dmenu) built-in in xmonad |
+| ~M-<Return>~   | Spawn terminal (alacritty)                           |
+| ~M-S-b~        | Toggle struts                                        |
+|----------------+------------------------------------------------------|
+
+** Dependencies
+- Haskell (obviously)
+- Trayer (Systray)
+- Picom
+- Volumeicon (Systray volume control)
+- Nitrogen (Wallpaper Manager)
+- Fonts (Mononoki Nerd, Ubuntu family, Jetbrains Nerd, Awesome)
+
+Jetbrains Nerd and Awesome is for xmobar.
