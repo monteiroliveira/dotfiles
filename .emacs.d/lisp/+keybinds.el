@@ -26,34 +26,13 @@
   (gmo/leader-keys
     "h"  '(:ignore t :wk "Help")
     "hv" '(describe-variable :wk "Describe variable")
-    "hf" '(describe-function :wk "Describe function")
-    "ht" '(consult-theme :wk "Load theme"))
+    "hf" '(describe-function :wk "Describe function"))
 
   (gmo/leader-keys
     "b"  '(:ignore t :wk "Buffer")
-    "bi" '(consult-buffer :wk "Ibuffer")
     "bk" '(kill-this-buffer :wk "Kill buffer")
     "br" '(revert-buffer :wk "Reload buffer"))
   
-  (gmo/leader-keys
-    "w"  '(:ignore t :wk "Windows")
-    "wc" '(evil-window-delete :wk "Close current windows")
-    "ws" '(evil-window-split :wk "Horizontal split")
-    "wv" '(evil-window-vsplit :wk "Vertical split")
-    "wh" '(evil-window-left :wk "Window left")
-    "wj" '(evil-window-down :wk "Window down")
-    "wk" '(evil-window-up :wk "Window up")
-    "wl" '(evil-window-right :wk "Window right")
-    "ww" '(evil-window-next :wk "Window next"))
-
-  (gmo/leader-keys
-    "p"  '(:ignore t :wk "Project")
-    "pf" '(consult-fd :wk "Project file")
-    "ps" '(consult-ripgrep :wk "Project search")
-    "pg" '(consult-git-grep :wk "Project git search")
-    "pi" '(consult-imenu :wk "Project imenu search")
-    "pl" '(consult-line :wk "project line search"))
-
   (gmo/leader-keys
     "d"  '(:ignore t :wk "Dired")
     "dd" '(dired :wk "Open Dired"))
@@ -61,11 +40,6 @@
   (gmo/leader-keys
     "l"  '(:ignore t :which-key "Lsp")
     "ld" '(xref-find-definitions :wk "Go to definition")
-    "lr" '(xref-find-references :wk "Go to reference")
-    "ln" 'lsp-ui-find-next-reference
-    "lp" 'lsp-ui-find-prev-reference
-    "le" 'lsp-ui-flycheck-list
-    "lS" 'lsp-ui-sideline-mode
-    "lX" 'lsp-execute-code-action))
+    "lr" '(xref-find-references :wk "Go to reference")))
 
 (provide '+keybinds)

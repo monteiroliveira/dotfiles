@@ -10,6 +10,8 @@
 (tooltip-mode -1)
 (menu-bar-mode -1)
 
+(toggle-truncate-lines)
+
 (global-display-line-numbers-mode 1)
 
 ;; (global-prettify-symbols-mode t)
@@ -25,10 +27,11 @@
 
 (require '+straight)
 (require '+setup)
+(require '+keybinds)
 (require '+ui)
 (require '+misc)
 (require '+evil)
 (require '+org)
 (require '+completion)
 (require '+shells)
-(require '+keybinds)
+(require '+latex)
