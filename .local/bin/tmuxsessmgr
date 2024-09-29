@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+declare -a OPTION_LIST=( "Attach" "Kill" "Quit" )
+
+function main() {
+    local session_name
+    local option
+    if [ -z $TMUX ] && ! tmux run 2> /dev/null; then
+        printf "No session avaliable\n"
+        return 1
+    fi
+    if tmux ls > /dev/null 2>&1; then
+        session_name=$(tmux ls | grep -v "(attached)" | cut -d ":" -f1 | fzf )
+        [ -z $session_name ] && return 1
+        option=$(printf "%s\n" ${OPTION_LIST[@]} | fzf)
+        case "$option" in
+            "${OPTION_LIST[0]}")
+                if [ ! -z $TMUX ]; then
+                    tmux switch-client -t $session_name
+                    return 0
+                fi
+                tmux attach -t $session_name
+                return 0
+                ;;
+            "${OPTION_LIST[1]}")
+                tmux kill-session -t $session_name
+                return 0
+                ;;
+            *)
+                return 0
+                ;;
+        esac
+    fi
+    printf "Empty tmux list sessions\n"
+    return 1
+}
+
+main

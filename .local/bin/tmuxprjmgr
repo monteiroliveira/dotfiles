@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+declare -a PROJECTS_FOLDER=( "$HOME/repos" )
+
+function main() {
+    local project
+    if [ $# -eq 1 ]; then
+        if [ -d $1 ]; then
+            project=$1
+        fi
+        printf "Not valid directory\n"
+        return 1
+    fi
+    project=$(fd . ${PROJECTS_FOLDER[@]} --type d --min-depth 1 --max-depth 1 | fzf)
+
+    if [ -z $project ]; then
+        printf "No projects avaliable\n"
+        return 1
+    fi
+
+    local session_name=$(basename "$project")
+
+    if [ -z $TMUX ] && tmux run 2> /dev/null; then
+        tmux new-session -s $session_name -c $project
+        return 0
+    elif ! tmux has-session -t $session_name 2> /dev/null; then
+        tmux new-session -ds $session_name -c $project
+    fi
+    tmux switch-client -t $session_name
+    return 0
+}
+
+if [ $# -gt 1 ]; then
+    printf "Too many arguments"
+    return 1
+fi
+
+main $@
