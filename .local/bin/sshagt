@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 function find_socket() {
     find /tmp/ssh* -type s -name "agent.*" 2> /dev/null
@@ -6,12 +6,12 @@ function find_socket() {
 
 function set_socket() {
     if [ $1 ]; then
-	if [ -S $1 ]; then
-	    export SSH_AUTH_SOCK=$1
-	else
-	    echo "$1 is not a socket"
-	    return 1
-	fi
+        if [ -S $1 ]; then
+            export SSH_AUTH_SOCK=$1
+        else
+            echo "$1 is not a socket"
+            return 1
+        fi
     fi
 }
 
@@ -22,11 +22,9 @@ function find_agent_process() {
 function kill_extra_agents() {
     local TOTAL_AGENTS=$(find_agent_process | wc -l)
     for (( pids=1; pids < $TOTAL_AGENTS; pids++ )); do
-	local CURRENT_PID=$(find_agent_process \
-				| tr "\n" "/" \
-				| cut -d '/' -f1)
-	echo "Killing SSH Agent with PID: $CURRENT_PID"
-	kill $CURRENT_PID
+        local CURRENT_PID=$(find_agent_process | tr "\n" "/" | cut -d '/' -f1)
+        echo "Killing SSH Agent with PID: $CURRENT_PID"
+        kill $CURRENT_PID
     done
 }
 
@@ -36,59 +34,58 @@ function agent_status() {
 
 function agent_check() {
     if [ $(agent_status) = 2 ]; then
-       if [ $(find_agent_process | wc -l) -eq 1 ]; then
-	   export SSH_AGENT_PID=$(find_agent_process)
-	   set_socket $(find_socket)
-       elif [ $(find_agent_process | wc -l) -gt 1 ]; then
-	   kill_extra_agents
-	   export SSH_AGENT_PID=$(find_agent_process)
-	   set_socket $(find_socket)
-       else
-	   eval "$(ssh-agent -s)"
-       fi
+        if [ $(find_agent_process | wc -l) -eq 1 ]; then
+            export SSH_AGENT_PID=$(find_agent_process)
+            set_socket $(find_socket)
+        elif [ $(find_agent_process | wc -l) -gt 1 ]; then
+            kill_extra_agents
+            export SSH_AGENT_PID=$(find_agent_process)
+            set_socket $(find_socket)
+        else
+            eval "$(ssh-agent -s)"
+        fi
     elif [ $(agent_status) = 1 ]; then
-	if [ $(find_agent_process | wc -l) -gt 1 ]; then
-	    kill_extra_agents
-	    export SSH_AGENT_PID=$(find_agent_process)
-	    set_socket $(find_socket)
-	fi
+        if [ $(find_agent_process | wc -l) -gt 1 ]; then
+            kill_extra_agents
+            export SSH_AGENT_PID=$(find_agent_process)
+            set_socket $(find_socket)
+        fi
     fi
 }
 
 function main() {
     case "$#" in
-	0)
-	    agent_check
-	    ;;
+        0)
+            agent_check
+            ;;
+        1)
+            case "$1" in
+                --add | -a | add)
+                    agent_check
+                    ssh-add
+                    ;;
+                --only-add | -oa | only-add)
+                    if [ $(agent_status) = 1 ]; then
+                        ssh-add
+                    elif [ $(agent_status) = 2 ]; then
+                        agent_check
+                        ssh-add
+                    else
+                        echo "Agent already have a key added"
+                        return 1
+                    fi
+                    ;;
+                *)
+                    echo "Wrong argument"
+                    return 1
+                    ;;
+            esac
+            ;;
 
-	1)
-	    case "$1" in
-		--add | -a | add)
-		    agent_check
-		    ssh-add
-		    ;;
-		--only-add | -oa | only-add)
-		    if [ $(agent_status) = 1 ]; then
-			ssh-add
-		    elif [ $(agent_status) = 2 ]; then
-			agent_check
-			ssh-add
-		    else
-			echo "Agent already have a key added"
-			return 1
-		    fi
-		    ;;
-		*)
-		    echo "Wrong argument"
-		    return 1
-		    ;;
-	    esac
-	    ;;
-	
-	*)
-	    echo "Too many arguments"
-	    return 1
-	    ;;
+        *)
+            echo "Too many arguments"
+            return 1
+            ;;
     esac
 }
 
