@@ -1,24 +1,21 @@
 #!/usr/bin/env bash
 
-declare -a PROJECTS_FOLDER=( "$HOME/repos" )
+declare -a PROJECTS_FOLDER=( "$HOME/repos" "$HOME/.local" "$HOME/.config" )
 
 function main() {
     local project
+    local session_name
+
     if [ $# -eq 1 ]; then
-        if [ -d $1 ]; then
-            project=$1
-        fi
-        printf "Not valid directory\n"
-        return 1
+        [ -d $1 ] && project=$1 || ( printf "Not valid dir\n" && return 1 )
     fi
-    project=$(fd . ${PROJECTS_FOLDER[@]} --type d --min-depth 1 --max-depth 1 | fzf)
 
     if [ -z $project ]; then
-        printf "No projects avaliable\n"
-        return 1
+        project=$(fd . ${PROJECTS_FOLDER[@]} --type d --min-depth 1 --max-depth 1 | fzf)
     fi
+    [ -z $project ] && printf "Project not select\n" && return 1
 
-    local session_name=$(basename "$project")
+    session_name=$(basename "$project")
 
     if [ -z $TMUX ] && tmux run 2> /dev/null; then
         tmux new-session -s $session_name -c $project

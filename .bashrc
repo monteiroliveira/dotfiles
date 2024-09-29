@@ -4,7 +4,8 @@
 
 export TERM="xterm-256color"
 export EDITOR="nvim"
-export HISTCONTROL=ignoredups:erasedups
+export HISTCONTROL=ignoredups
+export PATH="$HOME/.local/bin:$PATH"
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
