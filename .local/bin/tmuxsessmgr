@@ -10,7 +10,7 @@ function main() {
         return 1
     fi
     if tmux ls > /dev/null 2>&1; then
-        session_name=$(tmux ls | grep -v "(attached)" | cut -d ":" -f1 | fzf )
+        session_name=$(tmux ls | grep -v "(attached)" | cut -d ":" -f1 | fzf)
         [ -z $session_name ] && return 1
         option=$(printf "%s\n" ${OPTION_LIST[@]} | fzf)
         case "$option" in

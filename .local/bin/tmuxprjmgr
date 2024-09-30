@@ -15,9 +15,9 @@ function main() {
     fi
     [ -z $project ] && printf "Project not select\n" && return 1
 
-    session_name=$(basename "$project")
+    session_name=$(basename "$project" | tr . _)
 
-    if [ -z $TMUX ] && tmux run 2> /dev/null; then
+    if [ -z $TMUX ] && ! tmux run 2> /dev/null; then
         tmux new-session -s $session_name -c $project
         return 0
     elif ! tmux has-session -t $session_name 2> /dev/null; then
