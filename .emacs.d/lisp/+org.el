@@ -3,7 +3,7 @@
 ;;; Code:
 (setup (:pkg org)
   (:also-load org-tempo)
-  ;; (:option org-edit-src-content-indentation 0)
+  (:option org-edit-src-content-indentation 0)
   (:hook org-indent-mode toc-org-mode)
 
   (setup org-tempo

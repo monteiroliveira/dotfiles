@@ -6,11 +6,16 @@ return {
         "williamboman/mason-lspconfig.nvim",
 
         "hrsh7th/cmp-nvim-lsp",
+
+        { "folke/lazydev.nvim", ft = "lua" },
     },
 
     config = function()
         local cmp_lsp = require("cmp_nvim_lsp")
         local capabilities = cmp_lsp.default_capabilities() -- Set up lspconfig
+
+
+        require("lazydev").setup({})
 
         require("mason").setup() -- Just load mason
         require("mason-lspconfig").setup({
