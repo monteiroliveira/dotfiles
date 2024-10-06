@@ -1,14 +1,12 @@
 vim.g.mapleader = " "
 
 vim.keymap.set("n", "<leader>ne", vim.cmd.Ex)
-vim.keymap.set("n", "<leader><leader>", function()
-    vim.cmd("source %")
-end)
+vim.keymap.set("n", "<leader><leader>", "<cmd>source %<CR>")
 
-vim.keymap.set("n", "<C-j>", "<C-w><C-j>")
-vim.keymap.set("n", "<C-k>", "<C-w><C-k>")
-vim.keymap.set("n", "<C-h>", "<C-w><C-h>")
-vim.keymap.set("n", "<C-l>", "<C-w><C-l>")
+vim.keymap.set("n", "<C-j>", "<c-w><c-j>")
+vim.keymap.set("n", "<C-k>", "<c-w><c-k>")
+vim.keymap.set("n", "<C-h>", "<c-w><c-h>")
+vim.keymap.set("n", "<C-l>", "<c-w><c-l>")
 
 vim.keymap.set("n", "<M-,>", "<C-w>5<")
 vim.keymap.set("n", "<M-.>", "<C-w>5>")
