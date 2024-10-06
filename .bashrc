@@ -19,7 +19,7 @@ alias ls="eza --icons"
 alias cat="bat --style=auto"
 alias grep="grep --color=auto"
 alias ..="cd .."
-alias dot="/usr/bin/git --git-dir=$HOME/.dot --work-tree=$HOME"
+alias dot="/usr/bin/git --git-dir=$HOME/.git --work-tree=$HOME"
 
 shopt -s autocd
 shopt -s cmdhist
