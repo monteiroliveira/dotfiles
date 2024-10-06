@@ -12,7 +12,7 @@ disabled = false
 show_always = true
 
 [hostname]
-ssh_only = false
+ssh_only = true
 format = "on [$hostname](bold purple) "
 trim_at = "."
 disabled = false
@@ -21,7 +21,7 @@ disabled = false
 disabled = true
 
 [character]
-success_symbol = "[➜](bold cyan)"
+success_symbol = "[:](bold cyan)"
 error_symbol = "[✗](red)"
 
 [directory]
@@ -31,18 +31,22 @@ truncate_to_repo = true
 style = "bold italic cyan"
 
 [git_branch]
-symbol = "\uf418 "
+symbol = "\uf418"
+format = "[git:\\([$branch](bold red)\\) $symbol]($style) "
 
 [git_state]
 style = "bold red"
 format = "[$state( $progress_current/$progress_total) ]($style)"
-rebase = "rebase"
-merge = "merge"
-revert = "revert"
-cherry_pick = "cherry"
-bisect = "bisect"
-am = "am"
-am_or_rebase = "am/rebase"
+rebase = "REBASE"
+merge = "MERGE"
+revert = "REVERT"
+cherry_pick = "CHERRY"
+bisect = "BISECT"
+am = "AM"
+am_or_rebase = "AM/REBASE"
+
+[git_status]
+style = "bold cyan"
 
 # Disable the package module, hiding it from the prompt completely
 [package]
