@@ -15,6 +15,7 @@ export PATH="$HOME/.local/bin:$PATH"
 set -o vi
 
 alias vim="nvim"
+alias emacs="emacs &"
 alias ls="eza --icons"
 alias cat="bat --style=auto"
 alias grep="grep --color=auto"

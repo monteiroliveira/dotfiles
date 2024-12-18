@@ -1,80 +1,45 @@
-;;; lisp/+completion.el --- Completion enhancements  -*- lexical-binding: t; -*-
+;; lisp/+completion.el --- Completion -*- lexical-binding: t; -*-
 
-;;; Code:
-(setup savehist
-  (:option history-lenght 25)
-  (savehist-mode))
+;; Code:
+(straight/require 'vertico)
+(straight/require 'marginalia)
+(straight/require 'consult)
+(straight/require 'prescient)
+(straight/require 'vertico-prescient)
+(straight/require 'company-prescient)
 
-(setup (:pkg vertico)
-  (:with-map vertico-map
-    (:bind "C-j" vertico-next
-	   "C-k" vertico-previous))
-  (:option vertico-cycle t)
-  (vertico-mode))
+(require 'savehist)
+(setq history-length 25)
+(savehist-mode)
 
-(setup (:pkg marginalia)
-  (marginalia-mode))
+(setq vertico-cycle t)
+(vertico-mode)
+(marginalia-mode)
 
-(setup (:pkg consult)
-  (:global "C-s" consult-line
-	   "C-M-l" consult-imenu)
-  (:with-map minibuffer-local-map
-    (:bind "C-r" consult-history))
+(define-key vertico-map (kbd "C-<backspace>") 'vertico-directory-up) ;; Hmmm...
 
-  (with-eval-after-load 'general
-    (gmo/leader-keys
-      "ht" '(consult-theme :wk "Load theme")
-      "bi" '(consult-buffer :wk "Ibuffer"))
+(global-set-key (kbd "C-s") 'consult-line)
 
-    (gmo/leader-keys
-      "p"  '(:ignore t :wk "Project")
-      "pf" '(consult-fd :wk "Project file")
-      "ps" '(consult-ripgrep :wk "Project search")
-      "pg" '(consult-git-grep :wk "Project git search")
-      "pi" '(consult-imenu :wk "Project imenu search")
-      "pl" '(consult-line :wk "project line search"))))
+(global-set-key (kbd "C-x C-b") 'consult-buffer)
+(global-set-key (kbd "C-x b") 'consult-buffer)
 
-;; (setup (:pkg embark)
-;;   (:also-load embark-consult)
-;;   (:global "C-S-a" embark-act)
-;;   (:with-map minibuffer-local-map
-;;     (:bind "C-d" embark-act)))
+(with-eval-after-load 'vertico
+  (vertico-prescient-mode))
 
-;; (setup (:pkg embark-consult))
+(straight/require 'company)
+(straight/require 'company-box)
 
-;; (setup (:pkg orderless)
-;;   (:require)
-;;   (:option completion-styles '(orderless basic)
-;;            completion-category-defaults nil
-;;            completion-category-overrides '((file (styles partial-completion)))))
+(setq company-minimum-prefix-length 2
+      company-idle-delay 0.2)
 
-(setup (:pkg company)
-  (:diminish)
-  (:option company-minimum-prefix-length 2
-	   company-idle-delay 0.2)
-  (:with-map company-active-map
-    (:bind "TAB" company-complete-selection))
-  (global-company-mode)
+(add-hook 'company-mode-hook 'company-box-mode)
 
-  (setup (:pkg company-box)
-    (:diminish)
-    (:hook-into company-mode))
+(global-company-mode)
 
-  ;; Backends
-  (setup (:pkg company-auctex)
-    (:require)
-    (:load-after company)
-    (company-auctex-init)))
+(with-eval-after-load 'company
+  (company-prescient-mode))
 
-(setup (:pkg prescient)
-  (:load-after vertigo company)
-
-  (setup (:pkg vertico-prescient)
-    (vertico-prescient-mode))
-
-  (setup (:pkg company-prescient)
-    (company-prescient-mode)))
-
-(setup (:pkg yasnippet))
+(straight/require 'yasnippet)
+(yas-global-mode)
 
 (provide '+completion)

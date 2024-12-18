@@ -20,7 +20,7 @@ import XMonad.Prompt
 import XMonad.Prompt.Shell (shellPrompt)
 -- Utils
 import XMonad.Util.EZConfig (additionalKeysP, mkKeymap)
-import XMonad.Util.Hacks (trayerAboveXmobarEventHook, trayerPaddingXmobarEventHook, windowedFullscreenFixEventHook, javaHack)
+import XMonad.Util.Hacks (javaHack, trayerAboveXmobarEventHook, trayerPaddingXmobarEventHook, windowedFullscreenFixEventHook)
 import XMonad.Util.Loggers
 import XMonad.Util.SpawnOnce
 
@@ -95,7 +95,7 @@ myXmobarPP =
     { ppCurrent = xmobarColor "#ef50f2" "" . wrap "[" "]",
       ppVisible = xmobarColor "#98be65" "",
       ppHidden = xmobarColor "#82aaff" "" . wrap "*" "",
-      ppHiddenNoWindows = xmobarColor "#dfdfdf" "",
+      -- ppHiddenNoWindows = xmobarColor "#dfdfdf" "",
       ppTitle = xmobarColor "#dfdfdf" "" . shorten 75,
       ppSep = "   "
     }
@@ -108,10 +108,12 @@ myStartupHook = do
   spawnOnce "volumeicon"
   spawnOnce "dunst"
   spawnOnce "nitrogen --restore &"
-  spawn ("sleep 2 && \
-    \ trayer --edge top --align right --padding 6 \
-    \--widthtype request --SetDockType true --SetPartialStrut true --expand true \
-    \--monitor 1 --transparent true --alpha 0 --tint 0x282c34 --height 23")
+  spawn
+    ( "sleep 2 && \
+      \ trayer --edge top --align right --padding 6 -l \
+      \--widthtype request --SetDockType true --SetPartialStrut true --expand true \
+      \--monitor 1 --transparent true --alpha 0 --tint 0x282c34 --height 23"
+    )
 
 myWorkspaces = [" I ", " II ", " III ", " IV ", " V ", " VI ", " VII ", " VIII ", " IX "]
 
@@ -168,17 +170,17 @@ main = do
     withSB (xmobar0 <> xmobar1) $
       ewmhFullscreen $
         ewmh . docks $
-        javaHack $
-          def
-            { modMask = myModMask,
-              terminal = myTerminal,
-              layoutHook = showWName' myShowWName $ myLayoutHook,
-              startupHook = myStartupHook,
-              manageHook = myManageHook <+> manageDocks,
-              workspaces = myWorkspaces,
-              borderWidth = myBorderWidth,
-              normalBorderColor = myNormColor,
-              focusedBorderColor = myFocusColor,
-              handleEventHook = myHandleEventHook
-            }
-            `additionalKeysP` myKeys
+          javaHack $
+            def
+              { modMask = myModMask,
+                terminal = myTerminal,
+                layoutHook = showWName' myShowWName $ myLayoutHook,
+                startupHook = myStartupHook,
+                manageHook = myManageHook <+> manageDocks,
+                workspaces = myWorkspaces,
+                borderWidth = myBorderWidth,
+                normalBorderColor = myNormColor,
+                focusedBorderColor = myFocusColor,
+                handleEventHook = myHandleEventHook
+              }
+              `additionalKeysP` myKeys

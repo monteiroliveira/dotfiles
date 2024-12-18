@@ -1,22 +1,17 @@
-;;; lisp/+org.el --- Org mode -*- lexical-binding: t; -*-
+(straight/require 'org)
+(straight/require 'org-roam)
+(straight/require 'toc-org)
+(require 'org-tempo)
+(require 'org-indent)
 
-;;; Code:
-(setup (:pkg org)
-  (:also-load org-tempo)
-  (:option org-edit-src-content-indentation 0)
-  (:hook org-indent-mode toc-org-mode)
+(setq org-edit-src-content-indentation 0)
+(add-hook 'org-mode-hook 'org-indent-mode)
 
-  (setup org-tempo
-    (:when-loaded
-      (add-to-list
-       'org-structure-template-alist '("el" . "SRC emacs-lisp"))))
+(add-to-list 'org-structure-template-alist
+	     '("el" . "SRC emacs-lisp"))
 
-  (setup (:pkg toc-org))
-
-  (setup (:pkg org-roam))
-
-  (eval-after-load "org-indent"
-    '(progn
-       (:diminish org-indent-mode))))
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((latex . t)))
 
 (provide '+org)
