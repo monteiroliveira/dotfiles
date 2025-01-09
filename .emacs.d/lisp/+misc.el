@@ -21,6 +21,21 @@
 (global-set-key (kbd "C-=") 'text-scale-increase)
 (global-set-key (kbd "C--") 'text-scale-decrease)
 
+;; Unbind kill-regin from c-w
+(global-set-key (kbd "C-S-k") 'kill-region)
+
+;; I think i need to move thin to another session
+(define-prefix-command 'window-control)
+(global-set-key (kbd "C-w") 'window-control)
+(global-set-key (kbd "C-w v") 'split-window-right)
+(global-set-key (kbd "C-w s") 'split-window-below)
+(global-set-key (kbd "C-w p") 'windmove-up)
+(global-set-key (kbd "C-w n") 'windmove-down)
+(global-set-key (kbd "C-w f") 'windmove-right)
+(global-set-key (kbd "C-w b") 'windmove-left)
+;;(global-set-key (kbd "M-w") 'shrink-window-horizontally)
+;;(global-set-key (kbd "M-W") 'enlarge-window-horizontally)
+
 (defun misc/scroll-recenter-down ()
   "Scroll the screen \"up\" and move the cursor to the center"
   (interactive)
