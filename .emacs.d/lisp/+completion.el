@@ -27,12 +27,12 @@
   (vertico-prescient-mode))
 
 (straight/require 'company)
-(straight/require 'company-box)
+;; (straight/require 'company-box)
 
 (setq company-minimum-prefix-length 2
       company-idle-delay 0.2)
 
-(add-hook 'company-mode-hook 'company-box-mode)
+;; (add-hook 'company-mode-hook 'company-box-mode)
 
 (global-company-mode)
 
