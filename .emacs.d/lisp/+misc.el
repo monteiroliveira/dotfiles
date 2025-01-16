@@ -1,10 +1,6 @@
 ;; lisp/+misc.el --- Micellaneous -*- lexical-binding: t; -*-
 
 ;; Code:
-(defalias 'yes-or-no-p 'y-or-n-p)
-
-(setq make-backup-files nil)
-
 (global-display-line-numbers-mode)
 (setq display-line-numbers-type 'relative)
 
@@ -66,14 +62,23 @@
   (recenter))
 (global-set-key (kbd "C-S-v") 'misc/scroll-recenter-up)
 
-(defun misc/enable-whitespaces ()
+(defun misc/enable-whitespaces-mode ()
   (interactive)
   (whitespace-mode 1)
-  (add-to-list 'write-file-functions 'delete-trailing-whitespace))
+  (add-to-list 'write-file-functions
+               'delete-trailing-whitespace))
+
+(straight/require 'paredit)
+(defun misc/enable-paredit-mode ()
+  (paredit-mode))
 
 (straight/require 'undo-tree)
 (setq undo-tree-auto-save-history nil)
 (global-undo-tree-mode)
+
+(straight/require 'diminish) ;; Some packages i don't need to know if is enabled
+(diminish 'apheleia-mode)
+(diminish 'undo-tree-mode)
 
 (straight/require 'magit)
 (global-set-key (kbd "C-x m") 'magit) ;; need to look more of this.
