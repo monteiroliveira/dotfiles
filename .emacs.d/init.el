@@ -1,6 +1,6 @@
 (setq-default inhibit-splash-screen t
-			  indent-tabs-mode nil
-			  make-backup-files nil)
+              indent-tabs-mode nil
+              make-backup-files nil)
 (defalias 'yes-or-no-p 'y-or-n-p)
 (setq tab-width 4)
 
@@ -13,6 +13,7 @@
 
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 (add-to-list 'load-path "~/.emacs.d/lisp/builtin")
+(add-to-list 'custom-theme-load-path "~/repos/mruber-darker-theme/")
 
 (require '+straight)
 

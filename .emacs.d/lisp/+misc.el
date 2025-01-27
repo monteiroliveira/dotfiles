@@ -5,17 +5,12 @@
 (setq display-line-numbers-type 'relative)
 
 (set-face-attribute 'default nil
-					:font "Iosevka Nerd Font" ;; Trying this instead Jetbrains
-					:height 140)
+                    :font "Iosevka Nerd Font" ;; Trying this instead
+                    :height 140)
 
-(set-face-attribute 'font-lock-comment-face nil
-					:slant 'italic)
+(set-face-attribute 'font-lock-comment-face nil :slant 'italic)
 
-(set-face-attribute 'font-lock-keyword-face nil
-					:slant 'italic)
-
-;; (global-set-key (kbd "C-=") 'text-scale-increase)
-;; (global-set-key (kbd "C--") 'text-scale-decrease)
+(set-face-attribute 'font-lock-keyword-face nil :slant 'italic)
 
 ;; Unbind kill-regin from c-w
 (global-set-key (kbd "C-S-k") 'kill-region)
@@ -67,9 +62,11 @@
   (whitespace-mode 1)
   (add-to-list 'write-file-functions
                'delete-trailing-whitespace))
+(add-hook 'prog-mode-hook 'misc/enable-whitespaces-mode)
 
 (straight/require 'paredit)
 (defun misc/enable-paredit-mode ()
+  (interactive)
   (paredit-mode))
 
 (straight/require 'undo-tree)
@@ -114,8 +111,11 @@
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 
+(straight/require 'rainbow-mode)
+;; (rainbow-mode)
+
 (straight/require 'gruber-darker-theme) ;; Thanks tsoding
-(load-theme 'gruber-darker t)
+(load-theme 'mruber-darker t)
 
 (global-hl-line-mode)
 
