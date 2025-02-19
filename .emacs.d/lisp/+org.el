@@ -15,4 +15,8 @@
  'org-babel-load-languages
  '((latex . t)))
 
+(straight/require 'visual-fill-column)
+(setq-default visual-fill-column-width 100
+              visual-fill-column-center-text t)
+
 (provide '+org)

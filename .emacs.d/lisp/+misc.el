@@ -40,8 +40,6 @@
 (global-set-key (kbd "C-w n") 'windmove-down)
 (global-set-key (kbd "C-w f") 'windmove-right)
 (global-set-key (kbd "C-w b") 'windmove-left)
-;; (global-set-key (kbd "M-w") 'shrink-window-horizontally)
-;; (global-set-key (kbd "M-W") 'enlarge-window-horizontally)
 
 (defun misc/scroll-recenter-down ()
   "Scroll the screen \"up\" and move the cursor to the center"
@@ -85,7 +83,7 @@
 (global-set-key (kbd "C-x c c") 'compile)
 
 (global-set-key (kbd "C-x c f") 'consult-fd)
-(global-set-key (kbd "C-x c s") 'consult-grep)
+(global-set-key (kbd "C-x c s") 'consult-ripgrep)
 
 (straight/require 'expand-region)
 (define-prefix-command 'expand-mark-region)
@@ -118,11 +116,5 @@
 (load-theme 'mruber-darker t)
 
 (global-hl-line-mode)
-
-(setq modus-themes-mode-line '(borderless)
-      modus-themes-bold-constructs t
-      modus-themes-italic-constructs t
-      modus-themes-headings '((t . (rainbow))))
-;; (load-theme 'modus-vivendi t) ;; nice simple theme
 
 (provide '+misc)

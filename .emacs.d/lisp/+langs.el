@@ -16,6 +16,9 @@
 (straight/require 'haskell-mode)
 (add-to-list 'auto-mode-alist '("\\.hs\\'" . haskell-mode))
 
+(straight/require 'lua-mode)
+(add-to-list 'auto-mode-alist '("\\.lua\\'" . lua-mode))
+
 (straight/require ;; Thanks again tsoding
  '(simpc-mode :type git :host nil :repo "https://github.com/rexim/simpc-mode"))
 (add-to-list 'auto-mode-alist '("\\.\\(c\\|cpp\\|h\\)\\'" . simpc-mode))
