@@ -15,6 +15,9 @@
  'org-babel-load-languages
  '((latex . t)))
 
+(add-to-list
+ 'org-src-lang-modes '("plantuml" . plantuml))
+
 (straight/require 'visual-fill-column)
 (setq-default visual-fill-column-width 100
               visual-fill-column-center-text t)
