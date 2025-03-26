@@ -4,10 +4,12 @@
 (straight/require 'apheleia)
 (apheleia-global-mode)
 
+(require '+lsp)
 (straight/require 'python-mode)
 (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
 
 (straight/require 'go-mode)
+(add-hook 'go-mode-hook 'lsp-deferred)
 (add-to-list 'auto-mode-alist '("\\.go\\'" . go-mode))
 
 (straight/require 'rust-mode)
