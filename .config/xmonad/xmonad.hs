@@ -1,13 +1,11 @@
--- Main Imports
 import XMonad
--- Hooks
+import XMonad.Actions.GridSelect
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks (ToggleStruts (..), avoidStruts, docks, manageDocks)
 import XMonad.Hooks.ManageHelpers (doFullFloat, isFullscreen)
 import XMonad.Hooks.StatusBar
 import XMonad.Hooks.StatusBar.PP
 import XMonad.Hooks.WindowSwallowing
--- Layout
 import XMonad.Layout.LayoutModifier
 import XMonad.Layout.NoBorders (smartBorders)
 import XMonad.Layout.Renamed
@@ -15,10 +13,8 @@ import XMonad.Layout.ShowWName
 import XMonad.Layout.SimplestFloat
 import XMonad.Layout.Spacing
 import XMonad.Layout.Tabbed
--- Prompt
 import XMonad.Prompt
 import XMonad.Prompt.Shell (shellPrompt)
--- Utils
 import XMonad.Util.EZConfig (additionalKeysP, mkKeymap)
 import XMonad.Util.Hacks (javaHack, trayerAboveXmobarEventHook, trayerPaddingXmobarEventHook, windowedFullscreenFixEventHook)
 import XMonad.Util.Loggers
@@ -140,13 +136,36 @@ myPromptConfig =
       position = Bottom
     }
 
+spawnSelected' :: [(String, String)] -> X ()
+spawnSelected' lst = gridselect conf lst >>= flip whenJust spawn
+  where
+    conf =
+      def
+        { gs_cellheight = 40,
+          gs_cellwidth = 180,
+          gs_cellpadding = 6,
+          gs_originFractX = 0.5,
+          gs_originFractY = 0.5,
+          gs_font = "xft:Mononoki Nerd Font:size=11:antialias=true:hinting=true"
+        }
+
 myKeys :: [(String, X ())]
 myKeys =
   [ ("M-C-r", spawn "xmonad --recompile"),
     ("M-S-r", spawn "xmonad --restart"),
     ("M-S-<Return>", shellPrompt myPromptConfig),
     ("M-<Return>", spawn myTerminal),
-    ("M-S-b", sendMessage ToggleStruts)
+    ("M-S-b", sendMessage ToggleStruts),
+    ( "M-S-g",
+      spawnSelected'
+        [ ("Alacritty", "alacritty"),
+          ("Gimp", "gimp"),
+          ("Emacs", "emacs"),
+          ("Vlc", "vlc"),
+          ("Virt Manager", "virt-manager"),
+          ("Nvidia", "nvidia-settings")
+        ]
+    )
   ]
 
 mySwallowEventHook = swallowEventHook (className =? "Alacritty") (return True)
@@ -164,10 +183,13 @@ xmobar0 = statusBarProp "xmobar -x 0 ~/.config/xmobar/xmobarrc" $ pure myXmobarP
 xmobar1 :: StatusBarConfig
 xmobar1 = statusBarProp "xmobar -x 1 ~/.config/xmobar/xmobarrc" $ pure myXmobarPP
 
+xmobar2 :: StatusBarConfig
+xmobar2 = statusBarProp "xmobar -x 2 ~/.config/xmobar/xmobarrc" $ pure myXmobarPP
+
 main :: IO ()
 main = do
   xmonad $
-    withSB (xmobar0 <> xmobar1) $
+    withSB (xmobar0 <> xmobar1 <> xmobar2) $
       ewmhFullscreen $
         ewmh . docks $
           javaHack $
