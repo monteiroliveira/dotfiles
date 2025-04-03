@@ -9,8 +9,8 @@
 (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
 
 (straight/require 'go-mode)
-(add-hook 'go-mode-hook 'lsp-deferred)
 (add-to-list 'auto-mode-alist '("\\.go\\'" . go-mode))
+(add-hook 'go-mode-hook 'lsp-deferred)
 
 (straight/require 'rust-mode)
 (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
