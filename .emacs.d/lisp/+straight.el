@@ -17,13 +17,16 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
-(defun straight/require (recipe)
+(defun straight/require (&rest recipes)
   "Use 'straight-use-package' to ensure the RECIPE (or just pkg), then call require."
   (interactive "sEnter package name: ")
-  (when (eval `(straight-use-package ',recipe))
-    (let ((pkg (if (consp recipe)
-		   (car recipe)
-		 recipe)))
-      (eval `(require ',pkg)))))
+  (dolist (recipe recipes)
+    (when (stringp recipe)
+      (setq recipe (intern recipe)))
+    (when (eval `(straight-use-package ',recipe))
+      (let ((pkg (if (consp recipe)
+		             (car recipe)
+		           recipe)))
+        (eval `(require ',pkg))))))
 
 (provide '+straight)

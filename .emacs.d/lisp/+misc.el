@@ -4,24 +4,23 @@
 (global-display-line-numbers-mode)
 (setq display-line-numbers-type 'relative)
 
-(set-face-attribute 'default nil
-                    :font "Iosevka Nerd Font" ;; Trying this instead
-                    :height 140)
+(defun misc/get-default-font ()
+  "Sometimes we need to do things we are not much proud"
+  (cond
+   ((eq system-type 'windows-nt) "Consolas-18")
+   ((eq system-type 'gnu/linux) "Iosevka Nerd Font-18")))
 
-(set-face-attribute 'font-lock-comment-face nil :slant 'italic)
+;; (set-face-attribute 'default nil :font "Iosevka Nerd Font" :height 140)
+;; (set-face-attribute 'font-lock-comment-face nil :slant 'italic)
+;; (set-face-attribute 'font-lock-keyword-face nil :slant 'italic)
 
-(set-face-attribute 'font-lock-keyword-face nil :slant 'italic)
-
-;; Unbind kill-regin from c-w
-(global-set-key (kbd "C-S-k") 'kill-region)
-
-;; I think i need to move thin to another session
-(define-prefix-command 'window-control)
-(global-set-key (kbd "C-w") 'window-control)
+(dolist (fc `((font . ,(misc/get-default-font))
+              (height . 130)))
+  (add-to-list 'default-frame-alist fc))
 
 (straight/require 'hydra)
 (global-set-key
- (kbd "C-w C-w")
+ (kbd "C-x w w")
  (defhydra hydra-window-control ()
    ("v" split-window-right "vsplit")
    ("s" split-window-below "split")
@@ -33,13 +32,6 @@
    (">" shrink-window-horizontally)
    ("<" enlarge-window-horizontally)
    ("q" nil "quit")))
-
-(global-set-key (kbd "C-w v") 'split-window-right)
-(global-set-key (kbd "C-w s") 'split-window-below)
-(global-set-key (kbd "C-w p") 'windmove-up)
-(global-set-key (kbd "C-w n") 'windmove-down)
-(global-set-key (kbd "C-w f") 'windmove-right)
-(global-set-key (kbd "C-w b") 'windmove-left)
 
 (defun misc/scroll-recenter-down ()
   "Scroll the screen \"up\" and move the cursor to the center"
@@ -77,25 +69,24 @@
 
 (straight/require 'magit)
 (global-set-key (kbd "C-x m") 'magit) ;; need to look more of this.
+(global-set-key (kbd "C-c m l") 'magit-log)
+(global-set-key (kbd "C-c m s") 'magit-status)
 
 (require 'compile)
 (setq compilation-scroll-output t)
-(global-set-key (kbd "C-x c c") 'compile)
+(global-set-key (kbd "C-c c") 'compile)
+(global-set-key (kbd "C-c p f") 'find-grep)
 
-(global-set-key (kbd "C-x c f") 'consult-fd)
-(global-set-key (kbd "C-x c s") 'consult-ripgrep)
+(require 'project)
 
 (straight/require 'expand-region)
-(define-prefix-command 'expand-mark-region)
-(global-set-key (kbd "C-=") 'expand-mark-region)
-
-(global-set-key (kbd "C-= w") 'er/mark-word)
-(global-set-key (kbd "C-= i \"") 'er/mark-inside-quotes)
-(global-set-key (kbd "C-= a \"") 'er/mark-outside-quotes)
-(global-set-key (kbd "C-= i )") 'er/mark-inside-pairs)
-(global-set-key (kbd "C-= a )") 'er/mark-outside-pairs)
-(global-set-key (kbd "C-= i (") 'er/mark-inside-pairs)
-(global-set-key (kbd "C-= a (") 'er/mark-outside-pairs)
+(global-set-key (kbd "C-c v w") 'er/mark-word)
+(global-set-key (kbd "C-c v i \"") 'er/mark-inside-quotes)
+(global-set-key (kbd "C-c v a \"") 'er/mark-outside-quotes)
+(global-set-key (kbd "C-c v i )") 'er/mark-inside-pairs)
+(global-set-key (kbd "C-c v a )") 'er/mark-outside-pairs)
+(global-set-key (kbd "C-c v i (") 'er/mark-inside-pairs)
+(global-set-key (kbd "C-c v a (") 'er/mark-outside-pairs)
 
 (require 'textm)
 (global-set-key (kbd "C-,") 'textm/duplicate-line)

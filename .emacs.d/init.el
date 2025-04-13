@@ -2,11 +2,11 @@
               indent-tabs-mode nil
               make-backup-files nil)
 (defalias 'yes-or-no-p 'y-or-n-p)
-(setq tab-width 4)
 
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (menu-bar-mode -1)
+(delete-selection-mode)
 
 (setq custom-file "~/.emacs.d/custom.el")
 (load-file custom-file)
@@ -21,3 +21,4 @@
 (require '+completion)
 (require '+org)
 (require '+langs)
+(require '+treesit)
