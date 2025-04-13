@@ -181,10 +181,10 @@ xmobar0 :: StatusBarConfig
 xmobar0 = statusBarProp "xmobar -x 0 ~/.config/xmobar/xmobarrc" $ pure myXmobarPP
 
 xmobar1 :: StatusBarConfig
-xmobar1 = statusBarProp "xmobar -x 1 ~/.config/xmobar/xmobarrc" $ pure myXmobarPP
+xmobar1 = statusBarProp "xmobar -x 1 ~/.config/xmobar/xmobarrc-without-tray" $ pure myXmobarPP
 
 xmobar2 :: StatusBarConfig
-xmobar2 = statusBarProp "xmobar -x 2 ~/.config/xmobar/xmobarrc" $ pure myXmobarPP
+xmobar2 = statusBarProp "xmobar -x 2 ~/.config/xmobar/xmobarrc-without-tray" $ pure myXmobarPP
 
 main :: IO ()
 main = do
