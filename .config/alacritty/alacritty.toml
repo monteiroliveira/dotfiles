@@ -1,4 +1,4 @@
-general.import = ["~/.config/alacritty/themes/themes/rose-pine-moon.toml"]
+# general.import = ["~/.config/alacritty/themes/themes/rose-pine-moon.toml"]
 
 [env]
 TERM = "xterm-256color"
@@ -22,18 +22,46 @@ style = "Italic"
 family = "Iosevka Nerd Font"
 style = "Regular"
 
-[font.offset]
-x = 0
-y = 0
-
 [scrolling]
 history = 10000
 
 [window]
-dynamic_padding = true
+dynamic_padding = false
 opacity = 1.0
 title = "Alacritty"
+
+[window.padding]
+x = 10
+y = 10
 
 [window.class]
 general = "Alacritty"
 instance = "Alacritty"
+
+[colors.primary]
+background = '#181818'
+foreground = '#E4E4E4'
+
+[colors.cursor]
+text = '#E4E4E4'
+cursor = '#3888BA'
+
+[colors.normal]
+black   = '#000000'
+red     = '#F43841'
+green   = '#66BA38'
+yellow  = '#FCE94F'
+blue    = '#3888BA'
+magenta = '#9E95C7'
+cyan    = '#B0C3EB'
+white   = '#E4E4EF'
+
+[colors.bright]
+black   = '#484848'
+red     = '#FF4F58'
+green   = '#66BA38'
+yellow  = '#FCE94F'
+blue    = '#4AB4F6'
+magenta = '#9E95C7'
+cyan    = '#B0C3EB'
+white   = '#F4F4FF'
