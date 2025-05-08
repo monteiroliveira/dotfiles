@@ -21,6 +21,7 @@ alias cat="bat --style=auto"
 alias grep="grep --color=auto"
 alias ..="cd .."
 alias dot="/usr/bin/git --git-dir=$HOME/.git --work-tree=$HOME"
+alias orca="WEBKIT_FORCE_COMPOSITING_MODE=1 WEBKIT_DISABLE_COMPOSITING_MODE=1 WEBKIT_DISABLE_DMABUF_RENDERER=1 orca-slicer"
 
 shopt -s autocd
 shopt -s cmdhist
