@@ -95,6 +95,7 @@ myTreeSelectForest =
   [ Node
       (TSNode "System Options >>" "Default System Options" (return ()))
       [ Node (TSNode "Shutdown" "PowerOff the system" (spawn "poweroff")) [],
+        Node (TSNode "Reboot" "Reboot the system" (spawn "reboot")) [],
         Node (TSNode "Screen Lock" "Lock the computer screen" (spawn "slock")) [],
         Node (TSNode "Logoff" "Terminate user session" (spawn "loginctl terminate-user $(whoami)")) []
       ]
