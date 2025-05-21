@@ -22,3 +22,8 @@
 (require '+org)
 (require '+langs)
 (require '+treesit)
+
+(straight/require 'diminish) ;; Some packages i don't need to know if is enabled
+(diminish 'apheleia-mode)
+(diminish 'undo-tree-mode)
+(diminish 'company-mode)

@@ -18,6 +18,12 @@
               (height . 130)))
   (add-to-list 'default-frame-alist fc))
 
+;; God mode; Most used in emacs -nw to avoid key conflicts
+(straight/require 'god-mode)
+(when (not (display-graphic-p))
+  (god-mode))
+(global-set-key (kbd "C-c g") #'god-local-mode)
+
 (straight/require 'hydra)
 (global-set-key
  (kbd "C-x w w")
@@ -62,10 +68,6 @@
 (straight/require 'undo-tree)
 (setq undo-tree-auto-save-history nil)
 (global-undo-tree-mode)
-
-(straight/require 'diminish) ;; Some packages i don't need to know if is enabled
-(diminish 'apheleia-mode)
-(diminish 'undo-tree-mode)
 
 (straight/require 'magit)
 (global-set-key (kbd "C-x m") 'magit) ;; need to look more of this.
