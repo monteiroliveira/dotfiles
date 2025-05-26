@@ -18,26 +18,9 @@
               (height . 130)))
   (add-to-list 'default-frame-alist fc))
 
-;; God mode; Most used in emacs -nw to avoid key conflicts
-(straight/require 'god-mode)
 (when (not (display-graphic-p))
-  (god-mode))
-(global-set-key (kbd "C-c g") #'god-local-mode)
-
-(straight/require 'hydra)
-(global-set-key
- (kbd "C-x w w")
- (defhydra hydra-window-control ()
-   ("v" split-window-right "vsplit")
-   ("s" split-window-below "split")
-   ("p" windmove-up "up")
-   ("n" windmove-down "down")
-   ("f" windmove-right "right")
-   ("b" windmove-left "left")
-   ("d" delete-window "delete")
-   (">" shrink-window-horizontally)
-   ("<" enlarge-window-horizontally)
-   ("q" nil "quit")))
+  (straight/require 'xclip)
+  (xclip-mode))
 
 (defun misc/scroll-recenter-down ()
   "Scroll the screen \"up\" and move the cursor to the center"
@@ -70,9 +53,16 @@
 (global-undo-tree-mode)
 
 (straight/require 'magit)
+(global-set-key (kbd "C-c m w m") 'magit-worktree-move)
+
 (global-set-key (kbd "C-x m") 'magit) ;; need to look more of this.
 (global-set-key (kbd "C-c m l") 'magit-log)
 (global-set-key (kbd "C-c m s") 'magit-status)
+
+(global-set-key (kbd "C-c m w m") 'magit-worktree-move)
+(global-set-key (kbd "C-c m w b") 'magit-worktree-branch)
+(global-set-key (kbd "C-c m w m") 'magit-worktree-move)
+(global-set-key (kbd "C-c m w c") 'magit-worktree-checkout)
 
 (require 'compile)
 (setq compilation-scroll-output t)
