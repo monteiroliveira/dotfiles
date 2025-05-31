@@ -1,7 +1,7 @@
 ;; lisp/+magit.el --- Magit -*- lexical-binding: t; -*-
 
 (straight/require 'magit)
-(global-set-key (kbd "C-c m w m") 'magit-worktree-move)
+(setq magit-completing-read-function 'magit-ido-completing-read)
 
 (global-set-key (kbd "C-x m") 'magit) ;; need to look more of this.
 (global-set-key (kbd "C-c m l") 'magit-log)

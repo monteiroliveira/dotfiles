@@ -33,7 +33,4 @@
 (add-to-list 'auto-mode-alist '("\\.\\(c\\|cpp\\|h\\)\\'" . simpc-mode))
 (setf (alist-get 'simpc-mode apheleia-mode-alist) '(clang-format))
 
-(straight/require 'restclient) ;; trying this to replace postman
-(add-to-list 'auto-mode-alist '("\\.http\\'" . restclient-mode))
-
 (provide '+langs)
