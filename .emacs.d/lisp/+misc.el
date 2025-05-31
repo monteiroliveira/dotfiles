@@ -34,7 +34,7 @@
   (interactive)
   (scroll-down-command)
   (recenter))
-(global-set-key (kbd "C-S-v") 'misc/scroll-recenter-up)
+(global-set-key (kbd "M-v") 'misc/scroll-recenter-up)
 
 (defun misc/enable-whitespaces-mode ()
   (interactive)
@@ -83,18 +83,24 @@
 (require 'textm)
 (global-set-key (kbd "C-,") 'textm/duplicate-line)
 (global-set-key (kbd "C-c ,") 'textm/duplicate-line) ;; for emacs terminal
+
 (global-set-key (kbd "C-;") 'textm/delete-line)
 (global-set-key (kbd "C-c ;") 'textm/delete-line) ;; for emacs terminal again
+
 (global-set-key (kbd "M-p") 'textm/move-text-up)
 (global-set-key (kbd "M-n") 'textm/move-text-down)
 
 (straight/require 'multiple-cursors)
 (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+
 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-c >") 'mc/mark-next-like-this) ;; terminal
+(global-set-key (kbd "C-M-j") 'mc/mark-next-like-this) ;; terminal
+
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C-c <") 'mc/mark-previous-like-this) ;; terminal
+(global-set-key (kbd "C-M-k") 'mc/mark-previous-like-this) ;; terminal
+
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+(global-set-key (kbd "C-c C->") 'mc/mark-all-like-this-dwim)
 
 (straight/require 'rainbow-mode)
 ;; (rainbow-mode)
