@@ -52,17 +52,7 @@
 (setq undo-tree-auto-save-history nil)
 (global-undo-tree-mode)
 
-(straight/require 'magit)
-(global-set-key (kbd "C-c m w m") 'magit-worktree-move)
-
-(global-set-key (kbd "C-x m") 'magit) ;; need to look more of this.
-(global-set-key (kbd "C-c m l") 'magit-log)
-(global-set-key (kbd "C-c m s") 'magit-status)
-
-(global-set-key (kbd "C-c m w m") 'magit-worktree-move)
-(global-set-key (kbd "C-c m w b") 'magit-worktree-branch)
-(global-set-key (kbd "C-c m w m") 'magit-worktree-move)
-(global-set-key (kbd "C-c m w c") 'magit-worktree-checkout)
+(require '+magit)
 
 (require 'compile)
 (setq compilation-scroll-output t)
