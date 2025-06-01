@@ -1,5 +1,7 @@
 ;; lisp/+magit.el --- Magit -*- lexical-binding: t; -*-
 
+(require 'cl-lib)
+
 (straight/require 'magit)
 (setq magit-completing-read-function 'magit-ido-completing-read)
 
@@ -13,15 +15,16 @@ magit-worktree-status, but this just collect the available worktrees to use in
 the next functions."
   (list (magit-completing-read
          "Worktrees"
-         (cl-delete (directory-file-name (magit-toplevel))
-                    (magit-list-worktrees)))))
+         (cl-remove-if (lambda (worktree)
+                         (string= (car worktree) (magit-toplevel)))
+                       (magit-list-worktrees)))))
 
 (defun magitc/magit-goto-worktree (worktree)
   "Jump to another worktree and open 'dired'"
   (interactive (magitc/gather-avaliables-worktrees))
-  (let ((repo-toplevel (magit-toplevel)))
-    (if repo-toplevel
-        (dired worktree))))
+  (if-let ((repo-toplevel (magit-toplevel)))
+      (dired worktree)
+    (message "Not a git repo")))
 
 (defun magitc/magit-goto-worktree-file (worktree)
   "Jump to the current file in another worktree by relative path
