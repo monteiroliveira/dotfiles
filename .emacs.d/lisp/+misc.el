@@ -57,7 +57,6 @@
 (require 'compile)
 (setq compilation-scroll-output t)
 (global-set-key (kbd "C-c c") 'compile)
-(global-set-key (kbd "C-c p f") 'find-grep)
 
 (require 'project)
 
@@ -79,6 +78,11 @@
 
 (global-set-key (kbd "M-p") 'textm/move-text-up)
 (global-set-key (kbd "M-n") 'textm/move-text-down)
+
+(require 'telescope)
+(global-set-key (kbd "C-c p f") 'telescope/live-grep-git)
+(global-set-key (kbd "C-c p F") 'telescope/live-grep)
+(global-set-key (kbd "C-c p g") 'find-grep)
 
 (straight/require 'multiple-cursors)
 (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
