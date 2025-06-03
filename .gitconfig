@@ -5,10 +5,10 @@
 [gpg]
     format = ssh
 [alias]
-    clonebare = !$HOME/.local/bin/clonebare
+    clonebare = !$HOME/.local/bin/clbare
 	tree = log --graph --decorate --oneline --abbrev-commit --all
 	log = log --oneline
-	bb = !$HOME/.local/bin/betterbranch
+	bb = !$HOME/.local/bin/btrbranch
 	wdiff = diff --word-diff
 [rerere]
 	enabled = true

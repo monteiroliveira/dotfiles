@@ -5,7 +5,7 @@ declare -a OPTION_LIST=( "Attach" "Kill" "Quit" )
 function main() {
     local session_name
     local option
-    if [ -z $TMUX ] && ! tmux run 2> /dev/null; then
+    if [ -z $TMUX ] && ! tmux run > /dev/null 2>&1; then
         printf "No session avaliable\n"
         return 1
     fi

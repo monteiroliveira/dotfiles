@@ -12,7 +12,7 @@ export PATH="$HOME/.local/bin:$PATH"
 
 # PS1='[\u@\h \W]\$ '
 
-set -o vi
+set -o emacs
 
 alias vim="nvim"
 alias emacs="/usr/bin/emacs &"

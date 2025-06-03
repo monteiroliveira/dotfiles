@@ -17,12 +17,12 @@ function main() {
 
     session_name=$(basename "$project" | tr . -)
 
-    if [ -z $TMUX ] && ! tmux run 2> /dev/null; then
+    if [ -z $TMUX ] && ! tmux run > /dev/null 2>&1; then
         tmux new-session -s $session_name -c $project
         return 0
-    elif ! tmux has-session -t $session_name 2> /dev/null; then
+    elif ! tmux has-session -t $session_name > /dev/null 2>&1; then
         tmux new-session -ds $session_name -c $project
-    elif [ -z $TMUX ] && tmux has-session -t $session_name 2> /dev/null; then
+    elif [ -z $TMUX ] && tmux has-session -t $session_name > /dev/null 2>&1; then
         tmux attach -t $session_name
         return 0
     fi
