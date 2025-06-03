@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+# REFERENCE: https://gist.github.com/schacon/e9e743dee2e92db9a464619b99e94eff
+# AND:       https://www.youtube.com/watch?v=aolI_Rz0ZqY&t=461s
+
+BOLD="\e[1m"
+GREEN="\e[92m"
+RED="\e[91m"
+YELLOW="\e[93m"
+RESET="\e[0m"
+
+WIDTH1=5
+WIDTH2=6
+WIDTH3=30
+WIDTH4=20
+WIDTH5=40
+
+SHA_BRANCH=$(git rev-parse HEAD)
+REF_FORMAT="%(objectname:short)@%(refname:short)@%(committerdate:relative)@%(ahead-behind:HEAD)@%(describe)@%(upstream:short)"
+BRANCHS=$(git for-each-ref --sort=-authordate --format="$REF_FORMAT" refs/heads/)
+
+printf \
+    "${BOLD}${GREEN}%-${WIDTH1}s ${RED}%-${WIDTH2}s ${RESET}${BOLD}%-${WIDTH3}s %-${WIDTH3}s ${YELLOW}%-${WIDTH4}s ${RESET}${BOLD}%-${WIDTH5}s\n" \
+    "Ahead" "Behind" "Branch" "Upstream" "Last Commit" "Description"
+
+printf \
+    "${BOLD}${GREEN}%-${WIDTH1}s ${RED}%-${WIDTH2}s ${RESET}${BOLD}%-${WIDTH3}s %-${WIDTH3}s ${YELLOW}%-${WIDTH4}s ${RESET}${BOLD}%-${WIDTH5}s\n" \
+    "-----" "------" "------------------------------" "------------------------------" "--------------------" "----------------------------------------"
+
+IFS=$'\n' # Loop over lines not words
+
+for branch in $BRANCHS; do
+    sha=$(echo $branch | cut -d "@" -f1)
+    branch_name=$(echo $branch | cut -d "@" -f2)
+    last_commit=$(echo $branch | cut -d "@" -f3)
+    ahead_behind=$(echo $branch | cut -d "@" -f4)
+    description=$(echo $branch | cut -d "@" -f5)
+    upstream=$(echo $branch | cut -d "@" -f6); [ -z $upstream ] && upstream=" "
+    ahead=$(echo $ahead_behind | cut -d " " -f1)
+    behind=$(echo $ahead_behind | cut -d " " -f2)
+
+    printf \
+        "${BOLD}${GREEN}%-${WIDTH1}s ${RED}%-${WIDTH2}s ${RESET}${BOLD}%-${WIDTH3}s %-${WIDTH3}s ${YELLOW}%-${WIDTH4}s ${RESET}${BOLD}%-${WIDTH5}s\n" \
+        $ahead $behind $branch_name $upstream $last_commit $description
+done

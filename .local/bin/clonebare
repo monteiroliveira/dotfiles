@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+# Sorry about the english errors, its not my first lang
+
+# This script is made to fix the problem with the bare repos with worktrees
+# Like when you create the bare repo in the config bare = true then the fetch
+# option is assigned with `+refs/heads/*:refs/heads/*` which is fuc*ing bad because
+# you can't performe some actions (like --force-with-lease) and which fetch the
+# refs/head will be updated...
+# REFERENCE: https://stackoverflow.com/questions/54367011/git-bare-repositories-worktrees-and-tracking-branches
+
+# So this script just clone the repo with bare and adjust the fetch option and sync the repo
+
+# The question is: why use bare repo?
+# I'm use bare repo because i need to work with many modifications in the same time and worktree works better than
+# the standart checkout, and i use bare specific because my jump plugins in emacs uses the bare struct to parse the
+# files.
+
+set -e
+
+URL=$1
+
+if [ $# -eq 1 ]; then
+    git clone --bare $URL
+    cd $(echo $URL | cut -d "/" -f 2)
+else
+    git clone --bare $URL $2
+    cd $2
+fi
+
+git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
+git fetch origin

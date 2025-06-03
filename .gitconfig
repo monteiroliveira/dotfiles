@@ -1,0 +1,14 @@
+[user]
+	name = Guilherme Monteiro de Oliveira
+	email = guilherme@monteiroliveira.com
+	signingkey = /home/guilherme/.ssh/id_ed25519.pub
+[gpg]
+    format = ssh
+[alias]
+    clonebare = !$HOME/.local/bin/clonebare
+	tree = log --graph --decorate --oneline --abbrev-commit --all
+	log = log --oneline
+	bb = !$HOME/.local/bin/betterbranch
+	wdiff = diff --word-diff
+[rerere]
+	enabled = true
