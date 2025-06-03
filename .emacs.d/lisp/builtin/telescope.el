@@ -35,7 +35,7 @@ return nil if not found"
   "List the files in the git root dir and 'find-file' the choosed file"
   (interactive
    (list (telescope/completing-read
-          "Files?> "
+          "Files Git?> "
           (if-let ((root (telescope/gather-git-files-in-path)))
               (split-string
                (shell-command-to-string

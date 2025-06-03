@@ -5,7 +5,7 @@ endif
 DIR=$(shell pwd)/
 TARGET=$(HOME)/
 
-.PHONY: build
+.PHONY: build build-adopt purge
 
 all: build
 
@@ -13,6 +13,11 @@ build:
 	@echo "Build symlinks"
 	@echo "TAGET=$(TARGET) DIR=$(DIR)"
 	stow --dir=$(DIR) --target=$(TARGET) --verbose .
+
+build-adopt:
+	@echo "Build symlinks"
+	@echo "TAGET=$(TARGET) DIR=$(DIR)"
+	stow --dir=$(DIR) --target=$(TARGET) --verbose --adopt .
 
 purge:
 	@echo "Purge symslinks"
