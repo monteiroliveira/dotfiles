@@ -9,19 +9,20 @@
 (global-set-key (kbd "C-c m l") 'magit-log)
 (global-set-key (kbd "C-c m s") 'magit-status)
 
-(defun magitc/gather-avaliables-worktrees ()
+(defun magitc/gather-avaliables-worktrees (title)
   "Stoled from https://github.com/magit/magit/blob/main/lisp/magit-worktree.el
 magit-worktree-status, but this just collect the available worktrees to use in
 the next functions."
   (list (magit-completing-read
-         "Worktrees"
+         title
          (cl-remove-if (lambda (worktree)
                          (string= (car worktree) (magit-toplevel)))
                        (magit-list-worktrees)))))
 
 (defun magitc/magit-goto-worktree (worktree)
   "Jump to another worktree and open 'dired'"
-  (interactive (magitc/gather-avaliables-worktrees))
+  (interactive
+   (magitc/gather-avaliables-worktrees "Goto Worktree"))
   (if-let ((repo-toplevel (magit-toplevel)))
       (dired worktree)
     (message "Not a git repo")))
@@ -29,7 +30,8 @@ the next functions."
 (defun magitc/magit-goto-worktree-file (worktree)
   "Jump to the current file in another worktree by relative path
 If the file exit so open the file with 'find-file' else open 'dired'."
-  (interactive (magitc/gather-avaliables-worktrees))
+  (interactive
+   (magitc/gather-avaliables-worktrees "Goto Worktree File"))
   (let ((buf-file-name buffer-file-name)
         (line-pos (line-number-at-pos))
         (current-buffer (current-buffer))
@@ -50,21 +52,24 @@ If the file exit so open the file with 'find-file' else open 'dired'."
 (defun magitc/add-raw-worktree (worktree)
   "Create a raw worktree and open 'dired' the work tree is create
 in the bare repo root, OBS: this function works good only for my
-workflow, feel free to change it if necessary."
+workflow, feel free to change it if necessary.
+BUGS: Dont work in dired buffer (im to lazy to fix this)."
   (interactive
-   (magit-completing-read "Worktree Name" nil))
-  (if-let ((repo-toplevel (magit-toplevel)))
-      (progn
-        (setq-local bare-root (file-name-directory repo-toplevel))
-        (if (not (magit-toplevel))
-            (setq-local bare-root repo-toplevel))
+   (list (magit-completing-read "Raw Worktree Name" nil)))
+  (cd (file-name-directory buffer-file-name))
+  (let ((bare-root
+         (shell-command-to-string
+          "git worktree list | grep bare | awk '{print $1}'")))
+    (setq-local bare-root-dir
+                (file-name-as-directory
+                 (replace-regexp-in-string "\n" "" bare-root)))
+    (if (file-directory-p bare-root-dir)
         (progn
+          (cd bare-root-dir)
           (shell-command
-           (format
-            "git worktree add %s"
-            worktree))
-          (dired bare-root)))
-    (message "Not in a git repo")))
+           (format "git worktree add %s" worktree))
+          (dired (expand-file-name worktree bare-root-dir)))
+      (message "Not in a git repo"))))
 
 (global-set-key (kbd "C-c m w m") 'magit-worktree-move)
 (global-set-key (kbd "C-c m w b") 'magit-worktree-branch)
