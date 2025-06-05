@@ -1,0 +1,46 @@
+configuration {
+    font: "Mononoki Nerd Font 13";
+    display-drun: "Aplications:";
+    show-icons: true;
+    icon-theme: "Papirus";
+}
+
+@theme "/dev/null"
+
+* {
+    background: #181818;
+    foreground: #FFFFFF;
+
+    background-color: @background;
+    text-color: @foreground;
+
+    border: 3;
+    padding: 2;
+    spacing: 2;
+}
+
+window {
+    border-color: #242424;
+}
+
+element {
+    background-color: transparent;
+    text-color: @foreground;
+}
+
+element selected {
+    background-color: #323232;
+}
+
+element-text {
+    background-color: transparent;
+}
+
+element-icon {
+    size: 20;
+    background-color: transparent;
+}
+
+prompt {
+    font: "Mononoki Nerd Font Bold 13";
+}
