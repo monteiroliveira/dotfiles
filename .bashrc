@@ -3,7 +3,7 @@
 #
 
 export TERM="xterm-256color"
-export EDITOR="nvim"
+export EDITOR="emacs -nw"
 export HISTCONTROL=ignoredups
 export PATH="$HOME/.local/bin:$PATH"
 
@@ -15,13 +15,13 @@ export PATH="$HOME/.local/bin:$PATH"
 set -o emacs
 
 alias vim="nvim"
-alias emacs="/usr/bin/emacs &"
-alias tmacs="/usr/bin/emacs -nw"
+[ -z $(which emacs) ] && alias emacs="emacs &"
+[ -z $(which emacs) ] && alias tmacs="emacs -nw"
 alias ls="eza --icons"
 alias cat="bat --style=auto"
 alias grep="grep --color=auto"
 alias ..="cd .."
-alias dot="/usr/bin/git --git-dir=$HOME/dotfiles.git --work-tree=$HOME"
+alias pac="sudo pacman"
 alias orca="WEBKIT_FORCE_COMPOSITING_MODE=1 WEBKIT_DISABLE_COMPOSITING_MODE=1 WEBKIT_DISABLE_DMABUF_RENDERER=1 orca-slicer"
 
 shopt -s autocd
