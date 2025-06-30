@@ -40,7 +40,7 @@ myTerminal :: String
 myTerminal = "alacritty"
 
 myBorderWidth :: Dimension
-myBorderWidth = 3
+myBorderWidth = 0
 
 myNormColor :: String
 myNormColor = "#282C34"
@@ -166,7 +166,8 @@ myXmobarPP =
       ppVisible = xmobarColor "#BA8438" "",
       ppHidden = xmobarColor "#9E95C7" "" . wrap "*" "",
       ppTitle = xmobarColor "#FFFFFF" "" . shorten 75,
-      ppSep = " : "
+      ppSep = " : ",
+      ppOrder = \(ws : l : _ : _) -> [ws, l]
     }
 
 myStartupHook :: X ()
