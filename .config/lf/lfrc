@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+# Setters (pull some things of ranger)
+set shellopts "-eu"
+set ifs "\n"
+set period 1
+set hidden true
+set ignorecase true
+set info size
+set dircounts
+set scrolloff 10
+set autoquit true
+
+cmd open ${{
+    case $(file --mime-type "$(readlink -f $f)" -b) in
+        text/*)
+            emacs -nw --file "$f";;
+    esac
+}}
+
+cmd mkdir ${{
+    set -f
+    clear; tput init; tput cup $(($(tput lines)/3)); tput bold
+    printf "Create directory: "
+    read ans
+    mkdir -p $ans
+}}
+
+cmd touch ${{
+    set -f
+    clear; tput init; tput cup $(($(tput lines)/3)); tput bold
+    printf "Create file: "
+    read ans
+    touch $ans
+}}
+
+map <c-p> up
+map <c-n> down
+map <c-b> updir
+map <c-f> open
+
+map + mkdir
+map <c-x><c-f> touch
