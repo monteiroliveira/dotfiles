@@ -27,6 +27,7 @@
 (setq plantuml-jar-path "~/.emacs.d/straight/repos/plantuml-mode/plantuml-gplv2-1.2025.1.jar")
 (setq plantuml-default-exec-mode 'jar)
 (add-to-list 'auto-mode-alist '("\\.plantuml\\'" . plantuml-mode))
+(add-to-list 'auto-mode-alist '("\\.uml\\'" . plantuml-mode))
 
 (straight/require ;; Thanks again tsoding
  '(simpc-mode :type git :host nil :repo "https://github.com/rexim/simpc-mode"))

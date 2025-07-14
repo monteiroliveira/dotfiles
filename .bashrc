@@ -31,19 +31,23 @@ export XMONAD_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/xmonad"
 which nvim > /dev/null 2>&1 && alias vim="$(which nvim)"
 if which emacs > /dev/null 2>&1; then
     alias tmacs="$(which emacs) -nw"
+    alias em="tmacs"
     alias emacs="$(which emacs) &"
 fi
-which eza > /dev/null 2>&1 && alias ls="$(which eza) --icons"
-which bat > /dev/null 2>&1 && alias cat="$(which bat) --style=auto"
+alias ls="ls --color=auto"
 alias grep="grep --color=auto"
 alias ..="cd .."
 alias pac="sudo pacman"
+
 alias orca="WEBKIT_FORCE_COMPOSITING_MODE=1 WEBKIT_DISABLE_COMPOSITING_MODE=1 WEBKIT_DISABLE_DMABUF_RENDERER=1 orca-slicer"
+alias myt-dlp="yt-dlp -f bestaudio -x --embed-metadata --embed-thumbnail"
 
 shopt -s autocd
 shopt -s cdspell
 shopt -s cmdhist
 shopt -s histappend
+shopt -s expand_aliases
+shopt -s checkwinsize
 
 bind "set completion-ignore-case on"
 

@@ -13,7 +13,7 @@
 
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 (add-to-list 'load-path "~/.emacs.d/lisp/builtin")
-(add-to-list 'custom-theme-load-path "~/repos/mruber-darker-theme/")
+(add-to-list 'custom-theme-load-path "~/repos/mruber-darker-theme.git/master/")
 
 (require '+straight)
 
