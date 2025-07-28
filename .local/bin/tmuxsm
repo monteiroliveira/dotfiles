@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# Tmux Session Manager
+
 declare -a OPTION_LIST=( "Attach" "Kill" "Quit" )
 
 function main() {

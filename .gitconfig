@@ -7,8 +7,13 @@
 [alias]
     clonebare = !$HOME/.local/bin/clbare
 	tree = log --graph --decorate --oneline --abbrev-commit --all
-	log = log --oneline
+	llog = log --oneline
 	bb = !$HOME/.local/bin/btrbranch
 	wdiff = diff --word-diff
 [rerere]
 	enabled = true
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f

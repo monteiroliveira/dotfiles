@@ -21,6 +21,9 @@
 (straight/require 'lua-mode)
 (add-to-list 'auto-mode-alist '("\\.lua\\'" . lua-mode))
 
+(straight/require 'auctex)
+(add-to-list 'auto-mode-alist '("\\.tex\\'" . LaTeX-mode))
+
 (straight/require ;; This need java of course
  '(plantuml-mode :type git :host nil :repo "https://github.com/skuro/plantuml-mode"
                  :pre-build ("wget" "https://github.com/plantuml/plantuml/releases/download/v1.2025.1/plantuml-gplv2-1.2025.1.jar")))

@@ -3,7 +3,7 @@
 (require 'cl-lib)
 
 (straight/require 'magit)
-(setq magit-completing-read-function 'magit-ido-completing-read)
+;; (setq magit-completing-read-function 'magit-ido-completing-read)
 
 (global-set-key (kbd "C-x m") 'magit) ;; need to look more of this.
 (global-set-key (kbd "C-c m l") 'magit-log)

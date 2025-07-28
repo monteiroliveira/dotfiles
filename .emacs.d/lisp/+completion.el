@@ -14,32 +14,12 @@
 (straight/require 'smex)
 (global-set-key (kbd "M-x") 'smex)
 
-;; (straight/require 'vertico)
-;; (straight/require 'vertico-prescient)
-
-;; (setq vertico-cycle t)
-;; (vertico-mode)
-;; (vertico-flat-mode) ;; Turn vertico like ido
-
-;; (with-eval-after-load 'vertico
-;;   (vertico-prescient-mode))
-;; (define-key vertico-map (kbd "C-<backspace>") 'vertico-directory-up) ;; Hmmm...
-
-;; (straight/require 'consult)
-;; (global-set-key (kbd "C-s") 'consult-line)
-;; (global-set-key (kbd "C-x b") 'consult-buffer)
-;; (global-set-key (kbd "C-x c f") 'consult-fd)
-;; (global-set-key (kbd "C-x c s") 'consult-ripgrep)
-
 (straight/require 'prescient)
 (straight/require 'company)
 (straight/require 'company-prescient)
-;; (straight/require 'company-box)
-;; (add-hook 'company-mode-hook 'company-box-mode)
 
 (setq company-minimum-prefix-length 2
       company-idle-delay 0.2)
-
 (global-company-mode)
 
 (with-eval-after-load 'company

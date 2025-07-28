@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+# Tmux WorkTree (i cant think a better name)
+
+if ! git worktree list > /dev/null 2>&1; then
+    echo "Need to be in git directory"
+    exit 99
+elif [ -z $TMUX ]; then
+    echo "Not in a tmux session"
+    exit 69
+fi
+
+declare -a WORKTREES=($(git worktree list | awk '{print $1}'))
+declare -a BRANCHES=($(git worktree list | awk '{print $3}' | sed  s/[][]//g))
+
+choice=$(printf "%s\n" ${WORKTREES[@]} | nl -v0 | fzf --with-nth=2)
+[ -z "$choice" ] && exit 1
+
+index=$(echo $choice | cut -f1 -d " ")
+worktree=$(echo $choice | cut -f2- -d " ")
+project_name=$(tmux display-message -p '#S' | cut -d "@" -f1)
+session_name=$project_name
+if [ $index != 0 ]; then
+    branch=${BRANCHES[index-1]}
+    session_name="${project_name}@(${branch})"
+
+    if ! tmux has-session -t $session_name > /dev/null 2>&1; then
+        tmux new-session -d -s $session_name -c $worktree
+    fi
+fi
+tmux switch-client -t $session_name

@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# Tmux Project Manager
+
 declare -a PROJECTS_FOLDER=( "$HOME/repos" "$HOME/.local" "$HOME/.config" )
 
 function main() {
