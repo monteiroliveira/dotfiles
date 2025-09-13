@@ -1,5 +1,9 @@
+[[ -f $HOME/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
 xsetroot -cursor_name left_ptr
 setxkbmap -option ctrl:nocaps
 xset s off -dpms
-[[ -f $HOME/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
-exec xmonad
+
+
+exec startxfce4
+
+# exec xmonad

@@ -65,3 +65,7 @@ blue    = '#4AB4F6'
 magenta = '#9E95C7'
 cyan    = '#B0C3EB'
 white   = '#F4F4FF'
+
+[keyboard]
+bindings = [
+]

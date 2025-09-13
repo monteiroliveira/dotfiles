@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+KBLAYOUT=$(setxkbmap -query | grep layout | awk '{print $2}')
+
+if [ $KBLAYOUT == "us" ]; then
+    setxkbmap br
+else
+    setxkbmap us
+fi

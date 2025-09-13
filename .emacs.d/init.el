@@ -23,6 +23,10 @@
 (require '+langs)
 (require '+treesit)
 
+(global-font-lock-mode -1)
+(add-hook 'dired-mode-hook 'font-lock-mode)
+(add-hook 'magit-mode-hook 'font-lock-mode)
+
 (straight/require 'diminish) ;; Some packages i don't need to know if is enabled
 (diminish 'apheleia-mode)
 (diminish 'undo-tree-mode)

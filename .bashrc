@@ -11,7 +11,14 @@ export PATH="$HOME/.local/bin:$PATH"
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+function get_branch() {
+    if git branch --show-current > /dev/null 2>&1; then
+       echo " git:($(git branch --show-current 2> /dev/null))"
+    fi
+}
+
 # PS1='[\u@\h \W]\$ '
+PS1='[\u \W]$(get_branch)\$ '
 
 set -o emacs
 
@@ -50,8 +57,11 @@ shopt -s expand_aliases
 shopt -s checkwinsize
 
 bind "set completion-ignore-case on"
+bind '"\C-l":"clear\n"'
+bind '"\C-g":"tmuxpm\n"'
+bind '"\C-h":"tmuxsm\n"'
 
-which starship > /dev/null 2>&1 && eval "$(starship init bash)"
+# which starship > /dev/null 2>&1 && eval "$(starship init bash)"
 which fzf > /dev/null 2>&1 && eval "$(fzf --bash)"
 # CTRL-t = fzf select
 # CTRL-r = fzf history

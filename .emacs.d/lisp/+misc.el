@@ -41,7 +41,7 @@
   (whitespace-mode 1)
   (add-to-list 'write-file-functions
                'delete-trailing-whitespace))
-(add-hook 'prog-mode-hook 'misc/enable-whitespaces-mode)
+;; (add-hook 'prog-mode-hook 'misc/enable-whitespaces-mode)
 
 (straight/require 'paredit)
 (defun misc/enable-paredit-mode ()
@@ -100,7 +100,7 @@
 ;; (rainbow-mode)
 
 (straight/require 'gruber-darker-theme) ;; Thanks tsoding
-(load-theme 'mruber-darker t)
+(load-theme 'mruber-darker-simple t)
 
 (global-hl-line-mode)
 
