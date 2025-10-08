@@ -4,9 +4,6 @@
 (straight/require 'apheleia)
 (apheleia-global-mode)
 
-(straight/require 'python-mode)
-(add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
-
 (straight/require 'go-mode)
 (add-to-list 'auto-mode-alist '("\\.go\\'" . go-mode))
 

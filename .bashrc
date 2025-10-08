@@ -18,7 +18,7 @@ function get_branch() {
 }
 
 # PS1='[\u@\h \W]\$ '
-PS1='[\u \W]$(get_branch)\$ '
+PS1='[\u@\h \W]$(get_branch)\$ '
 
 set -o emacs
 
