@@ -1,5 +1,4 @@
 (straight/require 'org)
-(straight/require 'org-roam)
 (straight/require 'toc-org)
 (require 'org-tempo)
 (require 'org-indent)
@@ -19,7 +18,10 @@
  'org-src-lang-modes '("plantuml" . plantuml))
 
 (straight/require 'visual-fill-column)
-(setq-default visual-fill-column-width 100
+(setq-default visual-fill-column-width 120
               visual-fill-column-center-text t)
+
+(straight/require 'org-roam)
+(org-roam-complete-everywhere)
 
 (provide '+org)

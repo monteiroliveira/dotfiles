@@ -10,10 +10,6 @@
    ((eq system-type 'windows-nt) "Consolas-18")
    ((eq system-type 'gnu/linux) "Iosevka Nerd Font-18")))
 
-;; (set-face-attribute 'default nil :font "Iosevka Nerd Font" :height 140)
-;; (set-face-attribute 'font-lock-comment-face nil :slant 'italic)
-;; (set-face-attribute 'font-lock-keyword-face nil :slant 'italic)
-
 (dolist (fc `((font . ,(misc/get-default-font))
               (height . 130)))
   (add-to-list 'default-frame-alist fc))
@@ -71,10 +67,8 @@
 
 (require 'textm)
 (global-set-key (kbd "C-,") 'textm/duplicate-line)
-(global-set-key (kbd "C-c ,") 'textm/duplicate-line) ;; for emacs terminal
 
 (global-set-key (kbd "C-;") 'textm/delete-line)
-(global-set-key (kbd "C-c ;") 'textm/delete-line) ;; for emacs terminal again
 
 (global-set-key (kbd "M-p") 'textm/move-text-up)
 (global-set-key (kbd "M-n") 'textm/move-text-down)
@@ -88,10 +82,8 @@
 (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
 
 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-M-j") 'mc/mark-next-like-this) ;; terminal
 
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C-M-k") 'mc/mark-previous-like-this) ;; terminal
 
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 (global-set-key (kbd "C-c C->") 'mc/mark-all-like-this-dwim)
@@ -100,8 +92,8 @@
 ;; (rainbow-mode)
 
 (straight/require 'gruber-darker-theme) ;; Thanks tsoding
-(load-theme 'mruber-darker-simple t)
+(load-theme 'mruber-darker t)
 
-(global-hl-line-mode)
+;; (global-hl-line-mode)
 
 (provide '+misc)
