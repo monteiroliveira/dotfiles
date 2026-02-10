@@ -8,16 +8,16 @@
   "Sometimes we need to do things we are not much proud"
   (cond
    ((eq system-type 'windows-nt) "Consolas-18")
-   ((eq system-type 'gnu/linux) "Iosevka Nerd Font-18")))
+   ((eq system-type 'gnu/linux) "Iosevka Nerd Font-20")))
 
-(dolist (fc `((font . ,(misc/get-default-font))
-              (height . 130)))
+(dolist (fc `((font . ,(misc/get-default-font))))
   (add-to-list 'default-frame-alist fc))
 
-(when (not (display-graphic-p))
+(when (not (display-graphic-p)) ;; Legacy
   (straight/require 'xclip)
   (xclip-mode))
 
+;; TODO: adjust this center when scrolling down
 (defun misc/scroll-recenter-down ()
   "Scroll the screen \"up\" and move the cursor to the center"
   (interactive)
@@ -52,6 +52,14 @@
 
 (require 'compile)
 (setq compilation-scroll-output t)
+
+(require 'ansi-color)
+(defun misc/colorize-compilation-buffer ()
+  (read-only-mode 'toggle)
+  (ansi-color-apply-on-region compilation-filter-start (point))
+  (read-only-mode 'toggle))
+(add-hook 'compilation-filter-hook 'misc/colorize-compilation-buffer)
+
 (global-set-key (kbd "C-c c") 'compile)
 
 (require 'project)

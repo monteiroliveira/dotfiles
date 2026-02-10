@@ -1,6 +1,7 @@
 (setq-default inhibit-splash-screen t
               indent-tabs-mode nil
-              make-backup-files nil)
+              make-backup-files nil
+              tab-width 4)
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 (tool-bar-mode -1)

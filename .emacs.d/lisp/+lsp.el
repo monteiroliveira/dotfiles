@@ -6,6 +6,7 @@
       lsp-headerline-breadcrumb-enable nil
       lsp-modeline-code-actions-enable nil
       lsp-lens-enable nil)
+(add-to-list 'lsp-language-id-configuration '(simpc-mode . "c"))
 
 (straight/require 'dap-mode)
 

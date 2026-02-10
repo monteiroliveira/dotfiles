@@ -1,9 +1,6 @@
 [user]
 	name = Guilherme Monteiro de Oliveira
 	email = guilherme@monteiroliveira.com
-	signingkey = /home/guilherme/.ssh/id_ed25519.pub
-[gpg]
-    format = ssh
 [alias]
     clonebare = !$HOME/.local/bin/clbare
 	tree = log --graph --decorate --oneline --abbrev-commit --all

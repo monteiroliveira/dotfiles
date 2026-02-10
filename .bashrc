@@ -6,21 +6,43 @@ export TERM="xterm-256color"
 export EDITOR="emacs -nw"
 export VISUAL="emacs"
 export HISTCONTROL=ignoredups
-export PATH="$HOME/.local/bin:$PATH"
+
+set -o emacs
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-function get_branch() {
-    if git branch --show-current > /dev/null 2>&1; then
-       echo " git:($(git branch --show-current 2> /dev/null))"
-    fi
-}
+# Source global definitions
+[[ -f /etc/bashrc ]] && . /etc/bashrc
 
-# PS1='[\u@\h \W]\$ '
-PS1='[\u@\h \W]$(get_branch)\$ '
+# User specific environment
+if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
+    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+fi
 
-set -o emacs
+## ASDF
+if ! [[ "$PATH" =~ "${ASDF_DATA_DIR:-$HOME/.asdf}/shims:" ]]; then
+    PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+fi
+
+# Golang local packages (like asdf)
+if ! [[ "$PATH" =~ "${GOPATH:-$HOME/go}/bin:" ]]; then
+    PATH="${GOPATH:-$HOME/go}/bin:$PATH"
+fi
+export PATH
+
+# Uncomment the following line if you don't like systemctl's auto-paging feature:
+# export SYSTEMD_PAGER=
+
+# User specific aliases and functions
+if [ -d ~/.bashrc.d ]; then
+    for rc in ~/.bashrc.d/*; do
+        if [ -f "$rc" ]; then
+            . "$rc"
+        fi
+    done
+fi
+unset rc
 
 [ -z "$XDG_CONFIG_HOME" ] && \
     export XDG_CONFIG_HOME="$HOME/.config"
@@ -31,15 +53,13 @@ set -o emacs
 [ -z "$XDG_CACHE_HOME" ] && \
     export XDG_CACHE_HOME="$HOME/.cache"
 
-export XMONAD_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/xmonad"
-export XMONAD_DATA_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/xmonad"
-export XMONAD_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/xmonad"
-
-which nvim > /dev/null 2>&1 && alias vim="$(which nvim)"
-if which emacs > /dev/null 2>&1; then
-    alias tmacs="$(which emacs) -nw"
-    alias em="tmacs"
-    alias emacs="$(which emacs) &"
+command -v nvim > /dev/null 2>&1 && alias vim="command nvim"
+if command -v emacs > /dev/null 2>&1; then
+    alias tmacs="command emacs -nw"
+    emacs() {
+        command emacs "$@" & 
+    }
+    alias em="emacs"   
 fi
 alias ls="ls --color=auto"
 alias grep="grep --color=auto"
@@ -61,8 +81,9 @@ bind '"\C-l":"clear\n"'
 bind '"\C-g":"tmuxpm\n"'
 bind '"\C-h":"tmuxsm\n"'
 
-# which starship > /dev/null 2>&1 && eval "$(starship init bash)"
-which fzf > /dev/null 2>&1 && eval "$(fzf --bash)"
+command -v asdf > /dev/null 2>&1 && . <(asdf completion bash)
+command -v fzf > /dev/null 2>&1 && eval "$(fzf --bash)"
 # CTRL-t = fzf select
 # CTRL-r = fzf history
 # ALT-c  = fzf cd
+
