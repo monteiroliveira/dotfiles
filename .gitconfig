@@ -7,8 +7,16 @@
 	llog = log --oneline
 	bb = !$HOME/.local/bin/btrbranch
 	wdiff = diff --word-diff
+[sendemail]
+    smtpserver = smtp.gmail.com
+    smtpserverport = 587
+    smtpencryption = tls
+    smtpuser = guilherme@monteiroliveira.com
+    from = Guilherme Monteiro de Oliveira <guilherme@monteiroliveira.com>
 [rerere]
 	enabled = true
+[credential]
+    helper = store
 [filter "lfs"]
 	process = git-lfs filter-process
 	required = true

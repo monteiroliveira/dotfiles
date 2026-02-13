@@ -3,6 +3,7 @@
 ;; Telescope to emacs made by a dummy
 ;; REFERENCES: https://github.com/nvim-telescope/telescope.nvim/tree/master
 ;; OBS: Thinking in another name...
+;; OUTDATED (using project.el)
 
 ;; Just can find a files in a git repo for now, i dont find any solution to
 ;; gather the default path when emacs start.
