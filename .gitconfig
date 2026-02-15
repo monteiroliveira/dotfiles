@@ -1,6 +1,10 @@
 [user]
 	name = Guilherme Monteiro de Oliveira
 	email = guilherme@monteiroliveira.com
+[core]
+    abbrev = 12
+[init]
+	defaultBranch = master
 [alias]
     clonebare = !$HOME/.local/bin/clbare
 	tree = log --graph --decorate --oneline --abbrev-commit --all
