@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+
+# Build up change log to stdout BASED on the diff between the HEAD and
+# the origin/{default}
+#
+# REFERENCE: https://www.kernel.org/doc/html/latest/process/submitting-patches.html
+
+set -e
+
+SOURCE="HEAD"
+TARGET_BRANCH="master"
+MARKDOWN_PRETTY="format:%H (\"%s\")%n%n<details>%n<summary>%f Details</summary>%n%n\`\`\`text%n%b\`\`\`%n%n</details>%n"
+
+help() {
+    cat <<EOF
+gclog - GENERATE CHANGELOG
+Usage: gclog [OPTIONS]
+
+Options:
+    --pretty, -p PRETTY: Log generator pretty format;
+    --target, -t TARGET: Target branch {flor} to get commit list;
+    --source, -s SOURCE: Source to limit {ceil} commit list;
+
+    --help, -h:          Display help message.
+EOF
+}
+
+# Simple args parser... Im not making anything more complex than this.
+extract_args() {
+    for (( i=1; i <= $#; i=i+2)); do
+        next_index=$((i + 1))
+        case "${!i}" in
+            -p | --pretty)
+                [[ ${!next_index} != md ]] && (echo "Invalid pretty option" && exit 1) # Use pattern match for this
+                [[ ${!next_index} == md ]] && PRETTY=$MARKDOWN_PRETTY
+                ;;
+            -t | --target)
+                [[ -z ${!next_index} ]] && (echo "Invalid target branch" && exit 1)
+                TARGET_BRANCH=${!next_index}
+                ;;
+            -s | --source)
+                [[ -z ${!next_index} ]] && (echo "Invalid source branch" && exit 1)
+                SOURCE=${!next_index}
+                ;;
+            * | -h | --help)
+                help
+                exit 1
+                ;;
+        esac
+    done
+}
+
+extract_args $@
+[[ -z $PRETTY ]] && PRETTY=$MARKDOWN_PRETTY
+
+git --no-pager log origin/$TARGET_BRANCH..$SOURCE --shortstat --pretty="$PRETTY"
