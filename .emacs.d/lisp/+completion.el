@@ -9,7 +9,8 @@
 (ido-mode 1)
 (ido-everywhere 1)
 (ido-ubiquitous-mode 1)
-(setq ido-enable-flex-matching t)
+(setq ido-enable-flex-matching t
+      ido-buffer-disable-smart-matches nil)
 
 (straight/require 'smex)
 (global-set-key (kbd "M-x") 'smex)
