@@ -13,10 +13,6 @@
 (dolist (fc `((font . ,(misc/get-default-font))))
   (add-to-list 'default-frame-alist fc))
 
-(when (not (display-graphic-p)) ;; Legacy
-  (straight/require 'xclip)
-  (xclip-mode))
-
 ;; TODO: adjust this center when scrolling down
 (defun misc/scroll-recenter-down ()
   "Scroll the screen \"up\" and move the cursor to the center"
@@ -68,10 +64,11 @@
 (global-set-key (kbd "C-c v w") 'er/mark-word)
 (global-set-key (kbd "C-c v i \"") 'er/mark-inside-quotes)
 (global-set-key (kbd "C-c v a \"") 'er/mark-outside-quotes)
-(global-set-key (kbd "C-c v i )") 'er/mark-inside-pairs)
-(global-set-key (kbd "C-c v a )") 'er/mark-outside-pairs)
+
 (global-set-key (kbd "C-c v i (") 'er/mark-inside-pairs)
 (global-set-key (kbd "C-c v a (") 'er/mark-outside-pairs)
+(global-set-key (kbd "C-c v i )") 'er/mark-inside-pairs)
+(global-set-key (kbd "C-c v a )") 'er/mark-outside-pairs)
 
 (require 'textm)
 (global-set-key (kbd "C-,") 'textm/duplicate-line)
@@ -80,11 +77,6 @@
 
 (global-set-key (kbd "M-p") 'textm/move-text-up)
 (global-set-key (kbd "M-n") 'textm/move-text-down)
-
-(require 'telescope)
-(global-set-key (kbd "C-c p f") 'telescope/live-grep-git)
-(global-set-key (kbd "C-c p F") 'telescope/live-grep)
-(global-set-key (kbd "C-c p g") 'find-grep)
 
 (straight/require 'multiple-cursors)
 (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
@@ -97,11 +89,13 @@
 (global-set-key (kbd "C-c C->") 'mc/mark-all-like-this-dwim)
 
 (straight/require 'rainbow-mode)
-;; (rainbow-mode)
 
 (straight/require 'gruber-darker-theme) ;; Thanks tsoding
 (load-theme 'mruber-darker t)
 
-;; (global-hl-line-mode)
+(global-set-key (kbd "C-c b r")
+                (lambda()
+                  (interactive)
+                  (revert-buffer nil :noconfirm)))
 
 (provide '+misc)

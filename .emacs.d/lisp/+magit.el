@@ -7,7 +7,10 @@
 
 (global-set-key (kbd "C-x m") 'magit) ;; need to look more of this.
 (global-set-key (kbd "C-c m l") 'magit-log)
+(global-set-key (kbd "C-c m L") 'magit-log-current)
 (global-set-key (kbd "C-c m s") 'magit-status)
+(global-set-key (kbd "C-c m b") 'magit-blame)
+(global-set-key (kbd "C-c m B") 'magit-blame-addition)
 
 (defun magitc/gather-avaliables-worktrees (title)
   "Stoled from https://github.com/magit/magit/blob/main/lisp/magit-worktree.el
@@ -78,5 +81,16 @@ BUGS: Dont work in dired buffer (im to lazy to fix this)."
 (global-set-key (kbd "C-c m w a") 'magitc/add-raw-worktree)
 (global-set-key (kbd "C-c m w g") 'magitc/magit-goto-worktree)
 (global-set-key (kbd "C-c m w G") 'magitc/magit-goto-worktree-file)
+
+(require 'smerge-mode)
+(setq smerge-command-prefix "\C-cs")
+
+(defun magit/try-invoke-smerge ()
+  (save-excursion
+    (goto-char (point-min))
+    (when (re-search-forward "^<<<<<<< " nil t)
+      (smerge-mode 1))))
+(add-hook 'find-file-hook 'magit/try-invoke-smerge)
+(add-hook 'after-revert-hook 'magit/try-invoke-smerge)
 
 (provide '+magit)
