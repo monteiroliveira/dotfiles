@@ -9,7 +9,7 @@ set -e
 
 SOURCE="HEAD"
 TARGET_BRANCH="master"
-MARKDOWN_PRETTY="format:%H (\"%s\")%n%n<details>%n<summary>%f Details</summary>%n%n\`\`\`text%n%b\`\`\`%n%n</details>%n"
+MARKDOWN_PRETTY="format:%H (\"%s\")%n%n<details>%n<summary>%f Details</summary>%n%n\`\`\`text%n%b%n\`\`\`%n%n</details>%n"
 
 help() {
     cat <<EOF
