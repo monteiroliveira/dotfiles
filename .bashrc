@@ -20,7 +20,12 @@ if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
     PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 fi
 
-## ASDF
+# Homebrew
+if ! [[ "$PATH" =~ "/home/linuxbrew/.linuxbrew/bin:" ]]; then
+    PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+fi
+
+# ASDF
 if ! [[ "$PATH" =~ "${ASDF_DATA_DIR:-$HOME/.asdf}/shims:" ]]; then
     PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 fi
@@ -82,8 +87,11 @@ bind '"\C-g":"tmuxpm\n"'
 bind '"\C-h":"tmuxsm\n"'
 
 command -v asdf > /dev/null 2>&1 && . <(asdf completion bash)
+
 command -v fzf > /dev/null 2>&1 && eval "$(fzf --bash)"
 # CTRL-t = fzf select
 # CTRL-r = fzf history
 # ALT-c  = fzf cd
+
+command -v brew > /dev/null 2>&1 && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"
 
