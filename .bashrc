@@ -93,5 +93,4 @@ command -v fzf > /dev/null 2>&1 && eval "$(fzf --bash)"
 # CTRL-r = fzf history
 # ALT-c  = fzf cd
 
-command -v brew > /dev/null 2>&1 && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"
-
+# command -v brew > /dev/null 2>&1 && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"

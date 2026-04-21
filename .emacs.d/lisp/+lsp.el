@@ -35,4 +35,6 @@
                (revert-buffer nil :noconfirm)))))))
 (global-set-key (kbd "C-c l E") 'lsp/disable-lsp-session)
 
+(straight/require 'lsp-pyright)
+
 (provide '+lsp)
